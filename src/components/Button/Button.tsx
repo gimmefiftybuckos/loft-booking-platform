@@ -1,6 +1,8 @@
 import clsx from 'clsx';
 
 import styles from './Button.module.sass';
+import { Text } from '../Text';
+import { Link } from 'react-router-dom';
 
 export interface ButtonProps {
    /**
@@ -24,6 +26,8 @@ export interface ButtonProps {
    /**
     * Optional click handler
     */
+   pathTo: string;
+
    onClick?: () => void;
 }
 
@@ -31,14 +35,14 @@ export const Button: React.FC<ButtonProps> = ({
    children,
    accented,
    outlined,
-   onClick,
+   pathTo,
 }) => {
    const accent = accented ? styles.button_accent : null;
    const outline = outlined ? styles.button_outlined : null;
 
    return (
-      <button className={clsx(styles.button, accent, outline)}>
-         {children}
-      </button>
+      <Link className={clsx(styles.button, accent, outline)} to={pathTo}>
+         <Text>{children}</Text>
+      </Link>
    );
 };

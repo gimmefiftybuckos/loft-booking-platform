@@ -1,19 +1,19 @@
 import clsx from 'clsx';
 
-import styles from './styles/main.module.sass';
-import { Button } from './components/Button';
+import { Route, Routes } from 'react-router-dom';
+import { Home } from './components/Home';
+import { Header } from './components/Header';
 
 function App() {
    return (
       <>
-         <header className={clsx(styles.containers)}>
-            <Button>text</Button>
-            <Button outlined>text</Button>
-            <Button accented>text</Button>
-            <Button accented outlined>
-               text
-            </Button>
-         </header>
+         <Header isSticky></Header>
+         <main>
+            <Routes>
+               <Route path='/' element={<Home />} />
+            </Routes>
+         </main>
+         <footer></footer>
       </>
    );
 }
