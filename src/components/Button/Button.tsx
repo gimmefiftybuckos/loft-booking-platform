@@ -11,10 +11,10 @@ export interface ButtonProps {
    accented?: boolean;
 
    outlined?: boolean;
-   /**
-    * What background color to use
-    */
-   backgroundColor?: string;
+
+   pathTo: string;
+
+   textColor?: 'white' | 'black';
    /**
     * How large should the button be?
     */
@@ -26,7 +26,6 @@ export interface ButtonProps {
    /**
     * Optional click handler
     */
-   pathTo: string;
 
    onClick?: () => void;
 }
@@ -36,13 +35,16 @@ export const Button: React.FC<ButtonProps> = ({
    accented,
    outlined,
    pathTo,
+   textColor = 'black',
 }) => {
    const accent = accented ? styles.button_accent : null;
    const outline = outlined ? styles.button_outlined : null;
 
    return (
       <Link className={clsx(styles.button, accent, outline)} to={pathTo}>
-         <Text>{children}</Text>
+         <Text color={textColor} weight={500}>
+            {children}
+         </Text>
       </Link>
    );
 };

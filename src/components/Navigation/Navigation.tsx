@@ -16,7 +16,7 @@ export const Navigation = () => {
                ))}
             </div>
             <div>
-               <Button pathTo='/login' accented>
+               <Button textColor='white' pathTo='/login' accented>
                   Войти
                </Button>
             </div>

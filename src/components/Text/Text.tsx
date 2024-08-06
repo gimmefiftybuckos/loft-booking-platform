@@ -21,6 +21,8 @@ type TextProps = {
    uppercase?: boolean;
    /** Выравнивание текста */
    align?: 'center' | 'left';
+
+   color?: 'black' | 'white';
    /** font-family текста */
    family?: FontFamiliesClasses;
    /** Булевая пропса, делает динамическим только семью шрифтов и цвет */
@@ -35,7 +37,8 @@ export const Text = ({
    fontStyle = 'normal',
    uppercase = false,
    align = 'left',
-   family = 'open-sans',
+   family = 'inter',
+   color = 'black',
 }: TextProps) => {
    const className = clsx(
       styles.text,
@@ -45,7 +48,8 @@ export const Text = ({
       styles[`${fontStyle}`],
       { [styles.uppercase]: uppercase },
       styles[`${align}`],
-      styles[`${family}`]
+      styles[`${family}`],
+      styles[`${color}`]
    );
    return <Tag className={className}>{children}</Tag>;
 };
