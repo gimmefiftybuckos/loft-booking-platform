@@ -1,0 +1,66 @@
+@import ../../styles/variables
+
+@mixin typography($size: 18, $weight: 400, $family: $main-font)
+    color: $primary-color
+    font-weight: $weight
+    font-size: $size
+    font-family: $family
+    line-height: normal
+    letter-spacing: 0
+
+.text
+    @include typography(18, 400, $main-font)
+
+.inter
+    font-family: $main-font
+
+.monrope
+    font-family: $secondary-font
+
+.left
+    text-align: left
+
+.center
+    text-align: center
+
+.uppercase
+    text-transform: uppercase
+
+.size16
+    font-size: 1rem
+
+.size24
+    font-size: 1,5rem
+
+.size28
+    font-size: 1,75rem
+
+.size36
+    font-size: 2,25rem
+
+.size40
+    font-size: 2,5rem
+
+.weight400
+    font-weight: 400
+
+.weight500
+    font-weight: 500
+
+.weight600
+    font-weight: 600
+
+.weight700
+    font-weight: 700
+
+.weight800
+    font-weight: 800
+
+.weight900
+    font-weight: 900
+
+.normal
+    font-style: normal
+
+.italic
+    font-style: italic
