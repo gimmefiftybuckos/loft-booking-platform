@@ -1,7 +1,9 @@
 import clsx from 'clsx';
-import { Button } from '../Button';
+
 import styles from './MainSection.module.sass';
+
 import { selectionParams } from '../../utils';
+import { Button } from '../Button';
 
 export const MainSection = () => {
    return (

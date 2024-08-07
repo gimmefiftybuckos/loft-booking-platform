@@ -1,6 +1,8 @@
 import clsx from 'clsx';
-import { Navigation } from '../Navigation';
+
 import styles from './Header.module.sass';
+
+import { Navigation } from '../Navigation';
 
 type HeaderProps = {
    isSticky?: boolean;

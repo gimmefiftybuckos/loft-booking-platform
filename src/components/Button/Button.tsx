@@ -1,31 +1,18 @@
+import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 
 import styles from './Button.module.sass';
+
 import { Text } from '../Text';
-import { Link } from 'react-router-dom';
 
 export interface ButtonProps {
-   /**
-    * Is this the principal call to action on the page?
-    */
-   accented?: boolean;
-
-   outlined?: boolean;
-
-   pathTo: string;
-
-   textColor?: 'white' | 'black';
-   /**
-    * How large should the button be?
-    */
    size?: 'small' | 'medium' | 'large';
-   /**
-    * Button contents
-    */
    children: string;
-   /**
-    * Optional click handler
-    */
+
+   accented?: boolean;
+   outlined?: boolean;
+   pathTo: string;
+   textColor?: 'white' | 'black';
 
    onClick?: () => void;
 }

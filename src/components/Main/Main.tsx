@@ -1,7 +1,9 @@
 import { Route, Routes } from 'react-router-dom';
-import { Home } from '../Home';
 import clsx from 'clsx';
+
 import styles from './Main.module.sass';
+
+import { Home } from '../Home';
 
 export const Main = () => {
    return (

@@ -1,31 +1,21 @@
 import { ElementType, ReactNode } from 'react';
 import { clsx } from 'clsx';
-import { FontFamiliesClasses } from '../../constants';
 
 import styles from './Text.module.sass';
 
-type TextProps = {
-   /** Сам текст для вывода */
-   children: ReactNode;
-   /** Тэг которым отрендерить текст */
-   as?: ElementType;
-   /** Булевая пропса, должен ли текст меняться в зависимости от конфига */
-   dynamic?: boolean;
-   /** Размер шрифта */
-   size?: '14' | '16' | '24' | '28' | '32' | '36' | '40';
-   /** Вес шрифта */
-   weight?: 400 | 500 | 600 | 700 | 800 | 900;
-   /** Стиль шрифта */
-   fontStyle?: 'italic' | 'normal';
-   /** Булевая пропса, отвечающая должен ли текст быть в верхнем регистре */
-   uppercase?: boolean;
-   /** Выравнивание текста */
-   align?: 'center' | 'left';
+import { FontFamiliesClasses } from '../../constants';
 
+type TextProps = {
+   children: ReactNode;
+   as?: ElementType;
+   dynamic?: boolean;
+   size?: '14' | '16' | '24' | '28' | '32' | '36' | '40';
+   weight?: 400 | 500 | 600 | 700 | 800 | 900;
+   fontStyle?: 'italic' | 'normal';
+   uppercase?: boolean;
+   align?: 'center' | 'left';
    color?: 'black' | 'white';
-   /** font-family текста */
    family?: FontFamiliesClasses;
-   /** Булевая пропса, делает динамическим только семью шрифтов и цвет */
 };
 
 export const Text = ({
