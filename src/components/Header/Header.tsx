@@ -11,7 +11,7 @@ export const Header: React.FC<HeaderProps> = ({ isSticky }) => {
 
    return (
       <header className={clsx(styles.header, sticky)}>
-         <Navigation></Navigation>
+         <Navigation />
       </header>
    );
 };

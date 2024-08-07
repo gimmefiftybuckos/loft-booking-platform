@@ -1,0 +1,72 @@
+@import '../../styles/variables'
+
+.element
+    inline-size: 100px
+    block-size: 100px
+
+.banner-list
+    display: flex
+    flex-wrap: wrap-reverse
+    gap: 1rem
+    justify-content: space-between
+    margin: 0 auto
+
+.section
+    margin-block-start: 3rem
+
+.banner
+    display: flex
+    flex: 1 1 280px
+    gap: 1.25rem
+    padding: 1.7rem 2.5rem
+    inline-size: 100%
+    border-radius: 20px
+    background: $banner-bg-color
+
+.button
+    display: flex
+    flex: 2 1 200px
+    justify-content: space-between
+    align-items: center
+    padding: 18px 15px
+
+    // max-inline-size: 240px
+    inline-size: 500%
+    block-size: 60px
+    border: 1px solid $border-color
+    border-radius: 10px
+    background: $bg-color
+    cursor: pointer
+
+    &_smaller
+        padding: 18px 15px
+        flex: 1 2 200px
+        // max-inline-size: 150px
+
+.title
+    max-inline-size: 60%
+    line-height: 125%
+    font-family: $title-font
+    font-size: 3rem
+    text-align: left
+    color: $bg-color
+
+.container
+    display: flex
+    flex-wrap: wrap
+    justify-content: space-between
+    gap: 1rem
+    margin-block-start: 2.45rem
+    padding: 1rem
+    background: $bg-color
+    border-radius: 15px
+
+.cover-container
+    padding-block: 7.8rem
+    padding-inline: 5rem
+    inline-size: 100%
+    border-radius: 20px
+    // block-size: 100000px
+    background: url('../../assets/preview.png')
+    background-size: cover
+    background-position-y: bottom

@@ -12,7 +12,7 @@ type TextProps = {
    /** Булевая пропса, должен ли текст меняться в зависимости от конфига */
    dynamic?: boolean;
    /** Размер шрифта */
-   size?: '1rem' | '1,5rem' | '1,75rem' | '2rem' | '2,25rem' | '2,5rem';
+   size?: '14' | '16' | '24' | '28' | '32' | '36' | '40';
    /** Вес шрифта */
    weight?: 400 | 500 | 600 | 700 | 800 | 900;
    /** Стиль шрифта */
@@ -30,8 +30,8 @@ type TextProps = {
 
 export const Text = ({
    children,
-   as: Tag = 'div',
-   size = '1rem',
+   as: Tag = 'p',
+   size = '16',
    dynamic = false,
    weight = 400,
    fontStyle = 'normal',
@@ -49,7 +49,8 @@ export const Text = ({
       { [styles.uppercase]: uppercase },
       styles[`${align}`],
       styles[`${family}`],
-      styles[`${color}`]
+      styles[`${color}`],
+      styles.margin
    );
    return <Tag className={className}>{children}</Tag>;
 };
