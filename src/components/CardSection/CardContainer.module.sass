@@ -29,6 +29,7 @@
 
     &:hover
         box-shadow: 0 0 25px rgba(0, 0, 0, 0.1)
+
     &__container
         max-inline-size: 330px
         block-size: 250px
@@ -36,6 +37,7 @@
         margin: 0
         padding: 0
         border: 0
+
     &__image
         border-radius: 20px
         block-size: 100%
@@ -47,13 +49,16 @@
         flex-direction: column
         gap: 1rem
         margin-block-start: 1rem
+
     &__distance
         display: flex
         gap: 1.2rem
+
     &__metro
         display: flex
         gap: 0.5rem
         align-items: center
+
         &::before
             content: ''
             display: block
@@ -62,10 +67,12 @@
             background: url('src/assets/metro.svg')
             background-repeat: no-repeat
             object-fit: cover
+
     &__time
         display: flex
         gap: 0.5rem
         align-items: center
+
         &::before
             content: ''
             display: block
@@ -74,16 +81,20 @@
             background: url('src/assets/walk.svg')
             background-repeat: no-repeat
             object-fit: cover
+
     &__stars
         display: flex
         gap: 5px
+
     &__star
         block-size: 14px
         inline-size: 14px
         background: url('src/assets/rate-empty.svg')
+
     &__rating
         display: flex
         gap: 1.25rem
+
     &__review
         display: flex
         gap: 0.5rem
