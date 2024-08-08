@@ -1,3 +1,5 @@
+@import '../../styles/variables'
+
 .icon
     position: absolute
     inset-inline-end: 5px
@@ -20,15 +22,18 @@
 
 .card-container
     display: flex
+    margin-block-start: 1.45rem
 
 .card
     display: inline-block
-    padding: 1rem
+    padding: 1.25rem
+    border-radius: 10px
+    outline: 1px solid $border-color
+    transition: box-shadow 0.3s ease
     cursor: pointer
-    border-radius: 35px
 
     &:hover
-        box-shadow: 0 0 25px rgba(0, 0, 0, 0.1)
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.15)
 
     &__container
         max-inline-size: 330px
@@ -39,7 +44,7 @@
         border: 0
 
     &__image
-        border-radius: 20px
+        border-radius: 10px
         block-size: 100%
         inline-size: 100%
         object-fit: cover
@@ -47,12 +52,13 @@
     &__content
         display: flex
         flex-direction: column
-        gap: 1rem
-        margin-block-start: 1rem
+        gap: 0.7rem
+        margin-block-start: 0.95rem
 
     &__distance
         display: flex
-        gap: 1.2rem
+        gap: 1rem
+        block-size: 20px
 
     &__metro
         display: flex
@@ -84,7 +90,7 @@
 
     &__stars
         display: flex
-        gap: 5px
+        gap: 6px
 
     &__star
         block-size: 14px
@@ -93,8 +99,69 @@
 
     &__rating
         display: flex
-        gap: 1.25rem
+        align-items: center
+        gap: 0.75rem
+        block-size: 20px
 
     &__review
         display: flex
-        gap: 0.5rem
+        gap: 0.3rem
+
+    &__price
+        &::after
+            content: ''
+            display: inline-block
+            margin-block-start: 1rem
+            block-size: 1px
+            inline-size: 100%
+            background: $border-color
+
+.room
+    display: flex
+    justify-content: start
+    gap: 0.9rem
+
+    margin-block-start: 0.45rem
+
+    &__people
+        display: flex
+        align-items: center
+        gap: 0.45rem
+        // flex-direction: 
+
+        &::before
+            content: ''
+            display: block
+            block-size: 24px
+            inline-size: 24px
+            background: url('src/assets/people.svg')
+            background-repeat: no-repeat
+            object-fit: cover
+
+    &__seats
+        display: flex
+        align-items: center
+        gap: 0.45rem
+
+        &::before
+            content: ''
+            display: block
+            block-size: 24px
+            inline-size: 24px
+            background: url('src/assets/seats.svg')
+            background-repeat: no-repeat
+            object-fit: cover
+
+    &__area
+        display: flex
+        align-items: center
+        gap: 0.45rem
+
+        &::before
+            content: ''
+            display: block
+            block-size: 24px
+            inline-size: 24px
+            background: url('src/assets/area.svg')
+            background-repeat: no-repeat
+            object-fit: cover
