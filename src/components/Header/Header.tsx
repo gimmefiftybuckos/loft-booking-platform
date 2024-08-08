@@ -1,6 +1,8 @@
 import clsx from 'clsx';
-import { Navigation } from '../Navigation';
+
 import styles from './Header.module.sass';
+
+import { Navigation } from '../Navigation';
 
 type HeaderProps = {
    isSticky?: boolean;
@@ -11,7 +13,7 @@ export const Header: React.FC<HeaderProps> = ({ isSticky }) => {
 
    return (
       <header className={clsx(styles.header, sticky)}>
-         <Navigation></Navigation>
+         <Navigation />
       </header>
    );
 };

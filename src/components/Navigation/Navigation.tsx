@@ -1,9 +1,10 @@
 import clsx from 'clsx';
+
+import styles from './Navigation.module.sass';
+
 import { navPoints } from '../../utils';
 import { Button } from '../Button';
 import { HomeButton } from '../HomeButton';
-
-import styles from './Navigation.module.sass';
 
 export const Navigation = () => {
    return (

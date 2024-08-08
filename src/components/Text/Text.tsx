@@ -1,37 +1,27 @@
 import { ElementType, ReactNode } from 'react';
 import { clsx } from 'clsx';
-import { FontFamiliesClasses } from '../../constants';
 
 import styles from './Text.module.sass';
 
-type TextProps = {
-   /** Сам текст для вывода */
-   children: ReactNode;
-   /** Тэг которым отрендерить текст */
-   as?: ElementType;
-   /** Булевая пропса, должен ли текст меняться в зависимости от конфига */
-   dynamic?: boolean;
-   /** Размер шрифта */
-   size?: '1rem' | '1,5rem' | '1,75rem' | '2rem' | '2,25rem' | '2,5rem';
-   /** Вес шрифта */
-   weight?: 400 | 500 | 600 | 700 | 800 | 900;
-   /** Стиль шрифта */
-   fontStyle?: 'italic' | 'normal';
-   /** Булевая пропса, отвечающая должен ли текст быть в верхнем регистре */
-   uppercase?: boolean;
-   /** Выравнивание текста */
-   align?: 'center' | 'left';
+import { FontFamiliesClasses } from '../../constants';
 
-   color?: 'black' | 'white';
-   /** font-family текста */
+type TextProps = {
+   children: ReactNode;
+   as?: ElementType;
+   dynamic?: boolean;
+   size?: '14' | '16' | '18' | '20' | '24' | '28' | '32' | '36' | '40';
+   weight?: 400 | 500 | 600 | 700 | 800 | 900;
+   fontStyle?: 'italic' | 'normal';
+   uppercase?: boolean;
+   align?: 'center' | 'left';
+   color?: 'black' | 'white' | 'gray';
    family?: FontFamiliesClasses;
-   /** Булевая пропса, делает динамическим только семью шрифтов и цвет */
 };
 
 export const Text = ({
    children,
-   as: Tag = 'div',
-   size = '1rem',
+   as: Tag = 'p',
+   size = '16',
    dynamic = false,
    weight = 400,
    fontStyle = 'normal',
@@ -49,7 +39,8 @@ export const Text = ({
       { [styles.uppercase]: uppercase },
       styles[`${align}`],
       styles[`${family}`],
-      styles[`${color}`]
+      styles[`${color}`],
+      styles.margin
    );
    return <Tag className={className}>{children}</Tag>;
 };
