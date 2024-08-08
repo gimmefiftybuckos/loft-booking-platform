@@ -6,7 +6,6 @@ import styles from './Button.module.sass';
 import { Text } from '../Text';
 
 export interface ButtonProps {
-   size?: 'small' | 'medium' | 'large';
    children: string;
 
    accented?: boolean;
