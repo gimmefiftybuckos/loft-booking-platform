@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import styles from './Navigation.module.sass';
 
 import { navPoints } from '../../utils';
-import { Button } from '../Button';
+import { Button } from '../_reusable/Button';
 import { HomeButton } from '../HomeButton';
 
 export const Navigation = () => {

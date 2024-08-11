@@ -1,12 +1,11 @@
 import clsx from 'clsx';
-import { Button } from '../Button';
-import { Text } from '../Text';
+import { Button } from '../_reusable/Button';
+import { Text } from '../_reusable/Text';
 
 import styles from './CardContainer.module.sass';
+import { Card } from '../_reusable/Card/Card';
 
 export const CardSection = () => {
-   const test = [1, 2, 3, 4, 5];
-
    return (
       <section className={clsx(styles.section)}>
          <div className={clsx(styles['section__text-container'])}>
@@ -25,72 +24,9 @@ export const CardSection = () => {
             </div>
          </div>
          <div className={clsx(styles['card-container'])}>
-            <article className={clsx(styles.card)}>
-               <div className={clsx(styles.card__container)}>
-                  <img
-                     className={clsx(styles.card__image)}
-                     src='src/assets/preview.png'
-                     alt=''
-                  />
-               </div>
-               <div className={clsx(styles.card__content)}>
-                  <Text size='18' weight={600} as={'h3'}>
-                     Лофт из белого кирпича с верандой
-                  </Text>
-                  <div className={clsx(styles.card__distance)}>
-                     <div className={clsx(styles.card__metro)}>
-                        <Text size='14'>Бауманская</Text>
-                     </div>
-                     <div className={clsx(styles.card__time)}>
-                        <Text color='gray' size='14'>
-                           7 минут
-                        </Text>
-                     </div>
-                  </div>
-                  <div className={clsx(styles.card__rating)}>
-                     <div className={clsx(styles.card__stars)}>
-                        {test.map(() => (
-                           <div
-                              aria-hidden
-                              className={clsx(styles.card__star)}
-                           ></div>
-                        ))}
-                     </div>
-                     <div className={clsx(styles.card__review)}>
-                        <Text size='14'>4.0</Text>
-                        <Text size='14' color='gray'>
-                           (15 отзывов)
-                        </Text>
-                     </div>
-                  </div>
-                  <div className={clsx(styles.card__price)}>
-                     <Text color='gray' size='14'>
-                        от{' '}
-                        <Text size='20' weight={600} as={'span'}>
-                           3000 ₽
-                        </Text>{' '}
-                        / час
-                     </Text>
-                  </div>
-                  <div className={clsx(styles.room)}>
-                     <div className={clsx(styles.room__people)}>
-                        <Text size='14' as={'p'}>
-                           25 чел
-                        </Text>
-                     </div>
-                     <div className={clsx(styles.room__seats)}>
-                        <Text size='14' as={'p'}>
-                           38 мест
-                        </Text>
-                     </div>
-                     <div className={clsx(styles.room__area)}>
-                        <Text size='14' as={'p'}>
-                           210 m²
-                        </Text>
-                     </div>
-                  </div>
-               </div>
-            </article>
+            <Card />
+            <Card />
+            <Card />
          </div>
       </section>
    );

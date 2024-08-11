@@ -1,0 +1,32 @@
+@import '../../../styles/variables'
+
+.card
+    display: inline-block
+    padding: 1.25rem
+    border-radius: 10px
+    outline: 1px solid $border-color
+    transition: box-shadow 0.3s ease
+    cursor: pointer
+
+    &:hover
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.15)
+
+    &__container
+        max-inline-size: 330px
+        block-size: 250px
+        inline-size: 100%
+        margin: 0
+        padding: 0
+        border: 0
+
+    &__image
+        border-radius: 10px
+        block-size: 100%
+        inline-size: 100%
+        object-fit: cover
+
+    &__content
+        display: flex
+        flex-direction: column
+        gap: 0.7rem
+        margin-block-start: 0.95rem
