@@ -19,7 +19,7 @@ export const MainSection = () => {
                }
 
                return (
-                  <button className={stylesList}>
+                  <button key={index} className={stylesList}>
                      {item.name}
                      <img
                         src='src/assets/down.svg'

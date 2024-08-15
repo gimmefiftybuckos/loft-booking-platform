@@ -4,15 +4,20 @@ import styles from './Distance.module.sass';
 
 import { Text } from '../Text';
 
-export const Distance = () => {
+type DistanceProps = {
+   metro: string;
+   time: number;
+};
+
+export const Distance: React.FC<DistanceProps> = ({ metro, time }) => {
    return (
       <div className={clsx(styles.distance)}>
          <div className={clsx(styles.distance__metro)}>
-            <Text size='14'>Бауманская</Text>
+            <Text size='14'>{metro}</Text>
          </div>
          <div className={clsx(styles.distance__time)}>
             <Text color='gray' size='14'>
-               7 минут
+               {time} минут
             </Text>
          </div>
       </div>
