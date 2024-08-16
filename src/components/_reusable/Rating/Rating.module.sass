@@ -1,0 +1,24 @@
+.rating
+    display: flex
+    align-items: center
+    gap: 0.45rem
+    block-size: 20px
+
+    &__stars
+        display: flex
+        gap: 6px
+
+    &__star
+        block-size: 14px
+        inline-size: 14px
+        background: url('src/assets/rate-empty.svg')
+
+        &_full
+            background: url('src/assets/rate-full.svg')
+
+        &_half
+            background: url('src/assets/rate-half.svg')
+
+    &__review
+        display: flex
+        gap: 0.55rem

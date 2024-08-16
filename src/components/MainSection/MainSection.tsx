@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import styles from './MainSection.module.sass';
 
 import { selectionParams } from '../../utils';
-import { Button } from '../Button';
+import { Button } from '../_reusable/Button';
 
 export const MainSection = () => {
    return (
@@ -19,7 +19,7 @@ export const MainSection = () => {
                }
 
                return (
-                  <button className={stylesList}>
+                  <button key={index} className={stylesList}>
                      {item.name}
                      <img
                         src='src/assets/down.svg'

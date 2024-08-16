@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import styles from './BannerSection.module.sass';
 
 import { bannersContent } from '../../utils';
-import { Text } from '../Text';
+import { Text } from '../_reusable/Text';
 
 export const BannerSection = () => {
    return (

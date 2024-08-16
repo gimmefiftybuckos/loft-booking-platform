@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import styles from './Navigation.module.sass';
 
 import { navPoints } from '../../utils';
-import { Button } from '../Button';
+import { Button } from '../_reusable/Button';
 import { HomeButton } from '../HomeButton';
 
 export const Navigation = () => {
@@ -12,8 +12,10 @@ export const Navigation = () => {
          <HomeButton />
          <div className={clsx(styles.navigation__container)}>
             <div className={clsx(styles.points)}>
-               {navPoints.map((item) => (
-                  <Button pathTo={item.path}>{item.name}</Button>
+               {navPoints.map((item, index) => (
+                  <Button key={index} pathTo={item.path}>
+                     {item.name}
+                  </Button>
                ))}
             </div>
             <div>

@@ -1,0 +1,32 @@
+.distance
+    display: flex
+    gap: 1rem
+    block-size: 20px
+
+    &__metro
+        display: flex
+        gap: 0.5rem
+        align-items: center
+
+        &::before
+            content: ''
+            display: block
+            block-size: 12px
+            inline-size: 12px
+            background: url('src/assets/metro.svg')
+            background-repeat: no-repeat
+            object-fit: cover
+
+    &__time
+        display: flex
+        gap: 0.5rem
+        align-items: center
+
+        &::before
+            content: ''
+            display: block
+            block-size: 12px
+            inline-size: 12px
+            background: url('src/assets/walk.svg')
+            background-repeat: no-repeat
+            object-fit: cover
