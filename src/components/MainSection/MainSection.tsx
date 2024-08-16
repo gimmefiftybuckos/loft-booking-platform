@@ -22,7 +22,7 @@ export const MainSection = () => {
                   <button key={index} className={stylesList}>
                      {item.name}
                      <img
-                        src='src/assets/down.svg'
+                        src='/assets/down.svg'
                         alt='Dropdown Icon'
                         width='16'
                         height='16'

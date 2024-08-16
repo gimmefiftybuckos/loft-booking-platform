@@ -5,12 +5,12 @@ import { ILoftCard } from '../types';
 export const getLoftsData = createAsyncThunk(
    'cards/getLoftsData',
    async (filter: string) => {
+      const query = filter ? { params: { filter } } : {};
+
       try {
          const response = await axios.get<ILoftCard[]>(
             'http://localhost:3000/catalog',
-            {
-               params: { filter },
-            }
+            query
          );
          return response.data;
       } catch (error) {
@@ -18,13 +18,13 @@ export const getLoftsData = createAsyncThunk(
       }
    }
 );
+
 export const asyncGetHomeContainerData = async (filter: string) => {
+   const query = filter ? { params: { filter } } : {};
    try {
       const response = await axios.get<ILoftCard[]>(
          'http://localhost:3000/catalog',
-         {
-            params: { filter },
-         }
+         query
       );
 
       return response.data || null;

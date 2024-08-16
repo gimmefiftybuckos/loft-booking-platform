@@ -1,4 +1,5 @@
 export interface ILoftCard {
+   id: string;
    title: string;
    metroStation: string;
    walkingDistanceMinutes: number;
@@ -11,3 +12,8 @@ export interface ILoftCard {
    imageUrl: string;
    type: string[];
 }
+
+export type ICardSection = {
+   title: string;
+   param: string;
+};

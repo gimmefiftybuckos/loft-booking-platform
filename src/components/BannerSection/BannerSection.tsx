@@ -13,7 +13,7 @@ export const BannerSection = () => {
                return (
                   <li key={index} className={clsx(styles.banner)}>
                      <img
-                        src={`src/assets/${item.iconPath}.svg`}
+                        src={`/assets/${item.iconPath}.svg`}
                         alt={`${item.iconPath} icon`}
                      />
                      <Text size='14'>

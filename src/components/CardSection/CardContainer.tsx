@@ -10,7 +10,7 @@ import { ILoftCard } from '../../types';
 import { asyncGetHomeContainerData } from '../../api';
 
 type CardSectionProps = {
-   title: string;
+   title?: string;
    filter?: string;
 };
 
@@ -38,10 +38,10 @@ export const CardSection: React.FC<CardSectionProps> = ({
                {title}
             </Text>
             <div className={clsx(styles['section__button-container'])}>
-               <Button pathTo={''}>Смотреть все</Button>
+               <Button pathTo={'/catalog'}>Смотреть все</Button>
                <img
                   className={clsx(styles.icon)}
-                  src='src/assets/down.svg'
+                  src='/assets/down.svg'
                   alt='Dropdown Icon'
                   width='16'
                   height='16'
@@ -50,7 +50,7 @@ export const CardSection: React.FC<CardSectionProps> = ({
          </div>
          <div className={clsx(styles['card-container'])}>
             {titleCards?.map((item, index) => {
-               return <Card {...item} key={index} />;
+               return <Card cardData={item} key={item.id} />;
             })}
          </div>
       </section>

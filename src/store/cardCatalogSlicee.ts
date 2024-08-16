@@ -25,7 +25,7 @@ const cardSlice = createSlice({
             state.status = 'succeeded';
             state.cards = action.payload;
          })
-         .addCase(getLoftsData.rejected, (state, action) => {
+         .addCase(getLoftsData.rejected, (state) => {
             state.status = 'failed';
          });
    },

@@ -1,3 +1,5 @@
+import { ICardSection } from '../types';
+
 export const n = ['Все лофты', 'Идеи', 'Избранное'];
 
 type test = {
@@ -6,7 +8,7 @@ type test = {
 };
 
 export const navPoints: test[] = [
-   { name: 'Все лофты', path: '/lofts' },
+   { name: 'Все лофты', path: '/catalog' },
    { name: 'Идеи', path: '/ideas' },
    { name: 'Избранное', path: '/favorite' },
 ];
@@ -42,22 +44,10 @@ export const bannersContent = [
    },
 ];
 
-export const cardSectionList = [
+export const cardSectionList: ICardSection[] = [
    {
       title: 'Мы рекомендуем',
       param: 'recommendations',
-   },
-   {
-      title: 'Площадки для корпоративов',
-      param: 'corporate',
-   },
-   {
-      title: 'Площадки для Дня рождения',
-      param: 'birthday',
-   },
-   {
-      title: 'Площадки для детских праздников',
-      param: 'kids',
    },
    {
       title: 'Все площадки',
@@ -98,5 +88,17 @@ export const cardSectionList = [
    {
       title: 'Лофты на 15 гостей',
       param: 'lofts_15_guests',
+   },
+   {
+      title: 'Площадки для корпоративов',
+      param: 'corporate',
+   },
+   {
+      title: 'Площадки для Дня рождения',
+      param: 'birthday',
+   },
+   {
+      title: 'Площадки для детских праздников',
+      param: 'kids',
    },
 ];
