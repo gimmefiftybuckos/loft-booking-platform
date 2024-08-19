@@ -1,9 +1,9 @@
 import { cardSectionList } from '../../utils';
 
-import { MainSection } from '../MainSection';
-import { BannerSection } from '../BannerSection';
-import { CardBlockSection } from '../CardBlockSection';
-import { CardSection } from '../CardSection';
+import { MainSection } from '../_sections/MainSection';
+import { BannerSection } from '../_sections/BannerSection';
+import { CardBlockSection } from '../_sections/CardBlockSection';
+import { CardSection } from '../_sections/CardSection';
 
 export const Home = () => {
    const { title: mainSectionTitle, param: mainSectionParam } =

@@ -1,5 +1,5 @@
 import { ICardSection } from '../types';
-import { setFilter } from '../store/cardCatalogSlicee';
+import { setFilter } from '../store/cardCatalogSlice';
 import { AppDispatch } from '../store';
 
 export const n = ['Все лофты', 'Идеи', 'Избранное'];

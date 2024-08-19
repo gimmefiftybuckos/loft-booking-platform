@@ -3,17 +3,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import clsx from 'clsx';
 
-import styles from './Catalog.module.sass';
+import styles from './CatalogSection.module.sass';
 
-import { getLoftsData } from '../../api';
-import { AppDispatch, RootState } from '../../store';
-import { resetCardsState } from '../../store/cardCatalogSlicee';
-import { catalogFilters } from '../../utils';
+import { getLoftsData } from '../../../api';
+import { AppDispatch, RootState } from '../../../store';
+import { resetCardsState } from '../../../store/cardCatalogSlice';
+import { catalogFilters } from '../../../utils';
 
-import { Text } from '../_reusable/Text';
-import { Card } from '../_reusable/Card';
+import { Text } from '../../_reusable/Text';
+import { Card } from '../../_reusable/Card';
 
-export const Catalog = () => {
+export const CatalogSection = () => {
    const dispatch = useDispatch<AppDispatch>();
    const { cards, filter, page, hasMore, status } = useSelector(
       (state: RootState) => state.cards
