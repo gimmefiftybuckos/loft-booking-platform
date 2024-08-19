@@ -22,12 +22,17 @@ export const Button: React.FC<ButtonProps> = ({
    outlined,
    pathTo,
    textColor = 'black',
+   onClick,
 }) => {
    const accent = accented ? styles.button_accent : null;
    const outline = outlined ? styles.button_outlined : null;
 
    return (
-      <Link className={clsx(styles.button, accent, outline)} to={pathTo}>
+      <Link
+         onClick={onClick}
+         className={clsx(styles.button, accent, outline)}
+         to={pathTo}
+      >
          <Text color={textColor} weight={500}>
             {children}
          </Text>

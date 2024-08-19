@@ -2,12 +2,13 @@ import clsx from 'clsx';
 
 import styles from './Card.module.sass';
 
+import { ILoftCard } from '../../../types';
+
 import { Text } from '../Text';
 import { Price } from '../Price';
 import { Rating } from '../Rating';
 import { Room } from '../Room';
 import { Distance } from '../Distance';
-import { ILoftCard } from '../../../types';
 
 type CardProps = {
    cardData: ILoftCard;
@@ -61,7 +62,12 @@ export const Card: React.FC<CardProps> = ({ cardData, wide }) => {
                alt=''
             />
          </div>
-         <div className={clsx(styles.card__content)}>
+         <div
+            className={clsx(
+               styles.card__content,
+               styles[`card__content${size}`]
+            )}
+         >
             <Text
                size={`CardTitle${wide ? '_wide' : ''}`}
                weight={600}

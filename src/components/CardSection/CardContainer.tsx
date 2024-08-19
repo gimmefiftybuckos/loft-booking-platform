@@ -1,13 +1,17 @@
+import { useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
 import clsx from 'clsx';
-import { Button } from '../_reusable/Button';
-import { Text } from '../_reusable/Text';
 
 import styles from './CardContainer.module.sass';
-import { Card } from '../_reusable/Card/Card';
-import { useEffect, useState } from 'react';
 
 import { ILoftCard } from '../../types';
 import { asyncGetHomeContainerData } from '../../api';
+import { AppDispatch } from '../../store';
+import { setFilter } from '../../store/cardCatalogSlicee';
+
+import { Text } from '../_reusable/Text';
+import { Button } from '../_reusable/Button';
+import { Card } from '../_reusable/Card/Card';
 
 type CardSectionProps = {
    title?: string;
@@ -20,14 +24,20 @@ export const CardSection: React.FC<CardSectionProps> = ({
 }) => {
    const [dataState, setDataState] = useState<ILoftCard[]>();
 
-   const handle = async () => {
+   const dispatch = useDispatch<AppDispatch>();
+
+   const initalHomeCards = async () => {
       const data = await asyncGetHomeContainerData(filter);
       setDataState(data);
    };
 
    useEffect(() => {
-      handle();
+      initalHomeCards();
    }, [filter]);
+
+   const clickHandle = () => {
+      dispatch(setFilter(filter));
+   };
 
    const titleCards = dataState?.slice(0, 3);
 
@@ -38,7 +48,9 @@ export const CardSection: React.FC<CardSectionProps> = ({
                {title}
             </Text>
             <div className={clsx(styles['section__button-container'])}>
-               <Button pathTo={'/catalog'}>Смотреть все</Button>
+               <Button onClick={clickHandle} pathTo={'/catalog'}>
+                  Смотреть все
+               </Button>
                <img
                   className={clsx(styles.icon)}
                   src='/assets/down.svg'
@@ -49,7 +61,7 @@ export const CardSection: React.FC<CardSectionProps> = ({
             </div>
          </div>
          <div className={clsx(styles['card-container'])}>
-            {titleCards?.map((item, index) => {
+            {titleCards?.map((item) => {
                return <Card cardData={item} key={item.id} />;
             })}
          </div>

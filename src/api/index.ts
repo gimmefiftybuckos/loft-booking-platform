@@ -2,10 +2,17 @@ import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ILoftCard } from '../types';
 
+type paramsType = {
+   filter: string;
+   page: number;
+};
+
 export const getLoftsData = createAsyncThunk(
    'cards/getLoftsData',
-   async (filter: string) => {
-      const query = filter ? { params: { filter } } : {};
+   async ({ filter, page }: paramsType) => {
+      const query = filter
+         ? { params: { filter, page } }
+         : { params: { page } };
 
       try {
          const response = await axios.get<ILoftCard[]>(

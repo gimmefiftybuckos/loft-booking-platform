@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import styles from './MainSection.module.sass';
 
 import { selectionParams } from '../../utils';
+
 import { Button } from '../_reusable/Button';
 
 export const MainSection = () => {

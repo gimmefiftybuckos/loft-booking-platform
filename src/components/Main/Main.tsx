@@ -12,6 +12,7 @@ export const Main = () => {
          <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/catalog' element={<Catalog />} />
+            {/* <Route path="*" element={<NotFound />} /> */}
          </Routes>
       </main>
    );

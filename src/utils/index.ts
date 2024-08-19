@@ -1,14 +1,15 @@
 import { ICardSection } from '../types';
+import { setFilter } from '../store/cardCatalogSlicee';
+import { AppDispatch } from '../store';
 
 export const n = ['Все лофты', 'Идеи', 'Избранное'];
 
-type test = {
-   name: string;
-   path: string;
-};
-
-export const navPoints: test[] = [
-   { name: 'Все лофты', path: '/catalog' },
+export const createNavPoints = (dispatch: AppDispatch) => [
+   {
+      name: 'Все лофты',
+      path: '/catalog',
+      onClick: () => dispatch(setFilter('')),
+   },
    { name: 'Идеи', path: '/ideas' },
    { name: 'Избранное', path: '/favorite' },
 ];
@@ -102,3 +103,5 @@ export const cardSectionList: ICardSection[] = [
       param: 'kids',
    },
 ];
+
+export const catalogFilters = ['Событие', 'Стоимость', 'Даты', 'Фильтры'];

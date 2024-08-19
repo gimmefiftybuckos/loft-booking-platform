@@ -3,13 +3,36 @@
 .section
     // margin-block-start: 7.5rem
 
+.buttons
+    display: flex
+    gap: 0.65rem
+    margin-block-start: 4rem
+
+.button
+    display: flex
+    justify-content: space-between
+    align-items: center
+    padding: 12px 25px
+    max-inline-size: 143px
+    background: $footer-bg-color
+    border-radius: 60px
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15)
+    cursor: pointer
+
+    &_drop
+        padding: 12px 20px 12px 25px
+        inline-size: 100%
+
 .content
-    margin-block-start: 9.5rem
-    padding: 3.15rem
+    margin-block-start: 2.5rem
+    padding: 2.7rem 3.15rem 3.15rem 3.15rem
     border-radius: 30px
     background: $footer-bg-color
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15)
 
 .container
     display: grid
     grid-template-columns: repeat(auto-fit, minmax(340px, 1fr))
-    gap: 2.5rem
+    column-gap: 2.5rem
+    row-gap: 3.5rem
+    margin-block-start: 2rem
