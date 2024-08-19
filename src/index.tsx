@@ -5,12 +5,27 @@ import { Provider } from 'react-redux';
 
 import './styles/index.sass';
 import './fonts/font.sass';
-import { BrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { Main } from './components/Main/Main.tsx';
+
+const router = createBrowserRouter([
+   {
+      path: '/*',
+      element: <App />,
+      children: [
+         {
+            element: <Main />,
+         },
+         {
+            path: 'catalog',
+            element: <Main />,
+         },
+      ],
+   },
+]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
    <Provider store={store}>
-      <BrowserRouter>
-         <App />
-      </BrowserRouter>
+      <RouterProvider router={router} />
    </Provider>
 );

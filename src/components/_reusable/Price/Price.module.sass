@@ -1,10 +1,13 @@
 @import '../../../styles/variables'
 
 .price
-    &::after
-        content: ''
-        display: inline-block
-        margin-block-start: 1rem
-        block-size: 1px
-        inline-size: 100%
-        background: $border-color
+    block-size: 24px
+
+    &_outline
+        &::after
+            content: ''
+            display: inline-block
+            // margin-block-start: 0.rem
+            block-size: 1px
+            inline-size: 100%
+            background: $border-color

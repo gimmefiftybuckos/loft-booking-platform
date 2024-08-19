@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import styles from './MainSection.module.sass';
 
 import { selectionParams } from '../../utils';
+
 import { Button } from '../_reusable/Button';
 
 export const MainSection = () => {
@@ -22,7 +23,7 @@ export const MainSection = () => {
                   <button key={index} className={stylesList}>
                      {item.name}
                      <img
-                        src='src/assets/down.svg'
+                        src='/assets/down.svg'
                         alt='Dropdown Icon'
                         width='16'
                         height='16'

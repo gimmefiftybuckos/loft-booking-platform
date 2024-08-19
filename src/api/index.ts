@@ -2,15 +2,22 @@ import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ILoftCard } from '../types';
 
+type paramsType = {
+   filter: string;
+   page: number;
+};
+
 export const getLoftsData = createAsyncThunk(
    'cards/getLoftsData',
-   async (filter: string) => {
+   async ({ filter, page }: paramsType) => {
+      const query = filter
+         ? { params: { filter, page } }
+         : { params: { page } };
+
       try {
          const response = await axios.get<ILoftCard[]>(
             'http://localhost:3000/catalog',
-            {
-               params: { filter },
-            }
+            query
          );
          return response.data;
       } catch (error) {
@@ -18,13 +25,13 @@ export const getLoftsData = createAsyncThunk(
       }
    }
 );
+
 export const asyncGetHomeContainerData = async (filter: string) => {
+   const query = filter ? { params: { filter } } : {};
    try {
       const response = await axios.get<ILoftCard[]>(
          'http://localhost:3000/catalog',
-         {
-            params: { filter },
-         }
+         query
       );
 
       return response.data || null;

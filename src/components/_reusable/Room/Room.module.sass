@@ -2,47 +2,36 @@
     display: flex
     justify-content: start
     gap: 0.9rem
+    margin-block-start: 1rem
 
-    margin-block-start: 0.45rem
+    &_wide
+        justify-content: space-between
+
+    &__element
+        display: flex
+        align-items: center
+        gap: 0.45rem
+
+        &::before
+            content: ''
+            display: block
+            block-size: 24px
+            inline-size: 24px
+            background-repeat: no-repeat
+            object-fit: cover
 
     &__people
-        display: flex
-        align-items: center
-        gap: 0.45rem
-
         &::before
-            content: ''
-            display: block
-            block-size: 24px
-            inline-size: 24px
-            background: url('src/assets/people.svg')
-            background-repeat: no-repeat
-            object-fit: cover
+            background: url('/assets/people.svg')
 
     &__seats
-        display: flex
-        align-items: center
-        gap: 0.45rem
-
         &::before
-            content: ''
-            display: block
-            block-size: 24px
-            inline-size: 24px
-            background: url('src/assets/seats.svg')
-            background-repeat: no-repeat
-            object-fit: cover
+            background: url('/assets/seats.svg')
 
     &__area
-        display: flex
-        align-items: center
-        gap: 0.45rem
-
         &::before
-            content: ''
-            display: block
-            block-size: 24px
-            inline-size: 24px
-            background: url('src/assets/area.svg')
-            background-repeat: no-repeat
-            object-fit: cover
+            background: url('/assets/area.svg')
+
+    &__bell
+        &::before
+            background: url('/assets/bell.svg')

@@ -19,7 +19,8 @@ type TextProps = {
       | '32'
       | '36'
       | '40'
-      | 'CardTitle';
+      | 'CardTitle'
+      | 'CardTitle_wide';
    weight?: 400 | 500 | 600 | 700 | 800 | 900;
    fontStyle?: 'italic' | 'normal';
    uppercase?: boolean;
