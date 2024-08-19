@@ -2,16 +2,16 @@ import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import clsx from 'clsx';
 
-import styles from './CardContainer.module.sass';
+import styles from './CardSection.module.sass';
 
-import { ILoftCard } from '../../types';
-import { asyncGetHomeContainerData } from '../../api';
-import { AppDispatch } from '../../store';
-import { setFilter } from '../../store/cardCatalogSlicee';
+import { ILoftCard } from '../../../types';
+import { asyncGetHomeContainerData } from '../../../api';
+import { AppDispatch } from '../../../store';
+import { setFilter } from '../../../store/cardCatalogSlice';
 
-import { Text } from '../_reusable/Text';
-import { Button } from '../_reusable/Button';
-import { Card } from '../_reusable/Card/Card';
+import { Text } from '../../_reusable/Text';
+import { Button } from '../../_reusable/Button';
+import { Card } from '../../_reusable/Card/Card';
 
 type CardSectionProps = {
    title?: string;
