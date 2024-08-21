@@ -48,59 +48,59 @@ export const bannersContent = [
 export const cardSectionList: ICardSection[] = [
    {
       title: 'Мы рекомендуем',
-      param: 'recommendations',
+      filter: 'recommendations',
    },
    {
       title: 'Все площадки',
-      param: '',
+      filter: '',
    },
    {
       title: 'Коворкинги',
-      param: 'coworking',
+      filter: 'coworking',
    },
    {
       title: 'Банкетные залы для свадеб',
-      param: 'wedding',
+      filter: 'wedding',
    },
    {
       title: 'Танцевальные залы',
-      param: 'dance',
+      filter: 'dance',
    },
    {
       title: 'Площадки для выпускных',
-      param: 'graduation',
+      filter: 'graduation',
    },
    {
       title: 'Площадки для переговоров',
-      param: 'meeting',
+      filter: 'meeting',
    },
    {
       title: 'Лофты для вечеринок',
-      param: 'party',
+      filter: 'party',
    },
    {
       title: 'Бары для вечеринок',
-      param: 'bars',
+      filter: 'bars',
    },
    {
       title: 'Площадки в центре Москвы',
-      param: 'central_moscow',
+      filter: 'central_moscow',
    },
    {
       title: 'Лофты на 15 гостей',
-      param: 'lofts_15_guests',
+      filter: 'lofts_15_guests',
    },
    {
       title: 'Площадки для корпоративов',
-      param: 'corporate',
+      filter: 'corporate',
    },
    {
       title: 'Площадки для Дня рождения',
-      param: 'birthday',
+      filter: 'birthday',
    },
    {
       title: 'Площадки для детских праздников',
-      param: 'kids',
+      filter: 'kids',
    },
 ];
 

@@ -13,7 +13,23 @@ export interface ILoftCard {
    type: string[];
 }
 
-export type ICardSection = {
+export interface ICardSection {
    title: string;
-   param: string;
-};
+   filter: FilterParamsType;
+}
+
+export type FilterParamsType =
+   | ''
+   | 'recommendations'
+   | 'coworking'
+   | 'wedding'
+   | 'dance'
+   | 'graduation'
+   | 'meeting'
+   | 'party'
+   | 'bars'
+   | 'central_moscow'
+   | 'lofts_15_guests'
+   | 'corporate'
+   | 'birthday'
+   | 'kids';

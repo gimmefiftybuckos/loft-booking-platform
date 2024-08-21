@@ -6,7 +6,7 @@ import { CardBlockSection } from '../_sections/CardBlockSection';
 import { CardSection } from '../_sections/CardSection';
 
 export const Home = () => {
-   const { title: mainSectionTitle, param: mainSectionParam } =
+   const { title: mainSectionTitle, filter: mainSectionParam } =
       cardSectionList[0];
 
    const blockSectionCards = cardSectionList.slice(1, 11);
@@ -23,7 +23,7 @@ export const Home = () => {
                <CardSection
                   key={index}
                   title={item.title}
-                  filter={item.param}
+                  filter={item.filter}
                />
             );
          })}

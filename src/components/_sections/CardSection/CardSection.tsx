@@ -4,7 +4,7 @@ import clsx from 'clsx';
 
 import styles from './CardSection.module.sass';
 
-import { ILoftCard } from '../../../types';
+import { FilterParamsType, ILoftCard } from '../../../types';
 import { asyncGetHomeContainerData } from '../../../api';
 import { AppDispatch } from '../../../store';
 import { setFilter } from '../../../store/cardCatalogSlice';
@@ -15,7 +15,7 @@ import { Card } from '../../_reusable/Card/Card';
 
 type CardSectionProps = {
    title?: string;
-   filter?: string;
+   filter?: FilterParamsType;
 };
 
 export const CardSection: React.FC<CardSectionProps> = ({
