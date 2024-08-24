@@ -1,3 +1,5 @@
+@import '../../../styles/variables'
+
 .container
     display: grid
     grid-template-areas: "AP AP AP AP AP AP KP KP KP BP BP BP" "AP AP AP AP AP AP KP KP KP DP DP DP" "VP VP VP VP PP PP PP PP VeP VeP VeP VeP" "BaP BaP BaP BaP MP MP MP MP LPP LPP LPP LPP"
@@ -6,41 +8,54 @@
     margin-block-start: 1.45rem
 
     @media (max-width: 1200px)
-        grid-template-rows: repeat(5, 300px)
+        grid-template: none
+        grid-template-rows: repeat(5,300px)
+        grid-template-columns: 1fr 1fr
         grid-template-areas: "AP KP" "BP DP" "VP PP" "VeP BaP" "MP LPP"
 
     @media (max-width: 800px)
-        grid-template-rows: repeat(5, 300px)
-        grid-template-columns: 1fr
-        grid-template-areas: "AP KP" "BP DP" "VP PP" "VeP BaP" "MP LPP"
+        display: flex
+        flex-direction: column
 
 .card
     position: relative
-    z-index: -1
+    // z-index: -1
     block-size: 100%
     inline-size: 100%
     margin: 0
     padding: 0
     border: 0
+    border-radius: 10px
+    overflow: hidden
     cursor: pointer
+
+    &:hover .card__text
+        background: $bg-color
+        color: #000
+        transition: color 0.3s ease
+        outline: none
+
+    &:hover .card__image
+        transform: scale(1.1)
 
     &::after
         content: ""
         background: linear-gradient(180deg,#78849600,#161c26d9 95%)
+        position: absolute
+        z-index: 1
         left: 0
         right: 0
         top: 50%
         bottom: 0
         border-end-start-radius: 10px
         border-end-end-radius: 10px
-        position: absolute
-        z-index: 1
 
     &__image
         border-radius: 10px
         block-size: 100%
         inline-size: 100%
         object-fit: cover
+        transition: transform 0.3s ease
 
     &__text
         position: absolute
@@ -55,6 +70,7 @@
         font-size: 14px
         font-weight: 600
         line-height: 20px
+        transition: background 0.3s ease
 
     &:nth-of-type(1)
         grid-area: AP

@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { getLoftsData } from '../api';
-import { ILoftCard } from '../types';
+import { FilterParamsType, ILoftCard } from '../types';
 
 export type CardSliceType = {
    cards: ILoftCard[];
    status: 'idle' | 'loading' | 'succeeded' | 'failed';
-   filter: string;
+   filter: FilterParamsType;
    limit: number;
    page: number;
    hasMore: boolean;
@@ -25,7 +25,7 @@ const cardSlice = createSlice({
    name: 'cards',
    initialState,
    reducers: {
-      setFilter(state, action: PayloadAction<string>) {
+      setFilter(state, action: PayloadAction<FilterParamsType>) {
          state.filter = action.payload;
       },
       resetCardsState(state) {
