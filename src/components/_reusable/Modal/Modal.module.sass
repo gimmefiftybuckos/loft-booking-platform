@@ -1,0 +1,18 @@
+@import '../../../styles/variables'
+
+.modal
+    position: absolute
+    z-index: 101
+    inset-block-start: 58px
+    inset-inline-start: 0
+    display: none
+    padding: 1rem 1.5rem
+    max-block-size: 365px
+    background: #fff
+    overflow: auto
+    border-radius: 10px
+    border: 1px solid $border-color
+    cursor: default
+
+    &_open
+        display: block

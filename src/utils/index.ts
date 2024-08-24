@@ -1,4 +1,4 @@
-import { ICardSection } from '../types';
+import { ICardSection, selectionParamsType } from '../types';
 import { setFilter } from '../store/cardCatalogSlice';
 import { AppDispatch } from '../store';
 
@@ -14,11 +14,11 @@ export const createNavPoints = (dispatch: AppDispatch) => [
    { name: 'Избранное', path: '/favorite' },
 ];
 
-export const selectionParams = [
-   { name: 'Тип мероприятий' },
-   { name: 'Дата мероприятий' },
-   { name: 'Начало' },
-   { name: 'Конец' },
+export const selectionParams: selectionParamsType[] = [
+   'Мероприятие',
+   'Дата',
+   'Начало',
+   'Конец',
 ];
 
 export const bannersContent = [
@@ -99,7 +99,7 @@ export const cardSectionList: ICardSection[] = [
       filter: 'birthday',
    },
    {
-      title: 'Площадки для детских праздников',
+      title: 'Детские праздники',
       filter: 'kids',
    },
 ];

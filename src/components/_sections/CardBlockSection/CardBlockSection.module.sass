@@ -8,13 +8,14 @@
     margin-block-start: 1.45rem
 
     @media (max-width: 1200px)
-        grid-template-rows: repeat(5, 300px)
+        grid-template: none
+        grid-template-rows: repeat(5,300px)
+        grid-template-columns: 1fr 1fr
         grid-template-areas: "AP KP" "BP DP" "VP PP" "VeP BaP" "MP LPP"
 
     @media (max-width: 800px)
-        grid-template-rows: repeat(5, 300px)
-        grid-template-columns: 1fr
-        grid-template-areas: "AP KP" "BP DP" "VP PP" "VeP BaP" "MP LPP"
+        display: flex
+        flex-direction: column
 
 .card
     position: relative

@@ -1,0 +1,21 @@
+@import '../../styles/variables'
+
+.rdp
+    // border-radius: 10px
+    &_selected
+        color: $bg-color
+        background: $accent-color
+        border-radius: 50%
+
+        &:hover
+            background-color: $accent-alt-color
+
+    &_today
+        color: $accent-color
+        outline: 1.5px solid $accent-alt-color
+        border-radius: 50%
+
+.rdp_selected.rdp_today
+    outline: none
+    color: $bg-color
+    background: $accent-color

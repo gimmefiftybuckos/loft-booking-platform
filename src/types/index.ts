@@ -33,3 +33,5 @@ export type FilterParamsType =
    | 'corporate'
    | 'birthday'
    | 'kids';
+
+export type selectionParamsType = 'Мероприятие' | 'Дата' | 'Начало' | 'Конец';

@@ -18,6 +18,8 @@
     color: $bg-color
 
 .container
+    position: relative
+    z-index: 101
     display: flex
     flex-wrap: wrap
     justify-content: space-between
@@ -28,6 +30,7 @@
     border-radius: 15px
 
 .button
+    position: relative
     display: flex
     flex: 2 1 200px
     justify-content: space-between
@@ -40,6 +43,11 @@
     background: $bg-color
     cursor: pointer
 
-    &_smaller
-        padding: 18px 15px
-        flex: 1 2 200px
+.modalBackdrop
+    position: fixed
+    z-index: 100
+    top: 0
+    left: 0
+    width: 100vw
+    height: 100vh
+    background-color: rgba(0,0,0,0.2)
