@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import clsx from 'clsx';
@@ -12,7 +13,6 @@ import { cardSectionList, catalogFilters } from '../../../utils';
 
 import { Text } from '../../_reusable/Text';
 import { Card } from '../../_reusable/Card';
-import { useSearchParams } from 'react-router-dom';
 
 export const CatalogSection = () => {
    const dispatch = useDispatch<AppDispatch>();
@@ -35,7 +35,7 @@ export const CatalogSection = () => {
    };
 
    useEffect(() => {
-      if (filter) setSearchParams({ filter });
+      if (filter) setSearchParams({ filter }, { replace: true });
 
       const filterParam = filter || searchParams.get('filter') || '';
 
