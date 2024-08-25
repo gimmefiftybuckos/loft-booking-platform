@@ -18,8 +18,6 @@ export const Calendar = () => {
    const onClick = () => {
       const date = `${selected?.getDate()}:${selected?.getMonth() ? selected?.getMonth() + 1 : null}:${selected?.getFullYear()}`;
 
-      console.log(date);
-
       toggleModal ? toggleModal(-1) : null;
       dispatch(setDate(date));
    };
