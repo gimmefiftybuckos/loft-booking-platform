@@ -105,3 +105,46 @@ export const cardSectionList: ICardSection[] = [
 ];
 
 export const catalogFilters = ['Событие', 'Стоимость', 'Даты', 'Фильтры'];
+
+export const formatDate = (fullDate: string): string | null => {
+   const months = [
+      'января',
+      'февраля',
+      'марта',
+      'апреля',
+      'мая',
+      'июня',
+      'июля',
+      'августа',
+      'сентября',
+      'октября',
+      'ноября',
+      'декабря',
+   ];
+
+   const daysOfWeek = ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'];
+
+   const [day, month, year] = fullDate.split(':').map(Number);
+
+   if (!day || !month || !year) {
+      return null;
+   }
+
+   const jsDate = new Date(year, month - 1, day);
+   const dayOfWeek = daysOfWeek[jsDate.getDay()];
+
+   const formattedDate = `${day} ${months[month - 1]}, ${dayOfWeek}`;
+
+   return formattedDate;
+};
+
+export const getValueByAnother = (
+   filterParam: string,
+   cardSectionList: ICardSection[]
+) => {
+   return (
+      cardSectionList.find((item) => item.filter === filterParam)?.title || ''
+   );
+};
+
+export const todayDate = new Date();

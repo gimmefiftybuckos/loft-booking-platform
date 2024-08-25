@@ -1,16 +1,56 @@
 import clsx from 'clsx';
-import { useEffect, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 
 import styles from './MainSection.module.sass';
 
-import { selectionParams } from '../../../utils';
+import {
+   cardSectionList,
+   formatDate,
+   getValueByAnother,
+   selectionParams,
+} from '../../../utils';
 
 import { Button } from '../../_reusable/Button';
 import { Modal } from '../../_reusable/Modal';
 import { ModalContent } from '../../_reusable/ModalContent';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../../../store';
+import { selectionParamsType } from '../../../types';
+import { setFilter, setToSearchFilter } from '../../../store/cardCatalogSlice';
+
+type ModalContextType = ((key: number) => void) | null;
+
+export const ModalContext = createContext<ModalContextType>(null);
 
 export const MainSection = () => {
+   const dispatch = useDispatch<AppDispatch>();
+   const { toSearchFilter, date } = useSelector(
+      (state: RootState) => state.cards
+   );
+
    const [openModalKey, setOpenModalKey] = useState(-1);
+   const [fullDate, setFullDate] = useState<string | null>(null);
+
+   useEffect(() => {
+      const newDate = formatDate(date);
+      setFullDate(newDate);
+   }, [date]);
+
+   const selectionReducer = (type: selectionParamsType) => {
+      if (type === 'Мероприятие') {
+         if (!toSearchFilter) {
+            return null;
+         }
+
+         const title = getValueByAnother(toSearchFilter, cardSectionList);
+
+         return title;
+      }
+
+      if (type === 'Дата') {
+         return fullDate;
+      }
+   };
 
    const toggleModal = (key: number) => {
       setOpenModalKey(openModalKey === key ? -1 : key);
@@ -19,6 +59,11 @@ export const MainSection = () => {
    useEffect(() => {
       document.body.style.overflow = openModalKey !== -1 ? 'hidden' : 'visible';
    }, [openModalKey]);
+
+   const onClick = () => {
+      dispatch(setFilter(toSearchFilter));
+      dispatch(setToSearchFilter(''));
+   };
 
    return (
       <>
@@ -46,7 +91,7 @@ export const MainSection = () => {
                         key={index}
                         className={clsx(styles.button)}
                      >
-                        {item}
+                        {selectionReducer(item) || item}
                         <img
                            className={clsx(
                               styles.arrow,
@@ -58,13 +103,21 @@ export const MainSection = () => {
                            height='16'
                         />
                         <Modal isOpen={openModalKey === index}>
-                           <ModalContent name={item} />
+                           <ModalContext.Provider value={toggleModal}>
+                              <ModalContent name={item} />
+                           </ModalContext.Provider>
                         </Modal>
                      </div>
                   );
                })}
 
-               <Button inMainSection textColor='white' accented pathTo={''}>
+               <Button
+                  inMainSection
+                  textColor='white'
+                  accented
+                  onClick={onClick}
+                  pathTo={'/catalog'}
+               >
                   Найти
                </Button>
             </div>

@@ -9,48 +9,68 @@ import styles from './CatalogSection.module.sass';
 import { getLoftsData } from '../../../api';
 import { AppDispatch, RootState } from '../../../store';
 import { resetCardsState } from '../../../store/cardCatalogSlice';
-import { cardSectionList, catalogFilters } from '../../../utils';
+import {
+   cardSectionList,
+   catalogFilters,
+   getValueByAnother,
+} from '../../../utils';
 
 import { Text } from '../../_reusable/Text';
 import { Card } from '../../_reusable/Card';
 
 export const CatalogSection = () => {
    const dispatch = useDispatch<AppDispatch>();
-   const { cards, filter, page, hasMore, status } = useSelector(
+   const { cards, filter, date, page, hasMore, status } = useSelector(
       (state: RootState) => state.cards
    );
 
    const [searchParams, setSearchParams] = useSearchParams();
    const [titleState, setTitle] = useState('');
 
+   const initialFilterParam = filter || searchParams.get('filter') || '';
+   const [filterParam] = useState(initialFilterParam);
+
+   const initialDateParam =
+      encodeURIComponent(date) ||
+      decodeURIComponent(searchParams.get('date') || '');
+   const [dateParam] = useState(initialDateParam);
+
    const fetchMore = () => {
       if (status !== 'loading' && hasMore) {
          dispatch(
             getLoftsData({
-               filter,
+               filter: filterParam,
                page,
+               date: dateParam,
             })
          );
       }
    };
 
+   const updateSearchParams = (filter: string, date: string) => {
+      const params: Record<string, string> = {};
+      if (filter) params.filter = filter;
+      if (date) params.date = encodeURIComponent(date);
+      setSearchParams(params, { replace: true });
+   };
+
    useEffect(() => {
-      if (filter) setSearchParams({ filter }, { replace: true });
+      const title = getValueByAnother(filterParam, cardSectionList);
+      setTitle(title);
 
-      const filterParam = filter || searchParams.get('filter') || '';
+      if (filterParam || dateParam) {
+         updateSearchParams(filterParam, dateParam);
 
-      const title = cardSectionList.find(
-         (item) => item.filter === filterParam
-      )?.title;
-      if (title) setTitle(title);
-
-      dispatch(resetCardsState());
-      dispatch(getLoftsData({ filter: filterParam, page: 1 }));
-
+         dispatch(
+            getLoftsData({ filter: filterParam, page: 1, date: dateParam })
+         );
+      } else {
+         dispatch(getLoftsData({ filter, page: 1, date }));
+      }
       return () => {
          dispatch(resetCardsState());
       };
-   }, [filter, dispatch]);
+   }, [dispatch, filter, date]);
 
    return (
       <section className={clsx(styles.section)}>

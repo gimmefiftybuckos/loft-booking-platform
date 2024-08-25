@@ -1,12 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { getLoftsData } from '../api';
 import { FilterParamsType, ILoftCard } from '../types';
+import { getLoftsData } from '../api';
 
 export type CardSliceType = {
    cards: ILoftCard[];
    status: 'idle' | 'loading' | 'succeeded' | 'failed';
    filter: FilterParamsType;
+   toSearchFilter: FilterParamsType;
+   date: string;
    limit: number;
    page: number;
    hasMore: boolean;
@@ -16,6 +18,8 @@ const initialState: CardSliceType = {
    cards: [],
    status: 'idle',
    filter: '',
+   toSearchFilter: '',
+   date: '',
    limit: 10,
    page: 1,
    hasMore: true,
@@ -27,6 +31,12 @@ const cardSlice = createSlice({
    reducers: {
       setFilter(state, action: PayloadAction<FilterParamsType>) {
          state.filter = action.payload;
+      },
+      setToSearchFilter(state, action: PayloadAction<FilterParamsType>) {
+         state.toSearchFilter = action.payload;
+      },
+      setDate(state, action: PayloadAction<string>) {
+         state.date = action.payload;
       },
       resetCardsState(state) {
          state.cards = [];
@@ -53,6 +63,7 @@ const cardSlice = createSlice({
    },
 });
 
-export const { setFilter, resetCardsState } = cardSlice.actions;
+export const { setFilter, setToSearchFilter, setDate, resetCardsState } =
+   cardSlice.actions;
 
 export default cardSlice.reducer;

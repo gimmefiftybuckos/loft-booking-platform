@@ -5,14 +5,15 @@ import { ILoftCard } from '../types';
 type paramsType = {
    filter: string;
    page: number;
+   date: string;
 };
 
 export const getLoftsData = createAsyncThunk(
    'cards/getLoftsData',
-   async ({ filter, page }: paramsType) => {
-      const query = filter
-         ? { params: { filter, page } }
-         : { params: { page } };
+   async ({ filter, page, date }: paramsType) => {
+      const query = { params: { filter, page, date } };
+
+      console.log(query);
 
       try {
          const response = await axios.get<ILoftCard[]>(
