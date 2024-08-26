@@ -3,8 +3,8 @@ import clsx from 'clsx';
 import styles from './Arrow.module.sass';
 
 type ArrowProps = {
-   num: number;
-   index: number;
+   num?: number;
+   index?: number;
 };
 
 export const Arrow = ({ num, index }: ArrowProps) => {
