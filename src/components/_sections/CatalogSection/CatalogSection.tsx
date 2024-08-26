@@ -20,15 +20,15 @@ import { Card } from '../../_reusable/Card';
 
 export const CatalogSection = () => {
    const dispatch = useDispatch<AppDispatch>();
-   const { cards, filter, date, page, hasMore, status } = useSelector(
+   const { cards, type, date, page, hasMore, status } = useSelector(
       (state: RootState) => state.cards
    );
 
    const [searchParams, setSearchParams] = useSearchParams();
    const [titleState, setTitle] = useState('');
 
-   const initialFilterParam = filter || searchParams.get('filter') || '';
-   const [filterParam, setFilterParams] = useState(initialFilterParam);
+   const initialTypeParam = type || searchParams.get('type') || '';
+   const [typeParam, setTypeParams] = useState(initialTypeParam);
 
    const initialDateParam =
       encodeURIComponent(date) ||
@@ -39,7 +39,7 @@ export const CatalogSection = () => {
       if (status !== 'loading' && hasMore) {
          dispatch(
             getLoftsData({
-               filter: filterParam,
+               type: typeParam,
                page,
                date: dateParam,
             })
@@ -50,46 +50,44 @@ export const CatalogSection = () => {
    /*
     * Inital query parameters method
     */
-   const updateSearchParams = (filter: string, date: string) => {
+   const updateSearchParams = (type: string, date: string) => {
       const params: Record<string, string> = {};
-      if (filter) params.filter = filter;
+      if (type) params.type = type;
       if (date) params.date = encodeURIComponent(date);
       setSearchParams(params, { replace: true });
    };
 
    /*
-    * This useEffect allows you to change filter values from external components.
-    * The re-rendering process occurs when the filterParam is changed.
+    * This useEffect allows you to change type values from external components.
+    * The re-rendering process occurs when the typeParam is changed.
     * Other query parameters are not affected.
     */
    useEffect(() => {
-      setFilterParams(filter || searchParams.get('filter') || '');
-   }, [filter]);
+      setTypeParams(type || searchParams.get('type') || '');
+   }, [type]);
 
    /*
     * Basic handler for the CatalogSection component.
     */
    useEffect(() => {
-      const title = getValueByAnother(filterParam, cardSectionList);
+      const title = getValueByAnother(typeParam, cardSectionList);
       setTitle(title);
 
-      if (filterParam || dateParam) {
-         updateSearchParams(filterParam, dateParam);
+      if (typeParam || dateParam) {
+         updateSearchParams(typeParam, dateParam);
 
-         dispatch(
-            getLoftsData({ filter: filterParam, page: 1, date: dateParam })
-         );
+         dispatch(getLoftsData({ type: typeParam, page: 1, date: dateParam }));
       } else {
          /*
-          * Processing for filterParam = '' case.
+          * Processing for typeParam = '' case.
           */
-         dispatch(getLoftsData({ filter, page: 1, date }));
+         dispatch(getLoftsData({ type, page: 1, date }));
       }
 
       return () => {
          dispatch(resetCardsState());
       };
-   }, [dispatch, filterParam]);
+   }, [dispatch, typeParam]);
 
    return (
       <section className={clsx(styles.section)}>
