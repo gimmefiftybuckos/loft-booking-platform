@@ -28,7 +28,7 @@ export const CatalogSection = () => {
    const [titleState, setTitle] = useState('');
 
    const initialFilterParam = filter || searchParams.get('filter') || '';
-   const [filterParam] = useState(initialFilterParam);
+   const [filterParam, setFilterParams] = useState(initialFilterParam);
 
    const initialDateParam =
       encodeURIComponent(date) ||
@@ -47,6 +47,9 @@ export const CatalogSection = () => {
       }
    };
 
+   /*
+    * Inital query parameters method
+    */
    const updateSearchParams = (filter: string, date: string) => {
       const params: Record<string, string> = {};
       if (filter) params.filter = filter;
@@ -54,6 +57,18 @@ export const CatalogSection = () => {
       setSearchParams(params, { replace: true });
    };
 
+   /*
+    * This useEffect allows you to change filter values from external components.
+    * The re-rendering process occurs when the filterParam is changed.
+    * Other query parameters are not affected.
+    */
+   useEffect(() => {
+      setFilterParams(filter || searchParams.get('filter') || '');
+   }, [filter]);
+
+   /*
+    * Basic handler for the CatalogSection component.
+    */
    useEffect(() => {
       const title = getValueByAnother(filterParam, cardSectionList);
       setTitle(title);
@@ -65,12 +80,16 @@ export const CatalogSection = () => {
             getLoftsData({ filter: filterParam, page: 1, date: dateParam })
          );
       } else {
+         /*
+          * Processing for filterParam = '' case.
+          */
          dispatch(getLoftsData({ filter, page: 1, date }));
       }
+
       return () => {
          dispatch(resetCardsState());
       };
-   }, [dispatch, filter, date]);
+   }, [dispatch, filterParam]);
 
    return (
       <section className={clsx(styles.section)}>
