@@ -15,10 +15,10 @@ export interface ILoftCard {
 
 export interface ICardSection {
    title: string;
-   filter: FilterParamsType;
+   type: TypeParamsType;
 }
 
-export type FilterParamsType =
+export type TypeParamsType =
    | ''
    | 'recommendations'
    | 'coworking'

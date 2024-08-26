@@ -3,15 +3,15 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ILoftCard } from '../types';
 
 type paramsType = {
-   filter: string;
+   type: string;
    page: number;
    date: string;
 };
 
 export const getLoftsData = createAsyncThunk(
    'cards/getLoftsData',
-   async ({ filter, page, date }: paramsType) => {
-      const query = { params: { filter, page, date } };
+   async ({ type, page, date }: paramsType) => {
+      const query = { params: { type, page, date } };
 
       console.log(query);
 

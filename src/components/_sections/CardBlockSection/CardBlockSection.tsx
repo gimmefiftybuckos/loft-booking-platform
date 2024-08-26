@@ -5,9 +5,9 @@ import clsx from 'clsx';
 
 import styles from './CardBlockSection.module.sass';
 
-import { FilterParamsType, ICardSection } from '../../../types';
+import { TypeParamsType, ICardSection } from '../../../types';
 import { AppDispatch } from '../../../store';
-import { setFilter } from '../../../store/cardCatalogSlice';
+import { setType } from '../../../store/cardCatalogSlice';
 
 import { Text } from '../../_reusable/Text';
 
@@ -19,9 +19,9 @@ export const CardBlockSection: React.FC<CardBlockSectionProps> = ({ data }) => {
    const navigate = useNavigate();
    const dispatch = useDispatch<AppDispatch>();
 
-   const clickHandle = useCallback((filter: FilterParamsType) => {
+   const clickHandle = useCallback((type: TypeParamsType) => {
       navigate('/catalog');
-      dispatch(setFilter(filter));
+      dispatch(setType(type));
    }, []);
 
    return (
@@ -31,17 +31,17 @@ export const CardBlockSection: React.FC<CardBlockSectionProps> = ({ data }) => {
          </Text>
          <div className={clsx(styles.container)}>
             {data.map((item, index) => {
-               const { title, filter } = item;
+               const { title, type } = item;
 
                return (
                   <div
-                     onClick={() => clickHandle(filter)}
+                     onClick={() => clickHandle(type)}
                      key={index}
                      className={clsx(styles.card)}
                   >
                      <img
                         className={clsx(styles.card__image)}
-                        src={`/assets/block-section/${filter || 'all'}.png`}
+                        src={`/assets/block-section/${type || 'all'}.png`}
                         alt=''
                      />
                      <p className={clsx(styles.card__text)}>{title}</p>
