@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { createContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import styles from './MainSection.module.sass';
 
@@ -9,20 +9,15 @@ import {
    getValueByAnother,
    selectionParams,
 } from '../../../utils';
-
 import { Button } from '../../_reusable/Button';
-import { Modal } from '../../_reusable/Modal';
-import { ModalContent } from '../../_reusable/ModalContent';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../../store';
-import { selectionParamsType } from '../../../types';
 import { setType, setToSearchType } from '../../../store/cardCatalogSlice';
 
-import { Arrow } from '../../_reusable/Arrow';
-
-type ModalContextType = ((key: number) => void) | null;
-
-export const ModalContext = createContext<ModalContextType>(null);
+import { SelectionButton } from '../../_reusable/SelectionButton';
+import { useBodyScrollLock } from '../../../hooks/useBodyScrollLock';
+import { selectionParamsType } from '../../../types';
+import { CoverTitle } from '../../CoverTitle';
 
 export const MainSection = () => {
    const dispatch = useDispatch<AppDispatch>();
@@ -32,6 +27,16 @@ export const MainSection = () => {
 
    const [openModalKey, setOpenModalKey] = useState(-1);
    const [fullDate, setFullDate] = useState<string | null>(null);
+
+   useBodyScrollLock(openModalKey !== -1);
+
+   const toggleModal = (key: number) =>
+      setOpenModalKey(openModalKey === key ? -1 : key);
+
+   const handleClick = () => {
+      dispatch(setType(toSearchType));
+      dispatch(setToSearchType(''));
+   };
 
    useEffect(() => {
       const newDate = formatDate(date);
@@ -54,64 +59,41 @@ export const MainSection = () => {
       }
    };
 
-   const toggleModal = (key: number) => {
-      setOpenModalKey(openModalKey === key ? -1 : key);
-   };
-
-   useEffect(() => {
-      document.body.style.overflow = openModalKey !== -1 ? 'hidden' : 'visible';
-   }, [openModalKey]);
-
-   const onClick = () => {
-      dispatch(setType(toSearchType));
-      dispatch(setToSearchType(''));
-   };
-
    return (
       <>
-         {openModalKey !== -1 ? (
+         {openModalKey !== -1 && (
             <div
                onClick={() => toggleModal(-1)}
                className={clsx(styles.modalBackdrop)}
-            ></div>
-         ) : null}
+            />
+         )}
 
          <section className={clsx(styles.cover)}>
-            <h1 className={clsx(styles.title)}>
-               Более 500 площадок для вашего мероприятия
-            </h1>
+            <CoverTitle />
 
             <div
                className={clsx(
                   styles.container,
-                  openModalKey !== -1 ? styles.container_focus : null
+                  openModalKey !== -1 && styles.container_focus
                )}
             >
-               {selectionParams.map((item, index) => {
-                  return (
-                     <div
-                        onClick={() => toggleModal(index)}
-                        key={index}
-                        className={clsx(styles.button)}
-                     >
-                        {selectionReducer(item) || item}
-                        <Arrow num={openModalKey} index={index} />
-
-                        <Modal isOpen={openModalKey === index}>
-                           <ModalContext.Provider value={toggleModal}>
-                              <ModalContent name={item} />
-                           </ModalContext.Provider>
-                        </Modal>
-                     </div>
-                  );
-               })}
+               {selectionParams.map((item, index) => (
+                  <SelectionButton
+                     key={index}
+                     item={item}
+                     index={index}
+                     onClick={toggleModal}
+                     isActive={openModalKey === index}
+                     title={selectionReducer(item) || null}
+                  />
+               ))}
 
                <Button
                   inMainSection
                   textColor='white'
                   accented
-                  onClick={onClick}
-                  pathTo={'/catalog'}
+                  onClick={handleClick}
+                  pathTo='/catalog'
                >
                   Найти
                </Button>

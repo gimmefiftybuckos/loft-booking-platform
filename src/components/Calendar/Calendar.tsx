@@ -6,7 +6,7 @@ import { useContext, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../store';
 import { setDate } from '../../store/cardCatalogSlice';
-import { ModalContext } from '../_sections/MainSection/MainSection';
+import { ModalContext } from '../_reusable/SelectionButton/SelectionButton';
 import { todayDate } from '../../utils';
 
 export const Calendar = () => {
@@ -18,8 +18,13 @@ export const Calendar = () => {
    const onClick = () => {
       const date = `${selected?.getDate()}:${selected?.getMonth() ? selected?.getMonth() + 1 : null}:${selected?.getFullYear()}`;
 
+      if (selected?.getDate()) {
+         dispatch(setDate(date));
+      } else {
+         dispatch(setDate(''));
+      }
+
       toggleModal ? toggleModal(-1) : null;
-      dispatch(setDate(date));
    };
 
    return (
