@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../../store';
 import { selectionParamsType } from '../../../types';
 import { setType, setToSearchType } from '../../../store/cardCatalogSlice';
+
 import { Arrow } from '../../_reusable/Arrow';
 
 type ModalContextType = ((key: number) => void) | null;
