@@ -1,13 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { FilterParamsType, ILoftCard } from '../types';
+import { TypeParamsType, ILoftCard } from '../types';
 import { getLoftsData } from '../api';
 
 export type CardSliceType = {
    cards: ILoftCard[];
    status: 'idle' | 'loading' | 'succeeded' | 'failed';
-   filter: FilterParamsType;
-   toSearchFilter: FilterParamsType;
+   type: TypeParamsType;
+   toSearchType: TypeParamsType;
    date: string;
    limit: number;
    page: number;
@@ -17,8 +17,8 @@ export type CardSliceType = {
 const initialState: CardSliceType = {
    cards: [],
    status: 'idle',
-   filter: '',
-   toSearchFilter: '',
+   type: '',
+   toSearchType: '',
    date: '',
    limit: 10,
    page: 1,
@@ -29,11 +29,11 @@ const cardSlice = createSlice({
    name: 'cards',
    initialState,
    reducers: {
-      setFilter(state, action: PayloadAction<FilterParamsType>) {
-         state.filter = action.payload;
+      setType(state, action: PayloadAction<TypeParamsType>) {
+         state.type = action.payload;
       },
-      setToSearchFilter(state, action: PayloadAction<FilterParamsType>) {
-         state.toSearchFilter = action.payload;
+      setToSearchType(state, action: PayloadAction<TypeParamsType>) {
+         state.toSearchType = action.payload;
       },
       setDate(state, action: PayloadAction<string>) {
          state.date = action.payload;
@@ -63,7 +63,7 @@ const cardSlice = createSlice({
    },
 });
 
-export const { setFilter, setToSearchFilter, setDate, resetCardsState } =
+export const { setType, setToSearchType, setDate, resetCardsState } =
    cardSlice.actions;
 
 export default cardSlice.reducer;

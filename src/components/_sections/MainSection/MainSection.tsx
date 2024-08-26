@@ -16,7 +16,7 @@ import { ModalContent } from '../../_reusable/ModalContent';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../../store';
 import { selectionParamsType } from '../../../types';
-import { setFilter, setToSearchFilter } from '../../../store/cardCatalogSlice';
+import { setType, setToSearchType } from '../../../store/cardCatalogSlice';
 
 type ModalContextType = ((key: number) => void) | null;
 
@@ -24,7 +24,7 @@ export const ModalContext = createContext<ModalContextType>(null);
 
 export const MainSection = () => {
    const dispatch = useDispatch<AppDispatch>();
-   const { toSearchFilter, date } = useSelector(
+   const { toSearchType, date } = useSelector(
       (state: RootState) => state.cards
    );
 
@@ -38,11 +38,11 @@ export const MainSection = () => {
 
    const selectionReducer = (type: selectionParamsType) => {
       if (type === 'Мероприятие') {
-         if (!toSearchFilter) {
+         if (!toSearchType) {
             return null;
          }
 
-         const title = getValueByAnother(toSearchFilter, cardSectionList);
+         const title = getValueByAnother(toSearchType, cardSectionList);
 
          return title;
       }
@@ -61,8 +61,8 @@ export const MainSection = () => {
    }, [openModalKey]);
 
    const onClick = () => {
-      dispatch(setFilter(toSearchFilter));
-      dispatch(setToSearchFilter(''));
+      dispatch(setType(toSearchType));
+      dispatch(setToSearchType(''));
    };
 
    return (

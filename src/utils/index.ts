@@ -1,5 +1,5 @@
 import { ICardSection, selectionParamsType } from '../types';
-import { setFilter } from '../store/cardCatalogSlice';
+import { setType } from '../store/cardCatalogSlice';
 import { AppDispatch } from '../store';
 
 export const n = ['Все лофты', 'Идеи', 'Избранное'];
@@ -8,7 +8,7 @@ export const createNavPoints = (dispatch: AppDispatch) => [
    {
       name: 'Все лофты',
       path: '/catalog',
-      onClick: () => dispatch(setFilter('')),
+      onClick: () => dispatch(setType('')),
    },
    { name: 'Идеи', path: '/ideas' },
    { name: 'Избранное', path: '/favorite' },
@@ -48,59 +48,59 @@ export const bannersContent = [
 export const cardSectionList: ICardSection[] = [
    {
       title: 'Мы рекомендуем',
-      filter: 'recommendations',
+      type: 'recommendations',
    },
    {
       title: 'Все площадки',
-      filter: '',
+      type: '',
    },
    {
       title: 'Коворкинги',
-      filter: 'coworking',
+      type: 'coworking',
    },
    {
       title: 'Банкетные залы для свадеб',
-      filter: 'wedding',
+      type: 'wedding',
    },
    {
       title: 'Танцевальные залы',
-      filter: 'dance',
+      type: 'dance',
    },
    {
       title: 'Площадки для выпускных',
-      filter: 'graduation',
+      type: 'graduation',
    },
    {
       title: 'Площадки для переговоров',
-      filter: 'meeting',
+      type: 'meeting',
    },
    {
       title: 'Лофты для вечеринок',
-      filter: 'party',
+      type: 'party',
    },
    {
       title: 'Бары для вечеринок',
-      filter: 'bars',
+      type: 'bars',
    },
    {
       title: 'Площадки в центре Москвы',
-      filter: 'central_moscow',
+      type: 'central_moscow',
    },
    {
       title: 'Лофты на 15 гостей',
-      filter: 'lofts_15_guests',
+      type: 'lofts_15_guests',
    },
    {
       title: 'Площадки для корпоративов',
-      filter: 'corporate',
+      type: 'corporate',
    },
    {
       title: 'Площадки для Дня рождения',
-      filter: 'birthday',
+      type: 'birthday',
    },
    {
       title: 'Детские праздники',
-      filter: 'kids',
+      type: 'kids',
    },
 ];
 
@@ -139,12 +139,10 @@ export const formatDate = (fullDate: string): string | null => {
 };
 
 export const getValueByAnother = (
-   filterParam: string,
+   typeParam: string,
    cardSectionList: ICardSection[]
 ) => {
-   return (
-      cardSectionList.find((item) => item.filter === filterParam)?.title || ''
-   );
+   return cardSectionList.find((item) => item.type === typeParam)?.title || '';
 };
 
 export const todayDate = new Date();

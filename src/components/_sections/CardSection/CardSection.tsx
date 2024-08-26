@@ -4,10 +4,10 @@ import clsx from 'clsx';
 
 import styles from './CardSection.module.sass';
 
-import { FilterParamsType, ILoftCard } from '../../../types';
+import { TypeParamsType, ILoftCard } from '../../../types';
 import { asyncGetHomeContainerData } from '../../../api';
 import { AppDispatch } from '../../../store';
-import { setFilter } from '../../../store/cardCatalogSlice';
+import { setType } from '../../../store/cardCatalogSlice';
 
 import { Text } from '../../_reusable/Text';
 import { Button } from '../../_reusable/Button';
@@ -15,28 +15,28 @@ import { Card } from '../../_reusable/Card/Card';
 
 type CardSectionProps = {
    title?: string;
-   filter?: FilterParamsType;
+   type?: TypeParamsType;
 };
 
 export const CardSection: React.FC<CardSectionProps> = ({
    title = 'Мы рекомендуем',
-   filter = '',
+   type = '',
 }) => {
    const [dataState, setDataState] = useState<ILoftCard[]>();
 
    const dispatch = useDispatch<AppDispatch>();
 
    const initalHomeCards = async () => {
-      const data = await asyncGetHomeContainerData(filter);
+      const data = await asyncGetHomeContainerData(type);
       setDataState(data);
    };
 
    useEffect(() => {
       initalHomeCards();
-   }, [filter]);
+   }, [type]);
 
    const clickHandle = () => {
-      dispatch(setFilter(filter));
+      dispatch(setType(type));
    };
 
    const titleCards = dataState?.slice(0, 3);

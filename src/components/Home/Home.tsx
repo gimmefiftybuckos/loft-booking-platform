@@ -6,7 +6,7 @@ import { CardBlockSection } from '../_sections/CardBlockSection';
 import { CardSection } from '../_sections/CardSection';
 
 export const Home = () => {
-   const { title: mainSectionTitle, filter: mainSectionParam } =
+   const { title: mainSectionTitle, type: mainSectionParam } =
       cardSectionList[0];
 
    const blockSectionCards = cardSectionList.slice(1, 11);
@@ -16,15 +16,11 @@ export const Home = () => {
       <>
          <MainSection />
          <BannerSection />
-         <CardSection title={mainSectionTitle} filter={mainSectionParam} />
+         <CardSection title={mainSectionTitle} type={mainSectionParam} />
          <CardBlockSection data={blockSectionCards} />
          {cardsSection.map((item, index) => {
             return (
-               <CardSection
-                  key={index}
-                  title={item.title}
-                  filter={item.filter}
-               />
+               <CardSection key={index} title={item.title} type={item.type} />
             );
          })}
       </>
