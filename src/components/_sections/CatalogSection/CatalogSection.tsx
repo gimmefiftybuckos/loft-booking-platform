@@ -17,6 +17,7 @@ import {
 
 import { Text } from '../../_reusable/Text';
 import { Card } from '../../_reusable/Card';
+import { Arrow } from '../../_reusable/Arrow';
 
 export const CatalogSection = () => {
    const dispatch = useDispatch<AppDispatch>();
@@ -100,12 +101,7 @@ export const CatalogSection = () => {
                         className={clsx(styles.button, styles.button_drop)}
                      >
                         <Text weight={500}>{item}</Text>
-                        <img
-                           src='/assets/down.svg'
-                           alt='Dropdown Icon'
-                           width='16'
-                           height='16'
-                        />
+                        <Arrow />
                      </button>
                   );
                }
