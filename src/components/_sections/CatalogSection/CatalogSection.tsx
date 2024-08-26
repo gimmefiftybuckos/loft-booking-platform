@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import clsx from 'clsx';
@@ -8,49 +9,87 @@ import styles from './CatalogSection.module.sass';
 import { getLoftsData } from '../../../api';
 import { AppDispatch, RootState } from '../../../store';
 import { resetCardsState } from '../../../store/cardCatalogSlice';
-import { cardSectionList, catalogFilters } from '../../../utils';
+import {
+   cardSectionList,
+   catalogFilters,
+   getValueByAnother,
+} from '../../../utils';
 
 import { Text } from '../../_reusable/Text';
 import { Card } from '../../_reusable/Card';
-import { useSearchParams } from 'react-router-dom';
 
 export const CatalogSection = () => {
    const dispatch = useDispatch<AppDispatch>();
-   const { cards, filter, page, hasMore, status } = useSelector(
+   const { cards, filter, date, page, hasMore, status } = useSelector(
       (state: RootState) => state.cards
    );
 
    const [searchParams, setSearchParams] = useSearchParams();
    const [titleState, setTitle] = useState('');
 
+   const initialFilterParam = filter || searchParams.get('filter') || '';
+   const [filterParam, setFilterParams] = useState(initialFilterParam);
+
+   const initialDateParam =
+      encodeURIComponent(date) ||
+      decodeURIComponent(searchParams.get('date') || '');
+   const [dateParam] = useState(initialDateParam);
+
    const fetchMore = () => {
       if (status !== 'loading' && hasMore) {
          dispatch(
             getLoftsData({
-               filter,
+               filter: filterParam,
                page,
+               date: dateParam,
             })
          );
       }
    };
 
+   /*
+    * Inital query parameters method
+    */
+   const updateSearchParams = (filter: string, date: string) => {
+      const params: Record<string, string> = {};
+      if (filter) params.filter = filter;
+      if (date) params.date = encodeURIComponent(date);
+      setSearchParams(params, { replace: true });
+   };
+
+   /*
+    * This useEffect allows you to change filter values from external components.
+    * The re-rendering process occurs when the filterParam is changed.
+    * Other query parameters are not affected.
+    */
    useEffect(() => {
-      if (filter) setSearchParams({ filter });
+      setFilterParams(filter || searchParams.get('filter') || '');
+   }, [filter]);
 
-      const filterParam = filter || searchParams.get('filter') || '';
+   /*
+    * Basic handler for the CatalogSection component.
+    */
+   useEffect(() => {
+      const title = getValueByAnother(filterParam, cardSectionList);
+      setTitle(title);
 
-      const title = cardSectionList.find(
-         (item) => item.filter === filterParam
-      )?.title;
-      if (title) setTitle(title);
+      if (filterParam || dateParam) {
+         updateSearchParams(filterParam, dateParam);
 
-      dispatch(resetCardsState());
-      dispatch(getLoftsData({ filter: filterParam, page: 1 }));
+         dispatch(
+            getLoftsData({ filter: filterParam, page: 1, date: dateParam })
+         );
+      } else {
+         /*
+          * Processing for filterParam = '' case.
+          */
+         dispatch(getLoftsData({ filter, page: 1, date }));
+      }
 
       return () => {
          dispatch(resetCardsState());
       };
-   }, [filter, dispatch]);
+   }, [dispatch, filterParam]);
 
    return (
       <section className={clsx(styles.section)}>

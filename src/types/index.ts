@@ -9,7 +9,7 @@ export interface ILoftCard {
    maxPersons: number;
    seatingPlaces: number;
    area: number;
-   imageUrl: string;
+   imageUrl: string[];
    type: string[];
 }
 

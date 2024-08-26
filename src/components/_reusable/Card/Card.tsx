@@ -57,7 +57,7 @@ export const Card: React.FC<CardProps> = ({ cardData, wide }) => {
          >
             <img
                className={clsx(styles.card__image)}
-               src={`http://localhost:3000/uploads/${imageUrl}`}
+               src={`http://localhost:3000/uploads/${imageUrl[0]}`}
                loading='lazy'
                alt=''
             />

@@ -1,6 +1,6 @@
 @import '../../../styles/variables'
 
-.cover-container
+.cover
     padding-block: 7.8rem
     padding-inline: 5rem
     inline-size: 100%
@@ -18,7 +18,6 @@
     color: $bg-color
 
 .container
-    position: relative
     z-index: 101
     display: flex
     flex-wrap: wrap
@@ -29,6 +28,9 @@
     background: $bg-color
     border-radius: 15px
 
+    &_focus
+        position: relative
+        z-index: 101
 .button
     position: relative
     display: flex
@@ -41,7 +43,15 @@
     border: 1px solid $border-color
     border-radius: 10px
     background: $bg-color
+    text-align: left
     cursor: pointer
+
+.arrow
+    transform: rotate(-90deg)
+    transition: transform .3s
+
+    &_open
+        transform: rotate(0)
 
 .modalBackdrop
     position: fixed

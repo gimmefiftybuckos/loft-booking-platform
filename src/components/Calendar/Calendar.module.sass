@@ -2,6 +2,7 @@
 
 .rdp
     // border-radius: 10px
+    block-size: 341px
     &_selected
         color: $bg-color
         background: $accent-color
@@ -19,3 +20,13 @@
     outline: none
     color: $bg-color
     background: $accent-color
+
+.button
+    padding: 10px 25px
+    background-color: $accent-color
+    border-radius: $border-radius
+    color: $bg-color
+    transition: background-color 0.3s ease
+
+    &:hover
+        background-color: $accent-alt-color
