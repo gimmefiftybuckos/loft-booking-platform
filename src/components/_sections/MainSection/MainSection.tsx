@@ -17,7 +17,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../../store';
 import { selectionParamsType } from '../../../types';
 import { setType, setToSearchType } from '../../../store/cardCatalogSlice';
-import { Arrow } from '../../_reusable/Arrow';
 
 type ModalContextType = ((key: number) => void) | null;
 
@@ -79,7 +78,6 @@ export const MainSection = () => {
             <h1 className={clsx(styles.title)}>
                Более 500 площадок для вашего мероприятия
             </h1>
-
             <div
                className={clsx(
                   styles.container,
@@ -94,8 +92,16 @@ export const MainSection = () => {
                         className={clsx(styles.button)}
                      >
                         {selectionReducer(item) || item}
-                        <Arrow num={openModalKey} index={index} />
-
+                        <img
+                           className={clsx(
+                              styles.arrow,
+                              openModalKey === index ? styles.arrow_open : null
+                           )}
+                           src='/assets/down.svg'
+                           alt='Dropdown Icon'
+                           width='16'
+                           height='16'
+                        />
                         <Modal isOpen={openModalKey === index}>
                            <ModalContext.Provider value={toggleModal}>
                               <ModalContent name={item} />
