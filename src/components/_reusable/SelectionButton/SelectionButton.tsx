@@ -1,14 +1,16 @@
+import { createContext } from 'react';
 import clsx from 'clsx';
-import { selectionParamsType } from '../../../types';
 
 import styles from './SelectionButton.module.sass';
+
+import { CatalogFiltersType, SelectionFiltersType } from '../../../types';
+
 import { Arrow } from '../Arrow';
 import { Modal } from '../Modal';
-import { createContext } from 'react';
 import { ModalContent } from '../ModalContent';
 
 type SelectionButtonType = {
-   item: selectionParamsType;
+   item: SelectionFiltersType | CatalogFiltersType;
    index: number;
    onClick: (key: number) => void;
    isActive: boolean;

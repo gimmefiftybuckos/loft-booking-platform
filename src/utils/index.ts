@@ -1,6 +1,11 @@
-import { ICardSection, selectionParamsType } from '../types';
+import {
+   CatalogFiltersType,
+   ICardSection,
+   SelectionFiltersType,
+} from '../types';
 import { setType } from '../store/cardCatalogSlice';
-import { AppDispatch } from '../store';
+import { AppDispatch, RootState } from '../store';
+import { useSelector } from 'react-redux';
 
 export const n = ['Все лофты', 'Идеи', 'Избранное'];
 
@@ -14,11 +19,18 @@ export const createNavPoints = (dispatch: AppDispatch) => [
    { name: 'Избранное', path: '/favorite' },
 ];
 
-export const selectionParams: selectionParamsType[] = [
+export const selectionFilters: SelectionFiltersType[] = [
    'Мероприятие',
    'Дата',
    'Начало',
    'Конец',
+];
+
+export const catalogFilters: CatalogFiltersType[] = [
+   'Событие',
+   'Стоимость',
+   'Дата',
+   'Фильтры',
 ];
 
 export const bannersContent = [
@@ -104,8 +116,6 @@ export const cardSectionList: ICardSection[] = [
    },
 ];
 
-export const catalogFilters = ['Событие', 'Стоимость', 'Даты', 'Фильтры'];
-
 export const formatDate = (fullDate: string): string | null => {
    const months = [
       'января',
@@ -146,3 +156,22 @@ export const getValueByAnother = (
 };
 
 export const todayDate = new Date();
+
+export const getTitleByFilter = (filter: SelectionFiltersType) => {
+   const { toSearchType, date } = useSelector(
+      (state: RootState) => state.cards
+   );
+
+   const newDate = formatDate(date);
+
+   switch (filter) {
+      case 'Мероприятие':
+         return toSearchType
+            ? getValueByAnother(toSearchType, cardSectionList)
+            : null;
+      case 'Дата':
+         return newDate;
+      default:
+         return null;
+   }
+};

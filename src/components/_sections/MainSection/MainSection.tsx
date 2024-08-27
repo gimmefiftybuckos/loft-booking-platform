@@ -1,14 +1,9 @@
 import clsx from 'clsx';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import styles from './MainSection.module.sass';
 
-import {
-   cardSectionList,
-   formatDate,
-   getValueByAnother,
-   selectionParams,
-} from '../../../utils';
+import { getTitleByFilter, selectionFilters } from '../../../utils';
 import { Button } from '../../_reusable/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../../store';
@@ -16,17 +11,13 @@ import { setType, setToSearchType } from '../../../store/cardCatalogSlice';
 
 import { SelectionButton } from '../../_reusable/SelectionButton';
 import { useBodyScrollLock } from '../../../hooks/useBodyScrollLock';
-import { selectionParamsType } from '../../../types';
 import { CoverTitle } from '../../CoverTitle';
 
 export const MainSection = () => {
    const dispatch = useDispatch<AppDispatch>();
-   const { toSearchType, date } = useSelector(
-      (state: RootState) => state.cards
-   );
+   const { toSearchType } = useSelector((state: RootState) => state.cards);
 
    const [openModalKey, setOpenModalKey] = useState(-1);
-   const [fullDate, setFullDate] = useState<string | null>(null);
 
    useBodyScrollLock(openModalKey !== -1);
 
@@ -36,27 +27,6 @@ export const MainSection = () => {
    const handleClick = () => {
       dispatch(setType(toSearchType));
       dispatch(setToSearchType(''));
-   };
-
-   useEffect(() => {
-      const newDate = formatDate(date);
-      setFullDate(newDate);
-   }, [date]);
-
-   const selectionReducer = (type: selectionParamsType) => {
-      if (type === 'Мероприятие') {
-         if (!toSearchType) {
-            return null;
-         }
-
-         const title = getValueByAnother(toSearchType, cardSectionList);
-
-         return title;
-      }
-
-      if (type === 'Дата') {
-         return fullDate;
-      }
    };
 
    return (
@@ -77,14 +47,14 @@ export const MainSection = () => {
                   openModalKey !== -1 && styles.container_focus
                )}
             >
-               {selectionParams.map((item, index) => (
+               {selectionFilters.map((item, index) => (
                   <SelectionButton
                      key={index}
                      item={item}
                      index={index}
                      onClick={toggleModal}
                      isActive={openModalKey === index}
-                     title={selectionReducer(item) || null}
+                     title={getTitleByFilter(item) || null}
                   />
                ))}
 

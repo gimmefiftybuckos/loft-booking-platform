@@ -12,6 +12,7 @@ import { setType } from '../../../store/cardCatalogSlice';
 import { Text } from '../../_reusable/Text';
 import { Button } from '../../_reusable/Button';
 import { Card } from '../../_reusable/Card/Card';
+import { Arrow } from '../../_reusable/Arrow';
 
 type CardSectionProps = {
    title?: string;
@@ -48,16 +49,10 @@ export const CardSection: React.FC<CardSectionProps> = ({
                {title}
             </Text>
             <div className={clsx(styles['section__button-container'])}>
-               <Button onClick={clickHandle} pathTo={'/catalog'}>
+               <Button onClick={clickHandle} pathTo='/catalog'>
                   Смотреть все
                </Button>
-               <img
-                  className={clsx(styles.icon)}
-                  src='/assets/down.svg'
-                  alt='Dropdown Icon'
-                  width='16'
-                  height='16'
-               />
+               <Arrow />
             </div>
          </div>
          <div className={clsx(styles['card-container'])}>

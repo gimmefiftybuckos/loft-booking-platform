@@ -34,4 +34,6 @@ export type TypeParamsType =
    | 'birthday'
    | 'kids';
 
-export type selectionParamsType = 'Мероприятие' | 'Дата' | 'Начало' | 'Конец';
+export type SelectionFiltersType = 'Мероприятие' | 'Дата' | 'Начало' | 'Конец';
+
+export type CatalogFiltersType = 'Событие' | 'Стоимость' | 'Дата' | 'Фильтры';
