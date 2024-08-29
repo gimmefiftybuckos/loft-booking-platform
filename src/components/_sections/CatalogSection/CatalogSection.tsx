@@ -12,18 +12,22 @@ import { resetCardsState } from '../../../store/cardCatalogSlice';
 import {
    cardSectionList,
    catalogFilters,
+   getTitleByFilter,
    getValueByAnother,
 } from '../../../utils';
 
 import { Text } from '../../_reusable/Text';
 import { Card } from '../../_reusable/Card';
-import { Arrow } from '../../_reusable/Arrow';
+import { SelectionButton } from '../../_reusable/SelectionButton';
+import { useModalControl } from '../../../hooks/useModalControl';
+import { ModalBackdrop } from '../../_reusable/ModalBackdrop';
 
 export const CatalogSection = () => {
    const dispatch = useDispatch<AppDispatch>();
    const { cards, type, date, page, hasMore, status } = useSelector(
       (state: RootState) => state.cards
    );
+   const { toggleModal, controlIndex } = useModalControl();
 
    const [searchParams, setSearchParams] = useSearchParams();
    const [titleState, setTitle] = useState('');
@@ -91,44 +95,46 @@ export const CatalogSection = () => {
    }, [dispatch, typeParam]);
 
    return (
-      <section className={clsx(styles.section)}>
-         <div className={clsx(styles.buttons)}>
-            {catalogFilters.map((item, index) => {
-               if (index === 0 || index === catalogFilters.length - 1) {
-                  return (
-                     <button
-                        key={index}
-                        className={clsx(styles.button, styles.button_drop)}
-                     >
-                        <Text weight={500}>{item}</Text>
-                        <Arrow />
-                     </button>
-                  );
-               }
-
-               return (
-                  <button key={index} className={clsx(styles.button)}>
-                     <Text weight={500}>{item}</Text>
-                  </button>
-               );
-            })}
-         </div>
-         <div className={clsx(styles.content)}>
-            <Text as={'h1'} weight={700} size='32'>
-               {titleState}
-            </Text>
-            <InfiniteScroll
-               className={clsx(styles.container)}
-               next={fetchMore}
-               hasMore={hasMore}
-               loader={<p>Загрузка...</p>}
-               dataLength={cards.length}
+      <>
+         <ModalBackdrop />
+         <section className={clsx(styles.section)}>
+            <div
+               className={clsx(
+                  styles.buttons,
+                  controlIndex !== -1 && styles.buttons_focus
+               )}
             >
-               {cards.map((item) => (
-                  <Card key={item.id} wide cardData={item} />
-               ))}
-            </InfiniteScroll>
-         </div>
-      </section>
+               {catalogFilters.map((item, index) => {
+                  return (
+                     <SelectionButton
+                        key={index}
+                        title={item}
+                        index={index}
+                        onClick={toggleModal}
+                        isActive={controlIndex === index}
+                        currentValue={getTitleByFilter(item) || null}
+                        catalogStyles
+                     />
+                  );
+               })}
+            </div>
+            <div className={clsx(styles.content)}>
+               <Text as={'h1'} weight={700} size='32'>
+                  {titleState}
+               </Text>
+               <InfiniteScroll
+                  className={clsx(styles.container)}
+                  next={fetchMore}
+                  hasMore={hasMore}
+                  loader={<p>Загрузка...</p>}
+                  dataLength={cards.length}
+               >
+                  {cards.map((item) => (
+                     <Card key={item.id} wide cardData={item} />
+                  ))}
+               </InfiniteScroll>
+            </div>
+         </section>
+      </>
    );
 };

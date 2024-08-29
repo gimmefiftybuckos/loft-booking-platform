@@ -27,8 +27,8 @@ export const getLoftsData = createAsyncThunk(
    }
 );
 
-export const asyncGetHomeContainerData = async (filter: string) => {
-   const query = filter ? { params: { filter } } : {};
+export const asyncGetHomeContainerData = async (type: string) => {
+   const query = type ? { params: { type } } : {};
    try {
       const response = await axios.get<ILoftCard[]>(
          'http://localhost:3000/catalog',

@@ -1,0 +1,1 @@
+export { CoverTitle } from './CoverTitle';

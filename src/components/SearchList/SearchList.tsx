@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../store';
 import { setToSearchType } from '../../store/cardCatalogSlice';
 import { useContext } from 'react';
-import { ModalContext } from '../_sections/MainSection/MainSection';
+import { ModalContext } from '../_reusable/SelectionButton/SelectionButton';
 import { ICardSection } from '../../types';
 
 export const SearchList = () => {
