@@ -27,7 +27,7 @@ export const selectionFilters: SelectionFiltersType[] = [
 ];
 
 export const catalogFilters: CatalogFiltersType[] = [
-   'Событие',
+   'Мероприятие',
    'Стоимость',
    'Дата',
    'Фильтры',
@@ -157,7 +157,9 @@ export const getValueByAnother = (
 
 export const todayDate = new Date();
 
-export const getTitleByFilter = (filter: SelectionFiltersType) => {
+export const getTitleByFilter = (
+   filter: SelectionFiltersType | CatalogFiltersType
+) => {
    const { toSearchType, date } = useSelector(
       (state: RootState) => state.cards
    );

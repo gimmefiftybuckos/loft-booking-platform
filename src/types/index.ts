@@ -36,4 +36,8 @@ export type TypeParamsType =
 
 export type SelectionFiltersType = 'Мероприятие' | 'Дата' | 'Начало' | 'Конец';
 
-export type CatalogFiltersType = 'Событие' | 'Стоимость' | 'Дата' | 'Фильтры';
+export type CatalogFiltersType =
+   | 'Мероприятие'
+   | 'Стоимость'
+   | 'Дата'
+   | 'Фильтры';

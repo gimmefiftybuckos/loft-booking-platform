@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import cardReducer from './cardCatalogSlice';
+import modalControlReducer from './modalControlSlice';
 
 const store = configureStore({
    reducer: {
       cards: cardReducer,
+      modalControl: modalControlReducer,
    },
 });
 

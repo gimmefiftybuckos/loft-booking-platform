@@ -52,7 +52,7 @@ export const CardSection: React.FC<CardSectionProps> = ({
                <Button onClick={clickHandle} pathTo='/catalog'>
                   Смотреть все
                </Button>
-               <Arrow />
+               <Arrow turnRight />
             </div>
          </div>
          <div className={clsx(styles['card-container'])}>

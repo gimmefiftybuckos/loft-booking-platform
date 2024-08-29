@@ -1,5 +1,4 @@
 import clsx from 'clsx';
-import { useState } from 'react';
 
 import styles from './MainSection.module.sass';
 
@@ -10,19 +9,14 @@ import { AppDispatch, RootState } from '../../../store';
 import { setType, setToSearchType } from '../../../store/cardCatalogSlice';
 
 import { SelectionButton } from '../../_reusable/SelectionButton';
-import { useBodyScrollLock } from '../../../hooks/useBodyScrollLock';
 import { CoverTitle } from '../../CoverTitle';
+import { useModalControl } from '../../../hooks/useModalControl';
+import { ModalBackdrop } from '../../_reusable/ModalBackdrop';
 
 export const MainSection = () => {
    const dispatch = useDispatch<AppDispatch>();
    const { toSearchType } = useSelector((state: RootState) => state.cards);
-
-   const [openModalKey, setOpenModalKey] = useState(-1);
-
-   useBodyScrollLock(openModalKey !== -1);
-
-   const toggleModal = (key: number) =>
-      setOpenModalKey(openModalKey === key ? -1 : key);
+   const { toggleModal, controlIndex } = useModalControl();
 
    const handleClick = () => {
       dispatch(setType(toSearchType));
@@ -31,30 +25,23 @@ export const MainSection = () => {
 
    return (
       <>
-         {openModalKey !== -1 && (
-            <div
-               onClick={() => toggleModal(-1)}
-               className={clsx(styles.modalBackdrop)}
-            />
-         )}
-
+         <ModalBackdrop />
          <section className={clsx(styles.cover)}>
             <CoverTitle />
-
             <div
                className={clsx(
                   styles.container,
-                  openModalKey !== -1 && styles.container_focus
+                  controlIndex !== -1 && styles.container_focus
                )}
             >
                {selectionFilters.map((item, index) => (
                   <SelectionButton
                      key={index}
-                     item={item}
+                     title={item}
                      index={index}
                      onClick={toggleModal}
-                     isActive={openModalKey === index}
-                     title={getTitleByFilter(item) || null}
+                     isActive={controlIndex === index}
+                     currentValue={getTitleByFilter(item) || null}
                   />
                ))}
 
