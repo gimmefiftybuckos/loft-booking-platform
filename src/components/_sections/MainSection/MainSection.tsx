@@ -4,9 +4,6 @@ import styles from './MainSection.module.sass';
 
 import { getTitleByFilter, selectionFilters } from '../../../utils';
 import { Button } from '../../_reusable/Button';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '../../../store';
-import { setType, setToSearchType } from '../../../store/cardCatalogSlice';
 
 import { SelectionButton } from '../../_reusable/SelectionButton';
 import { CoverTitle } from '../../CoverTitle';
@@ -14,14 +11,7 @@ import { useModalControl } from '../../../hooks/useModalControl';
 import { ModalBackdrop } from '../../_reusable/ModalBackdrop';
 
 export const MainSection = () => {
-   const dispatch = useDispatch<AppDispatch>();
-   const { toSearchType } = useSelector((state: RootState) => state.cards);
    const { toggleModal, controlIndex } = useModalControl();
-
-   const handleClick = () => {
-      dispatch(setType(toSearchType));
-      dispatch(setToSearchType(''));
-   };
 
    return (
       <>
@@ -49,7 +39,6 @@ export const MainSection = () => {
                   inMainSection
                   textColor='white'
                   accented
-                  onClick={handleClick}
                   pathTo='/catalog'
                >
                   Найти

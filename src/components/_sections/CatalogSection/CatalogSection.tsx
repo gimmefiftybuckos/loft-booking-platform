@@ -38,7 +38,7 @@ export const CatalogSection = () => {
    const initialDateParam =
       encodeURIComponent(date) ||
       decodeURIComponent(searchParams.get('date') || '');
-   const [dateParam] = useState(initialDateParam);
+   const [dateParam, setDateParam] = useState(initialDateParam);
 
    const fetchMore = () => {
       if (status !== 'loading' && hasMore) {
@@ -69,7 +69,8 @@ export const CatalogSection = () => {
     */
    useEffect(() => {
       setTypeParams(type || searchParams.get('type') || '');
-   }, [type]);
+      setDateParam(date || decodeURIComponent(searchParams.get('date') || ''));
+   }, [type, date]);
 
    /*
     * Basic handler for the CatalogSection component.
@@ -84,7 +85,7 @@ export const CatalogSection = () => {
          dispatch(getLoftsData({ type: typeParam, page: 1, date: dateParam }));
       } else {
          /*
-          * Processing for typeParam = '' case.
+          * Processing for typeParam = '' && dateParam = '' case.
           */
          dispatch(getLoftsData({ type, page: 1, date }));
       }
@@ -92,7 +93,7 @@ export const CatalogSection = () => {
       return () => {
          dispatch(resetCardsState());
       };
-   }, [dispatch, typeParam]);
+   }, [dispatch, typeParam, dateParam]);
 
    return (
       <>

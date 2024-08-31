@@ -7,7 +7,6 @@ export type CardSliceType = {
    cards: ILoftCard[];
    status: 'idle' | 'loading' | 'succeeded' | 'failed';
    type: TypeParamsType;
-   toSearchType: TypeParamsType;
    date: string;
    limit: number;
    page: number;
@@ -18,7 +17,6 @@ const initialState: CardSliceType = {
    cards: [],
    status: 'idle',
    type: '',
-   toSearchType: '',
    date: '',
    limit: 10,
    page: 1,
@@ -31,9 +29,6 @@ const cardSlice = createSlice({
    reducers: {
       setType(state, action: PayloadAction<TypeParamsType>) {
          state.type = action.payload;
-      },
-      setToSearchType(state, action: PayloadAction<TypeParamsType>) {
-         state.toSearchType = action.payload;
       },
       setDate(state, action: PayloadAction<string>) {
          state.date = action.payload;
@@ -63,7 +58,6 @@ const cardSlice = createSlice({
    },
 });
 
-export const { setType, setToSearchType, setDate, resetCardsState } =
-   cardSlice.actions;
+export const { setType, setDate, resetCardsState } = cardSlice.actions;
 
 export default cardSlice.reducer;

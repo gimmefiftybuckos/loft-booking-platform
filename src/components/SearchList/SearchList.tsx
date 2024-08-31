@@ -4,7 +4,7 @@ import { cardSectionList } from '../../utils';
 import styles from './SearchList.module.sass';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../store';
-import { setToSearchType } from '../../store/cardCatalogSlice';
+import { setType } from '../../store/cardCatalogSlice';
 import { useContext } from 'react';
 import { ModalContext } from '../_reusable/SelectionButton/SelectionButton';
 import { ICardSection } from '../../types';
@@ -14,10 +14,10 @@ export const SearchList = () => {
    const toggleModal = useContext(ModalContext);
 
    const cardSectionListSlice = cardSectionList.slice(2, 100);
-   const { toSearchType } = useSelector((state: RootState) => state.cards);
+   const { type } = useSelector((state: RootState) => state.cards);
 
    const onClick = (item: ICardSection) => {
-      dispatch(setToSearchType(item.type));
+      dispatch(setType(item.type));
       toggleModal ? toggleModal(-1) : null;
    };
 
@@ -30,9 +30,7 @@ export const SearchList = () => {
                      onClick={() => onClick(item)}
                      className={clsx(
                         styles.list__button,
-                        item.type === toSearchType
-                           ? styles.list__button_selected
-                           : null
+                        item.type === type ? styles.list__button_selected : null
                      )}
                   >
                      {item.title}

@@ -160,17 +160,13 @@ export const todayDate = new Date();
 export const getTitleByFilter = (
    filter: SelectionFiltersType | CatalogFiltersType
 ) => {
-   const { toSearchType, date } = useSelector(
-      (state: RootState) => state.cards
-   );
+   const { type, date } = useSelector((state: RootState) => state.cards);
 
    const newDate = formatDate(date);
 
    switch (filter) {
       case 'Мероприятие':
-         return toSearchType
-            ? getValueByAnother(toSearchType, cardSectionList)
-            : null;
+         return type ? getValueByAnother(type, cardSectionList) : null;
       case 'Дата':
          return newDate;
       default:
