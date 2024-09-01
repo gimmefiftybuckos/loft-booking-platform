@@ -1,13 +1,16 @@
 import { DayPicker } from 'react-day-picker';
-import 'react-day-picker/dist/style.css';
-import clsx from 'clsx';
-import styles from './Calendar.module.sass';
 import { useContext, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import 'react-day-picker/dist/style.css';
+import clsx from 'clsx';
+
+import styles from './Calendar.module.sass';
+
 import { AppDispatch } from '../../store';
 import { setDate } from '../../store/cardCatalogSlice';
 import { ModalContext } from '../_reusable/SelectionButton/SelectionButton';
 import { todayDate } from '../../utils';
+import { ModalButton } from '../_reusable/ModalButton';
 
 export const Calendar = () => {
    const [selected, setSelected] = useState<Date>();
@@ -46,9 +49,7 @@ export const Calendar = () => {
                selectedToday: styles.rdp_selected,
             }}
          />
-         <button className={clsx(styles.button)} onClick={onClick}>
-            Принять
-         </button>
+         <ModalButton onClick={onClick}>Принять</ModalButton>
       </>
    );
 };

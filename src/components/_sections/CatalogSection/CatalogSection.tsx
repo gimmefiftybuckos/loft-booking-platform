@@ -24,7 +24,7 @@ import { ModalBackdrop } from '../../_reusable/ModalBackdrop';
 
 export const CatalogSection = () => {
    const dispatch = useDispatch<AppDispatch>();
-   const { cards, type, date, page, hasMore, status } = useSelector(
+   const { cards, type, date, price, page, hasMore, status } = useSelector(
       (state: RootState) => state.cards
    );
    const { toggleModal, controlIndex } = useModalControl();
@@ -36,9 +36,12 @@ export const CatalogSection = () => {
    const [typeParam, setTypeParams] = useState(initialTypeParam);
 
    const initialDateParam =
-      encodeURIComponent(date) ||
-      decodeURIComponent(searchParams.get('date') || '');
+      date || decodeURIComponent(searchParams.get('date') || '');
    const [dateParam, setDateParam] = useState(initialDateParam);
+
+   const initalPriceParam =
+      price || decodeURIComponent(searchParams.get('price') || '');
+   const [priceParam, setPriceParam] = useState(initalPriceParam);
 
    const fetchMore = () => {
       if (status !== 'loading' && hasMore) {
@@ -47,6 +50,7 @@ export const CatalogSection = () => {
                type: typeParam,
                page,
                date: dateParam,
+               price: priceParam,
             })
          );
       }
@@ -55,10 +59,11 @@ export const CatalogSection = () => {
    /*
     * Inital query parameters method
     */
-   const updateSearchParams = (type: string, date: string) => {
+   const updateSearchParams = (type: string, date: string, price: string) => {
       const params: Record<string, string> = {};
       if (type) params.type = type;
       if (date) params.date = encodeURIComponent(date);
+      if (price) params.price = encodeURIComponent(price);
       setSearchParams(params, { replace: true });
    };
 
@@ -70,7 +75,10 @@ export const CatalogSection = () => {
    useEffect(() => {
       setTypeParams(type || searchParams.get('type') || '');
       setDateParam(date || decodeURIComponent(searchParams.get('date') || ''));
-   }, [type, date]);
+      setPriceParam(
+         price || decodeURIComponent(searchParams.get('price') || '')
+      );
+   }, [type, date, price]);
 
    /*
     * Basic handler for the CatalogSection component.
@@ -79,21 +87,28 @@ export const CatalogSection = () => {
       const title = getValueByAnother(typeParam, cardSectionList);
       setTitle(title);
 
-      if (typeParam || dateParam) {
-         updateSearchParams(typeParam, dateParam);
+      if (typeParam || dateParam || priceParam) {
+         updateSearchParams(typeParam, dateParam, priceParam);
 
-         dispatch(getLoftsData({ type: typeParam, page: 1, date: dateParam }));
+         dispatch(
+            getLoftsData({
+               type: typeParam,
+               page: 1,
+               date: dateParam,
+               price: priceParam,
+            })
+         );
       } else {
          /*
-          * Processing for typeParam = '' && dateParam = '' case.
+          * Processing for typeParam = '' && dateParam = '' && priceParam = '' case.
           */
-         dispatch(getLoftsData({ type, page: 1, date }));
+         dispatch(getLoftsData({ type, page: 1, date, price }));
       }
 
       return () => {
          dispatch(resetCardsState());
       };
-   }, [dispatch, typeParam, dateParam]);
+   }, [dispatch, typeParam, dateParam, priceParam]);
 
    return (
       <>

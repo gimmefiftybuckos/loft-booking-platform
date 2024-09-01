@@ -2,12 +2,14 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { TypeParamsType, ILoftCard } from '../types';
 import { getLoftsData } from '../api';
+import { MAX_PRICE } from '../constants';
 
 export type CardSliceType = {
    cards: ILoftCard[];
    status: 'idle' | 'loading' | 'succeeded' | 'failed';
    type: TypeParamsType;
    date: string;
+   price: string;
    limit: number;
    page: number;
    hasMore: boolean;
@@ -18,6 +20,7 @@ const initialState: CardSliceType = {
    status: 'idle',
    type: '',
    date: '',
+   price: '',
    limit: 10,
    page: 1,
    hasMore: true,
@@ -32,6 +35,13 @@ const cardSlice = createSlice({
       },
       setDate(state, action: PayloadAction<string>) {
          state.date = action.payload;
+      },
+      setPrice(state, action: PayloadAction<string>) {
+         if (action.payload !== `0:${MAX_PRICE}`) {
+            state.price = action.payload;
+         } else {
+            state.price = '';
+         }
       },
       resetCardsState(state) {
          state.cards = [];
@@ -58,6 +68,7 @@ const cardSlice = createSlice({
    },
 });
 
-export const { setType, setDate, resetCardsState } = cardSlice.actions;
+export const { setType, setDate, setPrice, resetCardsState } =
+   cardSlice.actions;
 
 export default cardSlice.reducer;

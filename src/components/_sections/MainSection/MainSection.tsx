@@ -11,7 +11,7 @@ import { useModalControl } from '../../../hooks/useModalControl';
 import { ModalBackdrop } from '../../_reusable/ModalBackdrop';
 
 export const MainSection = () => {
-   const { toggleModal, controlIndex } = useModalControl();
+   const { toggleModal, closeModal, controlIndex } = useModalControl();
 
    return (
       <>
@@ -40,6 +40,7 @@ export const MainSection = () => {
                   textColor='white'
                   accented
                   pathTo='/catalog'
+                  onClick={closeModal}
                >
                   Найти
                </Button>

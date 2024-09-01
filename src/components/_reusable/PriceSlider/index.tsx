@@ -1,0 +1,1 @@
+export { PriceSlider } from './PriceSlider';

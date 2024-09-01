@@ -1,13 +1,16 @@
+import { useDispatch, useSelector } from 'react-redux';
+import { useContext } from 'react';
+import { AppDispatch, RootState } from '../../store';
 import clsx from 'clsx';
-import { cardSectionList } from '../../utils';
 
 import styles from './SearchList.module.sass';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '../../store';
-import { setType } from '../../store/cardCatalogSlice';
-import { useContext } from 'react';
-import { ModalContext } from '../_reusable/SelectionButton/SelectionButton';
+
 import { ICardSection } from '../../types';
+import { cardSectionList } from '../../utils';
+
+import { setType } from '../../store/cardCatalogSlice';
+import { ModalContext } from '../_reusable/SelectionButton/SelectionButton';
+import { Text } from '../_reusable/Text';
 
 export const SearchList = () => {
    const dispatch = useDispatch<AppDispatch>();
@@ -34,6 +37,11 @@ export const SearchList = () => {
                      )}
                   >
                      {item.title}
+                     {item.type !== type && (
+                        <Text size='14' color='gray' as={'span'}>
+                           10
+                        </Text>
+                     )}
                   </button>
                </li>
             );

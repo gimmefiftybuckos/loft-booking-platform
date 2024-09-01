@@ -160,15 +160,21 @@ export const todayDate = new Date();
 export const getTitleByFilter = (
    filter: SelectionFiltersType | CatalogFiltersType
 ) => {
-   const { type, date } = useSelector((state: RootState) => state.cards);
+   const { type, date, price } = useSelector((state: RootState) => state.cards);
 
    const newDate = formatDate(date);
+   const newPrice = price.split(':');
 
    switch (filter) {
       case 'Мероприятие':
          return type ? getValueByAnother(type, cardSectionList) : null;
       case 'Дата':
          return newDate;
+      case 'Стоимость':
+         if (price) {
+            return `${newPrice[0]} - ${newPrice[1]} руб.`;
+         }
+         return null;
       default:
          return null;
    }
