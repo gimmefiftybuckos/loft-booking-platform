@@ -1,0 +1,22 @@
+@import '../../../styles/variables'
+
+.button
+    padding: 10px 25px
+    border-radius: $border-radius
+    transition: background-color 0.3s ease
+
+    &_primary
+        outline: 1px solid $border-color
+        background-color: $bg-color
+        color: #000
+
+        &:hover
+            background-color: $banner-bg-color
+            outline: none
+
+    &_accent
+        background-color: $accent-color
+        color: $bg-color
+
+        &:hover
+            background-color: $accent-alt-color

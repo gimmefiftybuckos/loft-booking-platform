@@ -3,7 +3,7 @@ import {
    ICardSection,
    SelectionFiltersType,
 } from '../types';
-import { setType } from '../store/cardCatalogSlice';
+import { resetFilters } from '../store/cardCatalogSlice';
 import { AppDispatch, RootState } from '../store';
 import { useSelector } from 'react-redux';
 
@@ -13,24 +13,24 @@ export const createNavPoints = (dispatch: AppDispatch) => [
    {
       name: 'Все лофты',
       path: '/catalog',
-      onClick: () => dispatch(setType('')),
+      onClick: () => dispatch(resetFilters()),
    },
    { name: 'Идеи', path: '/ideas' },
    { name: 'Избранное', path: '/favorite' },
 ];
 
 export const selectionFilters: SelectionFiltersType[] = [
-   'Мероприятие',
-   'Дата',
-   'Начало',
-   'Конец',
+   'Event',
+   'Date',
+   'Start Time',
+   'End Time',
 ];
 
 export const catalogFilters: CatalogFiltersType[] = [
-   'Мероприятие',
-   'Стоимость',
-   'Дата',
-   'Фильтры',
+   'Event',
+   'Price',
+   'Date',
+   'Filters',
 ];
 
 export const bannersContent = [
@@ -160,19 +160,21 @@ export const todayDate = new Date();
 export const getTitleByFilter = (
    filter: SelectionFiltersType | CatalogFiltersType
 ) => {
-   const { toSearchType, date } = useSelector(
-      (state: RootState) => state.cards
-   );
+   const { type, date, price } = useSelector((state: RootState) => state.cards);
 
    const newDate = formatDate(date);
+   const newPrice = price.split(':');
 
    switch (filter) {
-      case 'Мероприятие':
-         return toSearchType
-            ? getValueByAnother(toSearchType, cardSectionList)
-            : null;
-      case 'Дата':
+      case 'Event':
+         return type ? getValueByAnother(type, cardSectionList) : null;
+      case 'Date':
          return newDate;
+      case 'Price':
+         if (price) {
+            return `${newPrice[0]} - ${newPrice[1]} руб.`;
+         }
+         return null;
       default:
          return null;
    }

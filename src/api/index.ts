@@ -6,12 +6,13 @@ type paramsType = {
    type: string;
    page: number;
    date: string;
+   price: string;
 };
 
 export const getLoftsData = createAsyncThunk(
    'cards/getLoftsData',
-   async ({ type, page, date }: paramsType) => {
-      const query = { params: { type, page, date } };
+   async ({ type, page, date, price }: paramsType) => {
+      const query = { params: { type, page, date, price } };
 
       console.log(query);
 

@@ -1,0 +1,41 @@
+@import '../../styles/variables'
+
+.cover
+    padding-block: 7.8rem
+    padding-inline: 5rem
+    inline-size: 100%
+    border-radius: 20px
+    background: url('/assets/preview.png')
+    background-size: cover
+    background-position-y: bottom
+
+.container
+    z-index: 101
+    display: flex
+    flex-wrap: wrap
+    justify-content: space-between
+    gap: 1rem
+    margin-block-start: 2.45rem
+    padding: 1rem
+    background: $bg-color
+    border-radius: 15px
+
+    &_focus
+        position: relative
+        z-index: 101
+
+.arrow
+    transform: rotate(-90deg)
+    transition: transform .3s
+
+    &_open
+        transform: rotate(0)
+
+.modalBackdrop
+    position: fixed
+    z-index: 100
+    top: 0
+    left: 0
+    width: 100vw
+    height: 100vh
+    background-color: rgba(0,0,0,0.2)

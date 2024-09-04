@@ -1,0 +1,59 @@
+@import '../../styles/variables'
+
+.card
+    display: inline-block
+    padding: 1.25rem
+    max-inline-size: 370px
+    inline-size: 100%
+    border-radius: 10px
+    outline: 1px solid $border-color
+    transition: box-shadow 0.3s ease
+    cursor: pointer
+
+    &:hover
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.15)
+
+    &_wide
+        padding: 0
+        max-inline-size: none
+        outline: none
+
+        &:hover
+            box-shadow: none
+
+        &:hover .card__image
+            transform: scale(1.1)
+
+    &__container
+        block-size: 250px
+        inline-size: 100%
+        margin: 0
+        padding: 0
+        overflow: hidden
+        border-radius: 10px
+        border: 0
+
+        &_wide
+            block-size: 320px
+
+    &__image
+        border-radius: 10px
+        block-size: 100%
+        inline-size: 100%
+        object-fit: cover
+        transition: transform 0.5s ease
+
+    &__content
+        display: flex
+        flex-direction: column
+        gap: 0.7rem
+        margin-block-start: 0.95rem
+
+        &_wide
+            gap: 0
+
+.details
+    display: flex
+    align-items: center
+    justify-content: space-between
+    margin-block-start: 1.25rem

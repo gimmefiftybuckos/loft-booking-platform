@@ -2,13 +2,14 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { TypeParamsType, ILoftCard } from '../types';
 import { getLoftsData } from '../api';
+import { MAX_PRICE } from '../constants';
 
 export type CardSliceType = {
    cards: ILoftCard[];
    status: 'idle' | 'loading' | 'succeeded' | 'failed';
    type: TypeParamsType;
-   toSearchType: TypeParamsType;
    date: string;
+   price: string;
    limit: number;
    page: number;
    hasMore: boolean;
@@ -18,8 +19,8 @@ const initialState: CardSliceType = {
    cards: [],
    status: 'idle',
    type: '',
-   toSearchType: '',
    date: '',
+   price: '',
    limit: 10,
    page: 1,
    hasMore: true,
@@ -32,11 +33,20 @@ const cardSlice = createSlice({
       setType(state, action: PayloadAction<TypeParamsType>) {
          state.type = action.payload;
       },
-      setToSearchType(state, action: PayloadAction<TypeParamsType>) {
-         state.toSearchType = action.payload;
-      },
       setDate(state, action: PayloadAction<string>) {
          state.date = action.payload;
+      },
+      setPrice(state, action: PayloadAction<string>) {
+         if (action.payload !== `0:${MAX_PRICE}`) {
+            state.price = action.payload;
+         } else {
+            state.price = '';
+         }
+      },
+      resetFilters(state) {
+         state.type = '';
+         state.date = '';
+         state.price = '';
       },
       resetCardsState(state) {
          state.cards = [];
@@ -63,7 +73,7 @@ const cardSlice = createSlice({
    },
 });
 
-export const { setType, setToSearchType, setDate, resetCardsState } =
+export const { setType, setDate, setPrice, resetFilters, resetCardsState } =
    cardSlice.actions;
 
 export default cardSlice.reducer;
