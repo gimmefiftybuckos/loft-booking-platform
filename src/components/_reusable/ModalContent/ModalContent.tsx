@@ -9,9 +9,9 @@ type ModalContentProps = {
 };
 
 const contentMap: { [key: string]: React.ReactNode } = {
-   Мероприятие: <SearchList />,
-   Дата: <Calendar />,
-   Стоимость: <PriceSlider />,
+   Event: <SearchList />,
+   Date: <Calendar />,
+   Price: <PriceSlider />,
 };
 
 export const ModalContent: React.FC<ModalContentProps> = ({ name }) => {

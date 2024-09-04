@@ -20,17 +20,17 @@ export const createNavPoints = (dispatch: AppDispatch) => [
 ];
 
 export const selectionFilters: SelectionFiltersType[] = [
-   'Мероприятие',
-   'Дата',
-   'Начало',
-   'Конец',
+   'Event',
+   'Date',
+   'Start Time',
+   'End Time',
 ];
 
 export const catalogFilters: CatalogFiltersType[] = [
-   'Мероприятие',
-   'Стоимость',
-   'Дата',
-   'Фильтры',
+   'Event',
+   'Price',
+   'Date',
+   'Filters',
 ];
 
 export const bannersContent = [
@@ -166,11 +166,11 @@ export const getTitleByFilter = (
    const newPrice = price.split(':');
 
    switch (filter) {
-      case 'Мероприятие':
+      case 'Event':
          return type ? getValueByAnother(type, cardSectionList) : null;
-      case 'Дата':
+      case 'Date':
          return newDate;
-      case 'Стоимость':
+      case 'Price':
          if (price) {
             return `${newPrice[0]} - ${newPrice[1]} руб.`;
          }
