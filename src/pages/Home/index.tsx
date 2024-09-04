@@ -1,9 +1,9 @@
 import { cardSectionList } from '../../utils';
 
-import { MainSection } from '../../components/SectionMain';
-import { BannerSection } from '../../components/SectionBanner';
-import { CardBlockSection } from '../../components/SectionCardBlocks';
-import { CardSection } from '../../components/SectionCard';
+import { MainSection } from '../../components/Sections/SectionMain';
+import { BannerSection } from '../../components/Sections/SectionBanner';
+import { CardBlockSection } from '../../components/Sections/SectionCardBlocks';
+import { CardSection } from '../../components/Sections/SectionCard';
 
 export const Home = () => {
    const { title: mainSectionTitle, type: mainSectionParam } =

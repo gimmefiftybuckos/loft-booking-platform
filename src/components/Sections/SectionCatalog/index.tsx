@@ -6,21 +6,21 @@ import clsx from 'clsx';
 
 import styles from './index.module.sass';
 
-import { getLoftsData } from '../../api';
-import { AppDispatch, RootState } from '../../store';
-import { resetCardsState } from '../../store/cardCatalogSlice';
+import { getLoftsData } from '../../../api';
+import { AppDispatch, RootState } from '../../../store';
+import { resetCardsState } from '../../../store/cardCatalogSlice';
 import {
    cardSectionList,
    catalogFilters,
    getTitleByFilter,
    getValueByAnother,
-} from '../../utils';
+} from '../../../utils';
 
-import { Text } from '../Text';
-import { Card } from '../Card';
-import { SelectionButton } from '../Modal/SelectionButton';
-import { useModalControl } from '../../hooks/useModalControl';
-import { Backdrop } from '../Backdrop';
+import { Text } from '../../Text';
+import { Card } from '../../Card';
+import { SelectionButton } from '../../Modal/SelectionButton';
+import { useModalControl } from '../../../hooks/useModalControl';
+import { Backdrop } from '../../Backdrop';
 
 export const CatalogSection = () => {
    const dispatch = useDispatch<AppDispatch>();

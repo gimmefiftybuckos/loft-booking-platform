@@ -2,13 +2,13 @@ import clsx from 'clsx';
 
 import styles from './index.module.sass';
 
-import { getTitleByFilter, selectionFilters } from '../../utils';
-import { Button } from '../Button';
+import { getTitleByFilter, selectionFilters } from '../../../utils';
+import { Button } from '../../Button';
 
-import { SelectionButton } from '../Modal/SelectionButton';
+import { SelectionButton } from '../../Modal/SelectionButton';
 import { CoverTitle } from './CoverTitle';
-import { useModalControl } from '../../hooks/useModalControl';
-import { Backdrop } from '../Backdrop';
+import { useModalControl } from '../../../hooks/useModalControl';
+import { Backdrop } from '../../Backdrop';
 
 export const MainSection = () => {
    const { toggleModal, closeModal, controlIndex } = useModalControl();
