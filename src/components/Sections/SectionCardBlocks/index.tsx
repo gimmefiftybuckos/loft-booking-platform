@@ -5,11 +5,11 @@ import clsx from 'clsx';
 
 import styles from './index.module.sass';
 
-import { TypeParamsType, ICardSection } from '../../types';
-import { AppDispatch } from '../../store';
-import { setType } from '../../store/cardCatalogSlice';
+import { TypeParamsType, ICardSection } from '../../../types';
+import { AppDispatch } from '../../../store';
+import { setType } from '../../../store/cardCatalogSlice';
 
-import { Text } from '../Text';
+import { Text } from '../../Text';
 
 type CardBlockSectionProps = {
    data: ICardSection[];

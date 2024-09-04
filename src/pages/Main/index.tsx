@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import styles from './index.module.sass';
 
 import { Home } from '../Home';
-import { CatalogSection } from '../../components/SectionCatalog';
+import { CatalogSection } from '../../components/Sections/SectionCatalog';
 
 export const Main = () => {
    return (

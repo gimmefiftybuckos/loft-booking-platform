@@ -2,9 +2,9 @@ import clsx from 'clsx';
 
 import styles from './index.module.sass';
 
-import { bannersContent } from '../../utils';
+import { bannersContent } from '../../../utils';
 
-import { Text } from '../Text';
+import { Text } from '../../Text';
 
 export const BannerSection = () => {
    return (
