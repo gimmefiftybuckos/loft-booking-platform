@@ -43,6 +43,11 @@ const cardSlice = createSlice({
             state.price = '';
          }
       },
+      resetFilters(state) {
+         state.type = '';
+         state.date = '';
+         state.price = '';
+      },
       resetCardsState(state) {
          state.cards = [];
          state.page = 1;
@@ -68,7 +73,7 @@ const cardSlice = createSlice({
    },
 });
 
-export const { setType, setDate, setPrice, resetCardsState } =
+export const { setType, setDate, setPrice, resetFilters, resetCardsState } =
    cardSlice.actions;
 
 export default cardSlice.reducer;

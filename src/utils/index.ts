@@ -3,7 +3,7 @@ import {
    ICardSection,
    SelectionFiltersType,
 } from '../types';
-import { setType } from '../store/cardCatalogSlice';
+import { resetFilters } from '../store/cardCatalogSlice';
 import { AppDispatch, RootState } from '../store';
 import { useSelector } from 'react-redux';
 
@@ -13,7 +13,7 @@ export const createNavPoints = (dispatch: AppDispatch) => [
    {
       name: 'Все лофты',
       path: '/catalog',
-      onClick: () => dispatch(setType('')),
+      onClick: () => dispatch(resetFilters()),
    },
    { name: 'Идеи', path: '/ideas' },
    { name: 'Избранное', path: '/favorite' },
