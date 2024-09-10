@@ -1,11 +1,13 @@
-import ReactDOM from 'react-dom/client';
-import App from './App.tsx';
-import store from './store/index.ts';
 import { Provider } from 'react-redux';
+import ReactDOM from 'react-dom/client';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import './styles/index.sass';
 import './fonts/font.sass';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+
+import store from './store/index.ts';
+
+import App from './App.tsx';
 import { MainSection } from './components/Sections/SectionMain/index.tsx';
 import { CatalogSection } from './components/Sections/SectionCatalog/index.tsx';
 

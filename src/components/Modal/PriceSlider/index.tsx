@@ -1,11 +1,14 @@
 import React, { useContext, useEffect, useReducer, useState } from 'react';
 import Slider from 'rc-slider';
+
 import 'rc-slider/assets/index.css';
-import { ModalButton } from '../ModalButton';
-import { ModalContext } from '../../../context';
+
 import { useDispatch } from '../../../store';
 import { setPrice } from '../../../store/cardCatalogSlice';
 import { MAX_PRICE } from '../../../services/constants';
+import { ModalContext } from '../../../context';
+
+import { ModalButton } from '../ModalButton';
 
 interface IPriceState {
    min: number;
@@ -73,8 +76,6 @@ export const PriceSlider = () => {
    };
 
    useEffect(() => {
-      console.log(currentPrice);
-
       storeDispatch(setPrice(`${currentPrice[0]}:${currentPrice[1]}`));
    }, [currentPrice]);
 

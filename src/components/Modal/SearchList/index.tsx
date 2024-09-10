@@ -6,8 +6,8 @@ import styles from './index.module.sass';
 
 import { ICardSection } from '../../../types';
 import { cardSectionList } from '../../../services/utils';
-
 import { setType } from '../../../store/cardCatalogSlice';
+
 import { ModalContext } from '../../../context';
 import { Text } from '../../Text';
 

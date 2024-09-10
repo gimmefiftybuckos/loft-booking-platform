@@ -18,7 +18,7 @@ import { Text } from '../../Text';
 import { Card } from '../../Card';
 import { SelectionButton } from '../../Modal/SelectionButton';
 import { useModalControl } from '../../../hooks/useModalControl';
-import { Backdrop } from '../../Backdrop';
+import { Backdrop } from '../../Modal/Backdrop';
 
 export const CatalogSection = () => {
    const dispatch = useDispatch();

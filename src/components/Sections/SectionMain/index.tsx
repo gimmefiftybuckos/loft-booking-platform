@@ -8,7 +8,7 @@ import { Button } from '../../Button';
 import { SelectionButton } from '../../Modal/SelectionButton';
 import { CoverTitle } from './CoverTitle';
 import { useModalControl } from '../../../hooks/useModalControl';
-import { Backdrop } from '../../Backdrop';
+import { Backdrop } from '../../Modal/Backdrop';
 
 export const MainSection = () => {
    const { toggleModal, closeModal, controlIndex } = useModalControl();

@@ -1,7 +1,9 @@
 import React from 'react';
+
+import { CatalogFiltersType, SelectionFiltersType } from '../../../types';
+
 import { Calendar } from '../Calendar';
 import { SearchList } from '../SearchList';
-import { CatalogFiltersType, SelectionFiltersType } from '../../../types';
 import { PriceSlider } from '../PriceSlider';
 
 type ModalContentProps = {

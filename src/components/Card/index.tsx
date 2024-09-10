@@ -3,13 +3,13 @@ import clsx from 'clsx';
 import styles from './index.module.sass';
 
 import { ILoftCard } from '../../types';
+import { API_URL } from '../../services/constants';
 
 import { Text } from '../Text';
 import { Price } from './Price';
 import { Rating } from './Rating';
 import { Room } from './Room';
 import { Distance } from './Distance';
-import { API_URL } from '../../services/constants';
 
 type CardProps = {
    cardData: ILoftCard;

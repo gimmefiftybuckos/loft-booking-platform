@@ -9,6 +9,7 @@ import styles from './index.module.sass';
 import { setDate } from '../../../store/cardCatalogSlice';
 import { ModalContext } from '../../../context';
 import { todayDate } from '../../../services/utils';
+
 import { ModalButton } from '../ModalButton';
 
 export const Calendar = () => {
