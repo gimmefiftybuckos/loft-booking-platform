@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { ILoftCard, TCatalogParams } from '../types';
-import { API_URL } from '../constants';
+import { API_URL } from './constants';
 
 const api = axios.create({
    baseURL: API_URL,

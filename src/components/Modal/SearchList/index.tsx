@@ -6,7 +6,7 @@ import clsx from 'clsx';
 import styles from './index.module.sass';
 
 import { ICardSection } from '../../../types';
-import { cardSectionList } from '../../../utils';
+import { cardSectionList } from '../../../services/utils';
 
 import { setType } from '../../../store/cardCatalogSlice';
 import { ModalContext } from '../../../context';

@@ -2,7 +2,7 @@ import clsx from 'clsx';
 
 import styles from './index.module.sass';
 
-import { getTitleByFilter, selectionFilters } from '../../../utils';
+import { getTitleByFilter, selectionFilters } from '../../../services/utils';
 import { Button } from '../../Button';
 
 import { SelectionButton } from '../../Modal/SelectionButton';

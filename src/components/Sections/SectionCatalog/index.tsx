@@ -13,7 +13,7 @@ import {
    catalogFilters,
    getTitleByFilter,
    getValueByAnother,
-} from '../../../utils';
+} from '../../../services/utils';
 
 import { Text } from '../../Text';
 import { Card } from '../../Card';

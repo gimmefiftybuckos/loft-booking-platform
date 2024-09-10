@@ -9,7 +9,7 @@ import { Price } from './Price';
 import { Rating } from './Rating';
 import { Room } from './Room';
 import { Distance } from './Distance';
-import { API_URL } from '../../constants';
+import { API_URL } from '../../services/constants';
 
 type CardProps = {
    cardData: ILoftCard;

@@ -3,7 +3,7 @@ import clsx from 'clsx';
 
 import styles from './index.module.sass';
 
-import { createNavPoints } from '../../../utils';
+import { createNavPoints } from '../../../services/utils';
 
 import { Button } from '../../Button';
 import { HomeButton } from '../HomeButton';

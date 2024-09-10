@@ -12,7 +12,7 @@ import { Text } from '../../Text';
 import { Button } from '../../Button';
 import { Card } from '../../Card';
 import { Arrow } from '../../Arrow';
-import { asyncGetCardsApi } from '../../../api';
+import { asyncGetCardsApi } from '../../../services/api';
 
 type CardSectionProps = {
    title?: string;

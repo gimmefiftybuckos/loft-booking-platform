@@ -6,7 +6,7 @@ import { ModalContext } from '../../../context';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { setPrice } from '../../../store/cardCatalogSlice';
-import { MAX_PRICE } from '../../../constants';
+import { MAX_PRICE } from '../../../services/constants';
 
 interface IPriceState {
    min: number;
