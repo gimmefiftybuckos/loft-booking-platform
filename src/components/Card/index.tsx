@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import styles from './index.module.sass';
 
 import { ILoftCard } from '../../types';
+import { API_URL } from '../../services/constants';
 
 import { Text } from '../Text';
 import { Price } from './Price';
@@ -57,7 +58,7 @@ export const Card: React.FC<CardProps> = ({ cardData, wide }) => {
          >
             <img
                className={clsx(styles.card__image)}
-               src={`http://localhost:3000/uploads/${imageUrl[0]}`}
+               src={`${API_URL}/uploads/${imageUrl[0]}`}
                loading='lazy'
                alt=''
             />

@@ -4,8 +4,7 @@ import {
    SelectionFiltersType,
 } from '../types';
 import { resetFilters } from '../store/cardCatalogSlice';
-import { AppDispatch, RootState } from '../store';
-import { useSelector } from 'react-redux';
+import { useSelector, AppDispatch } from '../store';
 
 export const n = ['Все лофты', 'Идеи', 'Избранное'];
 
@@ -160,7 +159,7 @@ export const todayDate = new Date();
 export const getTitleByFilter = (
    filter: SelectionFiltersType | CatalogFiltersType
 ) => {
-   const { type, date, price } = useSelector((state: RootState) => state.cards);
+   const { type, date, price } = useSelector((state) => state.cards);
 
    const newDate = formatDate(date);
    const newPrice = price.split(':');

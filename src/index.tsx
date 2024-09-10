@@ -1,12 +1,15 @@
-import ReactDOM from 'react-dom/client';
-import App from './App.tsx';
-import store from './store/index.ts';
 import { Provider } from 'react-redux';
+import ReactDOM from 'react-dom/client';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import './styles/index.sass';
 import './fonts/font.sass';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { Main } from './pages/Main/index.tsx';
+
+import store from './store/index.ts';
+
+import App from './App.tsx';
+import { MainSection } from './components/Sections/SectionMain/index.tsx';
+import { CatalogSection } from './components/Sections/SectionCatalog/index.tsx';
 
 const router = createBrowserRouter([
    {
@@ -14,11 +17,11 @@ const router = createBrowserRouter([
       element: <App />,
       children: [
          {
-            element: <Main />,
+            element: <MainSection />,
          },
          {
             path: 'catalog',
-            element: <Main />,
+            element: <CatalogSection />,
          },
       ],
    },

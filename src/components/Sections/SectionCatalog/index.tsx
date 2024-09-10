@@ -1,31 +1,29 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../../store';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import clsx from 'clsx';
 
 import styles from './index.module.sass';
 
-import { getLoftsData } from '../../../api';
-import { AppDispatch, RootState } from '../../../store';
-import { resetCardsState } from '../../../store/cardCatalogSlice';
+import { getCardsList, resetCardsState } from '../../../store/cardCatalogSlice';
 import {
    cardSectionList,
    catalogFilters,
    getTitleByFilter,
    getValueByAnother,
-} from '../../../utils';
+} from '../../../services/utils';
 
 import { Text } from '../../Text';
 import { Card } from '../../Card';
 import { SelectionButton } from '../../Modal/SelectionButton';
 import { useModalControl } from '../../../hooks/useModalControl';
-import { Backdrop } from '../../Backdrop';
+import { Backdrop } from '../../Modal/Backdrop';
 
 export const CatalogSection = () => {
-   const dispatch = useDispatch<AppDispatch>();
+   const dispatch = useDispatch();
    const { cards, type, date, price, page, hasMore, status } = useSelector(
-      (state: RootState) => state.cards
+      (state) => state.cards
    );
    const { toggleModal, controlIndex } = useModalControl();
 
@@ -46,7 +44,7 @@ export const CatalogSection = () => {
    const fetchMore = () => {
       if (status !== 'loading' && hasMore) {
          dispatch(
-            getLoftsData({
+            getCardsList({
                type: typeParam,
                page,
                date: dateParam,
@@ -91,7 +89,7 @@ export const CatalogSection = () => {
          updateSearchParams(typeParam, dateParam, priceParam);
 
          dispatch(
-            getLoftsData({
+            getCardsList({
                type: typeParam,
                page: 1,
                date: dateParam,
@@ -102,7 +100,7 @@ export const CatalogSection = () => {
          /*
           * Processing for typeParam = '' && dateParam = '' && priceParam = '' case.
           */
-         dispatch(getLoftsData({ type, page: 1, date, price }));
+         dispatch(getCardsList({ type, page: 1, date, price }));
       }
 
       return () => {

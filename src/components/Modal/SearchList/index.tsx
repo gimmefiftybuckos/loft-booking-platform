@@ -1,23 +1,22 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../../store';
 import { useContext } from 'react';
-import { AppDispatch, RootState } from '../../../store';
 import clsx from 'clsx';
 
 import styles from './index.module.sass';
 
 import { ICardSection } from '../../../types';
-import { cardSectionList } from '../../../utils';
-
+import { cardSectionList } from '../../../services/utils';
 import { setType } from '../../../store/cardCatalogSlice';
+
 import { ModalContext } from '../../../context';
 import { Text } from '../../Text';
 
 export const SearchList = () => {
-   const dispatch = useDispatch<AppDispatch>();
+   const dispatch = useDispatch();
    const toggleModal = useContext(ModalContext);
 
    const cardSectionListSlice = cardSectionList.slice(2, 100);
-   const { type } = useSelector((state: RootState) => state.cards);
+   const { type } = useSelector((state) => state.cards);
 
    const onClick = (item: ICardSection) => {
       dispatch(setType(item.type));

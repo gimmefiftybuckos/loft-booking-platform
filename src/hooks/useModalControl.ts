@@ -1,13 +1,10 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '../store';
+import { useDispatch, useSelector } from '../store';
 import { setIndexModal, setModalClose } from '../store/modalControlSlice';
 import { useBodyScrollLock } from './useBodyScrollLock';
 
 export const useModalControl = () => {
-   const dispatch = useDispatch<AppDispatch>();
-   const controlIndex = useSelector(
-      (state: RootState) => state.modalControl.controlIndex
-   );
+   const dispatch = useDispatch();
+   const controlIndex = useSelector((state) => state.modalControl.controlIndex);
 
    const toggleModal = (key: number) => {
       dispatch(setIndexModal(key));

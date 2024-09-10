@@ -1,20 +1,20 @@
 import { DayPicker } from 'react-day-picker';
 import { useContext, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '../../../store';
 import 'react-day-picker/dist/style.css';
 import clsx from 'clsx';
 
 import styles from './index.module.sass';
 
-import { AppDispatch } from '../../../store';
 import { setDate } from '../../../store/cardCatalogSlice';
 import { ModalContext } from '../../../context';
-import { todayDate } from '../../../utils';
+import { todayDate } from '../../../services/utils';
+
 import { ModalButton } from '../ModalButton';
 
 export const Calendar = () => {
    const [selected, setSelected] = useState<Date>();
-   const dispatch = useDispatch<AppDispatch>();
+   const dispatch = useDispatch();
 
    const toggleModal = useContext(ModalContext);
 

@@ -1,4 +1,4 @@
-import { cardSectionList } from '../../utils';
+import { cardSectionList } from '../../services/utils';
 
 import { MainSection } from '../../components/Sections/SectionMain';
 import { BannerSection } from '../../components/Sections/SectionBanner';

@@ -37,3 +37,10 @@ export type TypeParamsType =
 export type SelectionFiltersType = 'Event' | 'Date' | 'Start Time' | 'End Time';
 
 export type CatalogFiltersType = 'Event' | 'Price' | 'Date' | 'Filters';
+
+export type TCatalogParams = {
+   type?: string;
+   page?: number;
+   date?: string;
+   price?: string;
+};

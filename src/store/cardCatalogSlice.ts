@@ -1,8 +1,14 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { TypeParamsType, ILoftCard } from '../types';
-import { getLoftsData } from '../api';
-import { MAX_PRICE } from '../constants';
+import { TypeParamsType, ILoftCard, TCatalogParams } from '../types';
+import { MAX_PRICE } from '../services/constants';
+import { asyncGetCardsApi } from '../services/api';
+
+export const getCardsList = createAsyncThunk(
+   'cards/getCards',
+   async ({ type, page, date, price }: TCatalogParams) =>
+      asyncGetCardsApi({ type, page, date, price })
+);
 
 export type CardSliceType = {
    cards: ILoftCard[];
@@ -56,10 +62,10 @@ const cardSlice = createSlice({
    },
    extraReducers: (builder) => {
       builder
-         .addCase(getLoftsData.pending, (state) => {
+         .addCase(getCardsList.pending, (state) => {
             state.status = 'loading';
          })
-         .addCase(getLoftsData.fulfilled, (state, action) => {
+         .addCase(getCardsList.fulfilled, (state, action) => {
             state.status = 'succeeded';
 
             state.cards = [...state.cards, ...action.payload];
@@ -67,7 +73,7 @@ const cardSlice = createSlice({
             state.hasMore = action.payload.length >= state.limit;
             state.page += 1;
          })
-         .addCase(getLoftsData.rejected, (state) => {
+         .addCase(getCardsList.rejected, (state) => {
             state.status = 'failed';
          });
    },
