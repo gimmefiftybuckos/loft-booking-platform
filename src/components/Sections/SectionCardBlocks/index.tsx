@@ -1,12 +1,11 @@
 import { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '../../../store';
 import { useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
 
 import styles from './index.module.sass';
 
 import { TypeParamsType, ICardSection } from '../../../types';
-import { AppDispatch } from '../../../store';
 import { setType } from '../../../store/cardCatalogSlice';
 
 import { Text } from '../../Text';
@@ -17,7 +16,7 @@ type CardBlockSectionProps = {
 
 export const CardBlockSection: React.FC<CardBlockSectionProps> = ({ data }) => {
    const navigate = useNavigate();
-   const dispatch = useDispatch<AppDispatch>();
+   const dispatch = useDispatch();
 
    const clickHandle = useCallback((type: TypeParamsType) => {
       navigate('/catalog');

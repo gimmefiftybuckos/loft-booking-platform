@@ -1,11 +1,10 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '../../../store';
 import { useEffect, useState } from 'react';
 import clsx from 'clsx';
 
 import styles from './index.module.sass';
 
 import { TypeParamsType, ILoftCard } from '../../../types';
-import { AppDispatch } from '../../../store';
 import { setType } from '../../../store/cardCatalogSlice';
 
 import { Text } from '../../Text';
@@ -25,7 +24,7 @@ export const CardSection: React.FC<CardSectionProps> = ({
 }) => {
    const [dataState, setDataState] = useState<ILoftCard[]>();
 
-   const dispatch = useDispatch<AppDispatch>();
+   const dispatch = useDispatch();
 
    const initalHomeCards = async () => {
       const data = await asyncGetCardsApi({ type });

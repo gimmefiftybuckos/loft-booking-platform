@@ -1,4 +1,3 @@
-import { useDispatch } from 'react-redux';
 import clsx from 'clsx';
 
 import styles from './index.module.sass';
@@ -7,6 +6,7 @@ import { createNavPoints } from '../../../services/utils';
 
 import { Button } from '../../Button';
 import { HomeButton } from '../HomeButton';
+import { useDispatch } from '../../../store';
 
 export const Navigation = () => {
    const dispatch = useDispatch();

@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../../store';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import clsx from 'clsx';
 
 import styles from './index.module.sass';
 
-import { AppDispatch, RootState } from '../../../store';
 import { getCardsList, resetCardsState } from '../../../store/cardCatalogSlice';
 import {
    cardSectionList,
@@ -22,9 +21,9 @@ import { useModalControl } from '../../../hooks/useModalControl';
 import { Backdrop } from '../../Backdrop';
 
 export const CatalogSection = () => {
-   const dispatch = useDispatch<AppDispatch>();
+   const dispatch = useDispatch();
    const { cards, type, date, price, page, hasMore, status } = useSelector(
-      (state: RootState) => state.cards
+      (state) => state.cards
    );
    const { toggleModal, controlIndex } = useModalControl();
 

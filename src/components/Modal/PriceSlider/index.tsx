@@ -3,8 +3,7 @@ import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import { ModalButton } from '../ModalButton';
 import { ModalContext } from '../../../context';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../../../store';
+import { useDispatch } from '../../../store';
 import { setPrice } from '../../../store/cardCatalogSlice';
 import { MAX_PRICE } from '../../../services/constants';
 
@@ -33,7 +32,7 @@ const initialState: IPriceState = { min: 0, max: MAX_PRICE };
 export const PriceSlider = () => {
    const [currentPrice, setCurrentPrice] = useState<number[]>([0, MAX_PRICE]);
    const [price, dispatch] = useReducer(reducer, initialState);
-   const storeDispatch = useDispatch<AppDispatch>();
+   const storeDispatch = useDispatch();
 
    const toggleModal = useContext(ModalContext);
 
