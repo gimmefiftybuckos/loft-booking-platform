@@ -9,6 +9,7 @@ import { Price } from './Price';
 import { Rating } from './Rating';
 import { Room } from './Room';
 import { Distance } from './Distance';
+import { API_URL } from '../../constants';
 
 type CardProps = {
    cardData: ILoftCard;
@@ -57,7 +58,7 @@ export const Card: React.FC<CardProps> = ({ cardData, wide }) => {
          >
             <img
                className={clsx(styles.card__image)}
-               src={`http://localhost:3000/uploads/${imageUrl[0]}`}
+               src={`${API_URL}/uploads/${imageUrl[0]}`}
                loading='lazy'
                alt=''
             />

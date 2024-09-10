@@ -1,40 +1,20 @@
 import axios from 'axios';
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import { ILoftCard } from '../types';
+import { ILoftCard, TCatalogParams } from '../types';
+import { API_URL } from '../constants';
 
-type paramsType = {
-   type: string;
-   page: number;
-   date: string;
-   price: string;
-};
+const api = axios.create({
+   baseURL: API_URL,
+});
 
-export const getLoftsData = createAsyncThunk(
-   'cards/getLoftsData',
-   async ({ type, page, date, price }: paramsType) => {
-      const query = { params: { type, page, date, price } };
-
-      console.log(query);
-
-      try {
-         const response = await axios.get<ILoftCard[]>(
-            'http://localhost:3000/catalog',
-            query
-         );
-         return response.data;
-      } catch (error) {
-         throw new Error();
-      }
-   }
-);
-
-export const asyncGetHomeContainerData = async (type: string) => {
-   const query = type ? { params: { type } } : {};
+export const asyncGetCardsApi = async ({
+   type,
+   page,
+   date,
+   price,
+}: TCatalogParams) => {
+   const query = { params: { type, page, date, price } };
    try {
-      const response = await axios.get<ILoftCard[]>(
-         'http://localhost:3000/catalog',
-         query
-      );
+      const response = await api.get<ILoftCard[]>('/catalog', query);
 
       return response.data || null;
    } catch (error) {

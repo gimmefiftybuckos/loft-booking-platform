@@ -6,9 +6,8 @@ import clsx from 'clsx';
 
 import styles from './index.module.sass';
 
-import { getLoftsData } from '../../../api';
 import { AppDispatch, RootState } from '../../../store';
-import { resetCardsState } from '../../../store/cardCatalogSlice';
+import { getCardsList, resetCardsState } from '../../../store/cardCatalogSlice';
 import {
    cardSectionList,
    catalogFilters,
@@ -46,7 +45,7 @@ export const CatalogSection = () => {
    const fetchMore = () => {
       if (status !== 'loading' && hasMore) {
          dispatch(
-            getLoftsData({
+            getCardsList({
                type: typeParam,
                page,
                date: dateParam,
@@ -91,7 +90,7 @@ export const CatalogSection = () => {
          updateSearchParams(typeParam, dateParam, priceParam);
 
          dispatch(
-            getLoftsData({
+            getCardsList({
                type: typeParam,
                page: 1,
                date: dateParam,
@@ -102,7 +101,7 @@ export const CatalogSection = () => {
          /*
           * Processing for typeParam = '' && dateParam = '' && priceParam = '' case.
           */
-         dispatch(getLoftsData({ type, page: 1, date, price }));
+         dispatch(getCardsList({ type, page: 1, date, price }));
       }
 
       return () => {

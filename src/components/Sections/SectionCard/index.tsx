@@ -5,7 +5,6 @@ import clsx from 'clsx';
 import styles from './index.module.sass';
 
 import { TypeParamsType, ILoftCard } from '../../../types';
-import { asyncGetHomeContainerData } from '../../../api';
 import { AppDispatch } from '../../../store';
 import { setType } from '../../../store/cardCatalogSlice';
 
@@ -13,6 +12,7 @@ import { Text } from '../../Text';
 import { Button } from '../../Button';
 import { Card } from '../../Card';
 import { Arrow } from '../../Arrow';
+import { asyncGetCardsApi } from '../../../api';
 
 type CardSectionProps = {
    title?: string;
@@ -28,7 +28,7 @@ export const CardSection: React.FC<CardSectionProps> = ({
    const dispatch = useDispatch<AppDispatch>();
 
    const initalHomeCards = async () => {
-      const data = await asyncGetHomeContainerData(type);
+      const data = await asyncGetCardsApi({ type });
       setDataState(data);
    };
 
