@@ -10,6 +10,7 @@ import { Price } from './Price';
 import { Rating } from './Rating';
 import { Room } from './Room';
 import { Distance } from './Distance';
+import { useNavigate } from 'react-router-dom';
 
 type CardProps = {
    cardData: ILoftCard;
@@ -18,6 +19,7 @@ type CardProps = {
 
 export const Card: React.FC<CardProps> = ({ cardData, wide }) => {
    const {
+      id,
       title,
       imageUrl,
       metroStation,
@@ -29,6 +31,11 @@ export const Card: React.FC<CardProps> = ({ cardData, wide }) => {
       maxPersons,
       seatingPlaces,
    } = cardData;
+   const navigate = useNavigate();
+
+   const onClick = () => {
+      navigate(`/catalog/${id}`);
+   };
 
    const size = wide ? '_wide' : '';
 
@@ -49,7 +56,10 @@ export const Card: React.FC<CardProps> = ({ cardData, wide }) => {
    );
 
    return (
-      <article className={clsx(styles.card, styles[`card${size}`])}>
+      <article
+         onClick={() => onClick()}
+         className={clsx(styles.card, styles[`card${size}`])}
+      >
          <div
             className={clsx(
                styles.card__container,
