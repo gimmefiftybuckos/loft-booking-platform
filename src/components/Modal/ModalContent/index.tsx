@@ -17,5 +17,5 @@ const contentMap: { [key: string]: React.ReactNode } = {
 };
 
 export const ModalContent: React.FC<ModalContentProps> = ({ name }) => {
-   return <>{contentMap[name] || <p>Мне было лениво</p>}</>;
+   return <>{contentMap[name] || <p>In Progress</p>}</>;
 };

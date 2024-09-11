@@ -27,6 +27,7 @@ type TextProps = {
    align?: 'center' | 'left';
    color?: 'black' | 'white' | 'gray';
    family?: FontFamiliesClasses;
+   className?: {};
 };
 
 export const Text = ({
@@ -40,8 +41,9 @@ export const Text = ({
    align = 'left',
    family = 'inter',
    color = 'black',
+   className,
 }: TextProps) => {
-   const className = clsx(
+   const cl = clsx(
       styles.text,
       styles[`size${size}`],
       { [styles.dynamic]: dynamic },
@@ -53,5 +55,5 @@ export const Text = ({
       styles[`${color}`],
       styles.margin
    );
-   return <Tag className={className}>{children}</Tag>;
+   return <Tag className={clsx(cl, className)}>{children}</Tag>;
 };

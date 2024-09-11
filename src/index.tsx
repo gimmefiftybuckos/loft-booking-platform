@@ -9,7 +9,7 @@ import store from './store/index.ts';
 
 import App from './App.tsx';
 import { MainSection } from './components/Sections/SectionMain/index.tsx';
-import { CatalogSection } from './components/Sections/SectionCatalog/index.tsx';
+import { Catalog } from './pages/Catalog/index.tsx';
 
 const router = createBrowserRouter([
    {
@@ -21,7 +21,10 @@ const router = createBrowserRouter([
          },
          {
             path: 'catalog',
-            element: <CatalogSection />,
+            element: <Catalog />,
+         },
+         {
+            path: 'catalog/:id',
          },
       ],
    },

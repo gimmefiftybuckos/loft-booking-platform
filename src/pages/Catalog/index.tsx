@@ -1,26 +1,26 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { useDispatch, useSelector } from '../../../store';
+import { useDispatch, useSelector } from '../../store';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import clsx from 'clsx';
 
 import styles from './index.module.sass';
 
-import { getCardsList, resetCardsState } from '../../../store/cardCatalogSlice';
+import { getCardsList, resetCardsState } from '../../store/cardCatalogSlice';
 import {
    cardSectionList,
    catalogFilters,
    getTitleByFilter,
    getValueByAnother,
-} from '../../../services/utils';
+} from '../../services/utils';
 
-import { Text } from '../../Text';
-import { Card } from '../../Card';
-import { SelectionButton } from '../../Modal/SelectionButton';
-import { useModalControl } from '../../../hooks/useModalControl';
-import { Backdrop } from '../../Modal/Backdrop';
+import { Text } from '../../components/Text';
+import { Card } from '../../components/Card';
+import { SelectionButton } from '../../components/Modal/SelectionButton';
+import { useModalControl } from '../../hooks/useModalControl';
+import { Backdrop } from '../../components/Modal/Backdrop';
 
-export const CatalogSection = () => {
+export const Catalog = () => {
    const dispatch = useDispatch();
    const { cards, type, date, price, page, hasMore, status } = useSelector(
       (state) => state.cards

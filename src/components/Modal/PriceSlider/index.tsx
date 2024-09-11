@@ -1,14 +1,17 @@
-import React, { useContext, useEffect, useReducer, useState } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import Slider from 'rc-slider';
+import clsx from 'clsx';
 
 import 'rc-slider/assets/index.css';
+import styles from './index.module.sass';
 
 import { useDispatch } from '../../../store';
 import { setPrice } from '../../../store/cardCatalogSlice';
 import { MAX_PRICE } from '../../../services/constants';
-import { ModalContext } from '../../../context';
+import { useModalControl } from '../../../hooks/useModalControl';
 
 import { ModalButton } from '../ModalButton';
+import { Text } from '../../Text';
 
 interface IPriceState {
    min: number;
@@ -37,7 +40,7 @@ export const PriceSlider = () => {
    const [price, dispatch] = useReducer(reducer, initialState);
    const storeDispatch = useDispatch();
 
-   const toggleModal = useContext(ModalContext);
+   const { closeModal } = useModalControl();
 
    const handleChange = (value: number | number[]) => {
       if (Array.isArray(value)) {
@@ -67,7 +70,7 @@ export const PriceSlider = () => {
       const value = [price.min, price.max];
       setCurrentPrice(value);
 
-      toggleModal ? toggleModal(-1) : null;
+      closeModal();
    };
 
    const resetHandler = () => {
@@ -81,16 +84,26 @@ export const PriceSlider = () => {
 
    return (
       <>
-         <input
-            type='number'
-            value={price.min}
-            onChange={(event) => handleInputChange(event, 'min')}
-         />
-         <input
-            type='number'
-            value={price.max}
-            onChange={(event) => handleInputChange(event, 'max')}
-         />
+         <div className={clsx(styles.container)}>
+            <input
+               className={clsx(styles.input)}
+               type='number'
+               value={price.min}
+               onChange={(event) => handleInputChange(event, 'min')}
+            />
+            <Text className={styles.text} as={'p'} color='gray' size='16'>
+               От
+            </Text>
+            <input
+               className={clsx(styles.input)}
+               type='number'
+               value={price.max}
+               onChange={(event) => handleInputChange(event, 'max')}
+            />
+            <Text className={styles.text} as={'p'} color='gray' size='16'>
+               До
+            </Text>
+         </div>
          <Slider
             defaultValue={[0, MAX_PRICE]}
             value={[price.min, price.max] || currentPrice}
@@ -99,11 +112,14 @@ export const PriceSlider = () => {
             max={MAX_PRICE}
             allowCross={false}
             range
+            className={clsx(styles.slider)}
          />
-         <ModalButton primary onClick={resetHandler}>
-            Очистить
-         </ModalButton>
-         <ModalButton onClick={confirmHandler}>Принять</ModalButton>
+         <div className={styles['button-container']}>
+            <ModalButton primary onClick={resetHandler}>
+               Очистить
+            </ModalButton>
+            <ModalButton onClick={confirmHandler}>Принять</ModalButton>
+         </div>
       </>
    );
 };

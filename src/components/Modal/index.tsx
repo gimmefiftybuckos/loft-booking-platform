@@ -2,12 +2,28 @@ import clsx from 'clsx';
 
 import styles from './index.module.sass';
 
+import { useEffect } from 'react';
+import { useModalControl } from '../../hooks/useModalControl';
+
 type ModalProps = {
    children: React.ReactNode;
    isOpen: boolean;
 };
 
 export const Modal = ({ isOpen, children }: ModalProps) => {
+   const { closeModal } = useModalControl();
+
+   useEffect(() => {
+      const handleEsc = (e: KeyboardEvent) => {
+         e.key === 'Escape' && closeModal();
+      };
+
+      document.addEventListener('keydown', handleEsc);
+      return () => {
+         document.removeEventListener('keydown', handleEsc);
+      };
+   }, []);
+
    return (
       <div
          onClick={(event) => event.stopPropagation()}

@@ -1,0 +1,53 @@
+@import '../../../styles/variables'
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button
+    -webkit-appearance: none
+    margin: 0
+input[type=number]
+    -moz-appearance: textfield
+
+.container
+    position: relative
+    display: flex
+    flex-direction: row
+    // gap: 1rem
+    inline-size: 300px
+
+.button-container
+    display: flex
+    justify-content: space-between
+    margin-block-start: 1rem
+
+.slider
+    margin: 0 auto
+    margin-block-start: 1rem
+    max-inline-size: 290px
+
+.input
+    inline-size: 50%
+    block-size: 50px
+    padding: 0.5rem 0.5rem 0.5rem 3rem
+    outline: 1px solid $border-color
+    outline-offset: -1px
+    border: none
+
+    &:first-of-type
+        border-radius: 1rem 0 0 1rem
+        margin-inline-end: -1px
+    &:last-of-type
+        border-radius: 0 1rem 1rem 0
+
+    &:focus
+        outline: 1px solid $border-color
+        outline-offset: -1px
+
+.text
+    position: absolute
+    inset-block-start: 14px
+
+    &:first-of-type
+        inset-inline-start: 20px
+
+    &:last-of-type
+        inset-inline-end: 110px

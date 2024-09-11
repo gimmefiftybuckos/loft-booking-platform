@@ -13,6 +13,7 @@ export const asyncGetCardsApi = async ({
    price,
 }: TCatalogParams) => {
    const query = { params: { type, page, date, price } };
+
    try {
       const response = await api.get<ILoftCard[]>('/catalog', query);
 
