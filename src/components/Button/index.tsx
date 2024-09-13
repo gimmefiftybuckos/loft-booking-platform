@@ -1,45 +1,44 @@
-import { Link } from 'react-router-dom';
+import { ElementType } from 'react';
 import clsx from 'clsx';
 
 import styles from './index.module.sass';
 
 import { Text } from '../Text';
+import { Link } from 'react-router-dom';
+
+export enum ButtonVariant {
+   ACCENT = 'accent',
+   OUTLINED = 'outlined',
+}
 
 export interface ButtonProps {
+   as?: ElementType;
+   pathTo?: string;
    children: string;
 
-   accented?: boolean;
-   outlined?: boolean;
-   inMainSection?: boolean;
-
-   pathTo: string;
-   textColor?: 'white' | 'black';
-
+   className?: string;
+   variant?: ButtonVariant;
    onClick?: () => void;
 }
 
 export const Button: React.FC<ButtonProps> = ({
-   children,
-   accented,
-   outlined,
-   inMainSection,
+   as: Tag = 'button',
    pathTo,
-   textColor = 'black',
+   children,
+
+   className,
+   variant,
    onClick,
 }) => {
-   const accent = accented ? styles.button_accent : null;
-   const outline = outlined ? styles.button_outlined : null;
-   const search = inMainSection ? styles.button__search : null;
+   const variantClassName = variant ? styles[`button_${variant}`] : null;
 
    return (
-      <Link
+      <Tag
+         {...(Tag === Link && { to: pathTo })}
          onClick={onClick}
-         className={clsx(styles.button, accent, outline, search)}
-         to={pathTo}
+         className={clsx(styles.button, variantClassName, className)}
       >
-         <Text color={textColor} weight={500}>
-            {children}
-         </Text>
-      </Link>
+         {children}
+      </Tag>
    );
 };

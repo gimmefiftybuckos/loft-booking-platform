@@ -6,7 +6,7 @@ const api = axios.create({
    baseURL: API_URL,
 });
 
-export const asyncGetCardsApi = async ({
+export const getCardsApi = async ({
    type,
    page,
    date,
@@ -16,6 +16,16 @@ export const asyncGetCardsApi = async ({
 
    try {
       const response = await api.get<ILoftCard[]>('/catalog', query);
+
+      return response.data || null;
+   } catch (error) {
+      throw new Error();
+   }
+};
+
+export const getLoftApi = async (id: string) => {
+   try {
+      const response = await api.get<ILoftCard>(`/catalog/${id}`);
 
       return response.data || null;
    } catch (error) {

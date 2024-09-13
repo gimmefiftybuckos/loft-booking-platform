@@ -7,18 +7,14 @@ import clsx from 'clsx';
 import styles from './index.module.sass';
 
 import { getCardsList, resetCardsState } from '../../store/cardCatalogSlice';
-import {
-   cardSectionList,
-   catalogFilters,
-   getTitleByFilter,
-   getValueByAnother,
-} from '../../services/utils';
+import { getTitleByFilter, getValueByAnother } from '../../services/utils';
 
 import { Text } from '../../components/Text';
 import { Card } from '../../components/Card';
 import { SelectionButton } from '../../components/Modal/SelectionButton';
 import { useModalControl } from '../../hooks/useModalControl';
 import { Backdrop } from '../../components/Modal/Backdrop';
+import { cardSectionList, catalogFilters } from '../../services/constants';
 
 export const Catalog = () => {
    const dispatch = useDispatch();
@@ -111,44 +107,42 @@ export const Catalog = () => {
    return (
       <>
          <Backdrop />
-         <section className={clsx(styles.section)}>
-            <div
-               className={clsx(
-                  styles.buttons,
-                  controlIndex !== -1 && styles.buttons_focus
-               )}
+         <div
+            className={clsx(
+               styles.buttons,
+               controlIndex !== -1 && styles.buttons_focus
+            )}
+         >
+            {catalogFilters.map((item, index) => {
+               return (
+                  <SelectionButton
+                     key={index}
+                     title={item}
+                     index={index}
+                     onClick={toggleModal}
+                     isActive={controlIndex === index}
+                     currentValue={getTitleByFilter(item) || null}
+                     catalogStyles
+                  />
+               );
+            })}
+         </div>
+         <div className={clsx(styles.content)}>
+            <Text as={'h1'} weight={700} size='32'>
+               {titleState}
+            </Text>
+            <InfiniteScroll
+               className={clsx(styles.container)}
+               next={fetchMore}
+               hasMore={hasMore}
+               loader={<p>Загрузка...</p>}
+               dataLength={cards.length}
             >
-               {catalogFilters.map((item, index) => {
-                  return (
-                     <SelectionButton
-                        key={index}
-                        title={item}
-                        index={index}
-                        onClick={toggleModal}
-                        isActive={controlIndex === index}
-                        currentValue={getTitleByFilter(item) || null}
-                        catalogStyles
-                     />
-                  );
-               })}
-            </div>
-            <div className={clsx(styles.content)}>
-               <Text as={'h1'} weight={700} size='32'>
-                  {titleState}
-               </Text>
-               <InfiniteScroll
-                  className={clsx(styles.container)}
-                  next={fetchMore}
-                  hasMore={hasMore}
-                  loader={<p>Загрузка...</p>}
-                  dataLength={cards.length}
-               >
-                  {cards.map((item) => (
-                     <Card key={item.id} wide cardData={item} />
-                  ))}
-               </InfiniteScroll>
-            </div>
-         </section>
+               {cards.map((item) => (
+                  <Card key={item.id} wide cardData={item} />
+               ))}
+            </InfiniteScroll>
+         </div>
       </>
    );
 };

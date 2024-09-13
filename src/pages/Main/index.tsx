@@ -5,6 +5,7 @@ import styles from './index.module.sass';
 
 import { Home } from '../Home';
 import { Catalog } from '../Catalog';
+import { Loft } from '../Loft';
 
 export const Main = () => {
    return (
@@ -12,7 +13,7 @@ export const Main = () => {
          <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/catalog' element={<Catalog />} />
-            <Route path='/catalog/:id' />
+            <Route path='/catalog/:id' element={<Loft />} />
             {/* <Route path="*" element={<NotFound />} /> */}
          </Routes>
       </main>

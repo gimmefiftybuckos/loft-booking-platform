@@ -2,7 +2,7 @@ import clsx from 'clsx';
 
 import styles from './index.module.sass';
 
-import { bannersContent } from '../../../services/utils';
+import { bannersContent } from '../../../services/constants';
 
 import { Text } from '../../Text';
 

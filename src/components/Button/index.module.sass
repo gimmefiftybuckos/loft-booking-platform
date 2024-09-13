@@ -4,16 +4,20 @@
     display: flex
     align-items: center
     padding: 10px 25px
+    block-size: 50px
     background-color: $bg-color
     border-radius: $border-radius
     text-decoration: none
     transition: background-color 0.3s ease
+    font-weight: 500
+    color: #000
 
     &:hover
         outline: 1px solid $border-color
 
     &_accent
         background-color: $accent-color
+        color: $bg-color
         &:hover
             outline: none
             background-color: $accent-alt-color
@@ -28,7 +32,3 @@
         background-color: $bg-color
         &:hover
             background-color: $accent-alt-color
-
-    &__search
-        block-size: 60px
-        flex: 1 2 80px
