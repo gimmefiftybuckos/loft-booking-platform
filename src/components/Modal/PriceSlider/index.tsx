@@ -10,8 +10,8 @@ import { setPrice } from '../../../store/cardCatalogSlice';
 import { MAX_PRICE } from '../../../services/constants';
 import { useModalControl } from '../../../hooks/useModalControl';
 
-import { ModalButton } from '../ModalButton';
 import { Text } from '../../Text';
+import { Button, ButtonVariant } from '../../Button';
 
 interface IPriceState {
    min: number;
@@ -115,10 +115,12 @@ export const PriceSlider = () => {
             className={clsx(styles.slider)}
          />
          <div className={styles['button-container']}>
-            <ModalButton primary onClick={resetHandler}>
+            <Button className={clsx(styles.button)} onClick={resetHandler}>
                Очистить
-            </ModalButton>
-            <ModalButton onClick={confirmHandler}>Принять</ModalButton>
+            </Button>
+            <Button variant={ButtonVariant.ACCENT} onClick={confirmHandler}>
+               Принять
+            </Button>
          </div>
       </>
    );

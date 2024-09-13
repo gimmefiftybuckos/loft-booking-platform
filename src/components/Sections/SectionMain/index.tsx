@@ -2,13 +2,15 @@ import clsx from 'clsx';
 
 import styles from './index.module.sass';
 
-import { getTitleByFilter, selectionFilters } from '../../../services/utils';
-import { Button } from '../../Button';
+import { getTitleByFilter } from '../../../services/utils';
+import { selectionFilters } from '../../../services/constants';
+import { useModalControl } from '../../../hooks/useModalControl';
 
+import { Button, ButtonVariant } from '../../Button';
 import { SelectionButton } from '../../Modal/SelectionButton';
 import { CoverTitle } from './CoverTitle';
-import { useModalControl } from '../../../hooks/useModalControl';
 import { Backdrop } from '../../Modal/Backdrop';
+import { Link } from 'react-router-dom';
 
 export const MainSection = () => {
    const { toggleModal, closeModal, controlIndex } = useModalControl();
@@ -36,11 +38,11 @@ export const MainSection = () => {
                ))}
 
                <Button
-                  inMainSection
-                  textColor='white'
-                  accented
+                  as={Link}
                   pathTo='/catalog'
+                  variant={ButtonVariant.ACCENT}
                   onClick={closeModal}
+                  className={clsx(styles.button)}
                >
                   Найти
                </Button>

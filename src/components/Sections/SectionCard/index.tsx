@@ -10,8 +10,8 @@ import { setType } from '../../../store/cardCatalogSlice';
 import { Text } from '../../Text';
 import { Button } from '../../Button';
 import { Card } from '../../Card';
-import { Arrow } from '../../Arrow';
-import { asyncGetCardsApi } from '../../../services/api';
+import { getCardsApi } from '../../../services/api';
+import { Link } from 'react-router-dom';
 
 type CardSectionProps = {
    title?: string;
@@ -27,7 +27,7 @@ export const CardSection: React.FC<CardSectionProps> = ({
    const dispatch = useDispatch();
 
    const initalHomeCards = async () => {
-      const data = await asyncGetCardsApi({ type });
+      const data = await getCardsApi({ type });
       setDataState(data);
    };
 
@@ -48,10 +48,9 @@ export const CardSection: React.FC<CardSectionProps> = ({
                {title}
             </Text>
             <div className={clsx(styles['section__button-container'])}>
-               <Button onClick={clickHandle} pathTo='/catalog'>
+               <Button as={Link} pathTo='/catalog' onClick={clickHandle}>
                   Смотреть все
                </Button>
-               <Arrow turnRight />
             </div>
          </div>
          <div className={clsx(styles['card-container'])}>

@@ -5,11 +5,11 @@ import clsx from 'clsx';
 import styles from './index.module.sass';
 
 import { ICardSection } from '../../../types';
-import { cardSectionList } from '../../../services/utils';
+import { cardSectionList } from '../../../services/constants';
 import { setType } from '../../../store/cardCatalogSlice';
 
 import { ModalContext } from '../../../context';
-import { Text } from '../../Text';
+import { Button } from '../../Button';
 
 export const SearchList = () => {
    const dispatch = useDispatch();
@@ -28,20 +28,15 @@ export const SearchList = () => {
          {cardSectionListSlice.map((item, index) => {
             return (
                <li key={index} className={clsx(styles.list__item)}>
-                  <button
+                  <Button
                      onClick={() => onClick(item)}
                      className={clsx(
                         styles.list__button,
-                        item.type === type ? styles.list__button_selected : null
+                        item.type === type && styles.list__button_selected
                      )}
                   >
                      {item.title}
-                     {item.type !== type && (
-                        <Text size='14' color='gray' as={'span'}>
-                           10
-                        </Text>
-                     )}
-                  </button>
+                  </Button>
                </li>
             );
          })}

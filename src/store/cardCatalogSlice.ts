@@ -2,12 +2,12 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { TypeParamsType, ILoftCard, TCatalogParams } from '../types';
 import { MAX_PRICE } from '../services/constants';
-import { asyncGetCardsApi } from '../services/api';
+import { getCardsApi } from '../services/api';
 
 export const getCardsList = createAsyncThunk(
    'cards/getCards',
    async ({ type, page, date, price }: TCatalogParams) =>
-      asyncGetCardsApi({ type, page, date, price })
+      getCardsApi({ type, page, date, price })
 );
 
 export type CardSliceType = {

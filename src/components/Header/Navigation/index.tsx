@@ -5,8 +5,9 @@ import styles from './index.module.sass';
 import { createNavPoints } from '../../../services/utils';
 import { useDispatch } from '../../../store';
 
-import { Button } from '../../Button';
+import { Button, ButtonVariant } from '../../Button';
 import { HomeButton } from '../HomeButton';
+import { Link } from 'react-router-dom';
 
 export const Navigation = () => {
    const dispatch = useDispatch();
@@ -18,13 +19,18 @@ export const Navigation = () => {
          <div className={clsx(styles.navigation__container)}>
             <div className={clsx(styles.points)}>
                {navPoints.map((item, index) => (
-                  <Button key={index} pathTo={item.path} onClick={item.onClick}>
+                  <Button
+                     as={Link}
+                     pathTo={item.path}
+                     key={index}
+                     onClick={item.onClick}
+                  >
                      {item.name}
                   </Button>
                ))}
             </div>
             <div>
-               <Button textColor='white' pathTo='/login' accented>
+               <Button as={Link} pathTo='/login' variant={ButtonVariant.ACCENT}>
                   Войти
                </Button>
             </div>

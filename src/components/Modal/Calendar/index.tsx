@@ -10,7 +10,7 @@ import { setDate } from '../../../store/cardCatalogSlice';
 import { ModalContext } from '../../../context';
 import { todayDate } from '../../../services/utils';
 
-import { ModalButton } from '../ModalButton';
+import { Button, ButtonVariant } from '../../Button';
 
 export const Calendar = () => {
    const [selected, setSelected] = useState<Date>();
@@ -49,7 +49,9 @@ export const Calendar = () => {
                selectedToday: styles.rdp_selected,
             }}
          />
-         <ModalButton onClick={onClick}>Принять</ModalButton>
+         <Button variant={ButtonVariant.ACCENT} onClick={onClick}>
+            Принять
+         </Button>
       </>
    );
 };

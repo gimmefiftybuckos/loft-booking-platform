@@ -9,25 +9,14 @@ type TextProps = {
    children: ReactNode;
    as?: ElementType;
    dynamic?: boolean;
-   size?:
-      | '14'
-      | '16'
-      | '18'
-      | '20'
-      | '24'
-      | '28'
-      | '32'
-      | '36'
-      | '40'
-      | 'CardTitle'
-      | 'CardTitle_wide';
+   size?: '14' | '16' | '18' | '20' | '24' | '28' | '32' | '36' | '40';
    weight?: 400 | 500 | 600 | 700 | 800 | 900;
    fontStyle?: 'italic' | 'normal';
    uppercase?: boolean;
    align?: 'center' | 'left';
    color?: 'black' | 'white' | 'gray';
    family?: FontFamiliesClasses;
-   className?: {};
+   className?: string;
 };
 
 export const Text = ({

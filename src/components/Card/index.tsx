@@ -80,7 +80,7 @@ export const Card: React.FC<CardProps> = ({ cardData, wide }) => {
             )}
          >
             <Text
-               size={`CardTitle${wide ? '_wide' : ''}`}
+               className={clsx(styles.title, wide && styles.title_wide)}
                weight={600}
                as={'h3'}
             >
