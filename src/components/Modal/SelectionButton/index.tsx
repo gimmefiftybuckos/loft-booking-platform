@@ -6,8 +6,8 @@ import { CatalogFiltersType, SelectionFiltersType } from '../../../types';
 
 import { Modal } from '../../Modal';
 import { ModalContent } from '../ModalContent';
-import { Text } from '../../Text';
-import { Arrow } from '../../Arrow';
+import { Text } from '../../ui/Text';
+import { Arrow } from '../../ui/Arrow';
 import { ModalContext } from '../../../context';
 
 type SelectionButtonType = {

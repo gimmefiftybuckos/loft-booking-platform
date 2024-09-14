@@ -9,7 +9,7 @@ import styles from './index.module.sass';
 import { getCardsList, resetCardsState } from '../../store/cardCatalogSlice';
 import { getTitleByFilter, getValueByAnother } from '../../services/utils';
 
-import { Text } from '../../components/Text';
+import { Text } from '../../components/ui/Text';
 import { Card } from '../../components/Card';
 import { SelectionButton } from '../../components/Modal/SelectionButton';
 import { useModalControl } from '../../hooks/useModalControl';
@@ -63,7 +63,7 @@ export const Catalog = () => {
 
    /*
     * This useEffect allows you to change type values from external components.
-    * The re-rendering process occurs when the typeParam is changed.
+    * The re-rendering process starts when the typeParam is changed.
     * Other query parameters are not affected.
     */
    useEffect(() => {
@@ -81,9 +81,8 @@ export const Catalog = () => {
       const title = getValueByAnother(typeParam, cardSectionList);
       setTitle(title);
 
+      updateSearchParams(typeParam, dateParam, priceParam);
       if (typeParam || dateParam || priceParam) {
-         updateSearchParams(typeParam, dateParam, priceParam);
-
          dispatch(
             getCardsList({
                type: typeParam,

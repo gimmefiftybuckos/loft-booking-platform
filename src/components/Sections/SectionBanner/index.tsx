@@ -4,7 +4,7 @@ import styles from './index.module.sass';
 
 import { bannersContent } from '../../../services/constants';
 
-import { Text } from '../../Text';
+import { Text } from '../../ui/Text';
 
 export const BannerSection = () => {
    return (

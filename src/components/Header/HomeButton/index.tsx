@@ -3,6 +3,6 @@ import clsx from 'clsx';
 
 import styles from './index.module.sass';
 
-export const HomeButton = () => {
-   return <Link to='/' className={clsx(styles.button)}></Link>;
-};
+export const HomeButton = () => (
+   <Link to='/' className={clsx(styles.button)}></Link>
+);

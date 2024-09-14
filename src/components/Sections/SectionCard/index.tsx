@@ -7,7 +7,7 @@ import styles from './index.module.sass';
 import { TypeParamsType, ILoftCard } from '../../../types';
 import { setType } from '../../../store/cardCatalogSlice';
 
-import { Text } from '../../Text';
+import { Text } from '../../ui/Text';
 import { Button } from '../../Button';
 import { Card } from '../../Card';
 import { getCardsApi } from '../../../services/api';

@@ -5,7 +5,7 @@ import styles from './index.module.sass';
 import { ILoftCard } from '../../types';
 import { API_URL } from '../../services/constants';
 
-import { Text } from '../Text';
+import { Text } from '../ui/Text';
 import { Price } from './Price';
 import { Rating } from './Rating';
 import { Room } from './Room';

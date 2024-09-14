@@ -3,7 +3,6 @@ import clsx from 'clsx';
 
 import styles from './index.module.sass';
 
-import { Text } from '../Text';
 import { Link } from 'react-router-dom';
 
 export enum ButtonVariant {

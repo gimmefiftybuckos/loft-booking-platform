@@ -2,7 +2,7 @@ import clsx from 'clsx';
 
 import styles from './index.module.sass';
 
-import { Text } from '../../Text';
+import { Text } from '../../ui/Text';
 
 type RoomProps = {
    area: number;
