@@ -1,17 +1,12 @@
-import { ScrollRestoration } from 'react-router-dom';
-
-import { Footer } from './components/Footer';
-import { Header } from './components/Header';
-import { Main } from './pages/Main';
+import { Main } from './parts/Main';
+import { Layout } from './parts/Layout';
 
 function App() {
    return (
       <>
-         <ScrollRestoration />
-
-         <Header isSticky />
-         <Main />
-         <Footer />
+         <Layout>
+            <Main />
+         </Layout>
       </>
    );
 }

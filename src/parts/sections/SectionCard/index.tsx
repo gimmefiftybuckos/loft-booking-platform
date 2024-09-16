@@ -7,9 +7,9 @@ import styles from './index.module.sass';
 import { TypeParamsType, ILoftCard } from '../../../types';
 import { setType } from '../../../store/cardCatalogSlice';
 
-import { Text } from '../../ui/Text';
-import { Button } from '../../Button';
-import { Card } from '../../Card';
+import { Text } from '../../../components/ui/Text';
+import { Button } from '../../../components/Button';
+import { Card } from '../../../components/Card';
 import { getCardsApi } from '../../../services/api';
 import { Link } from 'react-router-dom';
 

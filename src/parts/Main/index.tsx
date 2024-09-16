@@ -3,9 +3,9 @@ import clsx from 'clsx';
 
 import styles from './index.module.sass';
 
-import { Home } from '../Home';
-import { Catalog } from '../Catalog';
-import { Loft } from '../Loft';
+import { Home } from '../../pages/Home';
+import { Catalog } from '../../pages/Catalog';
+import { Loft } from '../../pages/Loft';
 
 export const Main = () => {
    return (

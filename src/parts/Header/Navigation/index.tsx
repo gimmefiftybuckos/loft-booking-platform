@@ -5,7 +5,7 @@ import styles from './index.module.sass';
 import { createNavPoints } from '../../../services/utils';
 import { useDispatch } from '../../../store';
 
-import { Button, ButtonVariant } from '../../Button';
+import { Button, ButtonVariant } from '../../../components/Button';
 import { HomeButton } from '../HomeButton';
 import { Link } from 'react-router-dom';
 

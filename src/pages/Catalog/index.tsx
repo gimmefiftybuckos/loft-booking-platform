@@ -7,13 +7,16 @@ import clsx from 'clsx';
 import styles from './index.module.sass';
 
 import { getCardsList, resetCardsState } from '../../store/cardCatalogSlice';
-import { getTitleByFilter, getValueByAnother } from '../../services/utils';
+import {
+   getTitleByFilter,
+   getTitle,
+   updateSearchParams,
+} from '../../services/utils';
 
 import { Text } from '../../components/ui/Text';
 import { Card } from '../../components/Card';
 import { SelectionButton } from '../../components/Modal/SelectionButton';
 import { useModalControl } from '../../hooks/useModalControl';
-import { Backdrop } from '../../components/Modal/Backdrop';
 import { cardSectionList, catalogFilters } from '../../services/constants';
 
 export const Catalog = () => {
@@ -26,16 +29,15 @@ export const Catalog = () => {
    const [searchParams, setSearchParams] = useSearchParams();
    const [titleState, setTitle] = useState('');
 
-   const initialTypeParam = type || searchParams.get('type') || '';
-   const [typeParam, setTypeParams] = useState(initialTypeParam);
+   const getInitParam = (param: string, searchParamKey: string) => {
+      return (
+         param || decodeURIComponent(searchParams.get(searchParamKey) || '')
+      );
+   };
 
-   const initialDateParam =
-      date || decodeURIComponent(searchParams.get('date') || '');
-   const [dateParam, setDateParam] = useState(initialDateParam);
-
-   const initalPriceParam =
-      price || decodeURIComponent(searchParams.get('price') || '');
-   const [priceParam, setPriceParam] = useState(initalPriceParam);
+   const [typeParam, setTypeParams] = useState(getInitParam(type, 'type'));
+   const [dateParam, setDateParam] = useState(getInitParam(date, 'date'));
+   const [priceParam, setPriceParam] = useState(getInitParam(price, 'price'));
 
    const fetchMore = () => {
       if (status !== 'loading' && hasMore) {
@@ -51,52 +53,34 @@ export const Catalog = () => {
    };
 
    /*
-    * Inital query parameters method
-    */
-   const updateSearchParams = (type: string, date: string, price: string) => {
-      const params: Record<string, string> = {};
-      if (type) params.type = type;
-      if (date) params.date = encodeURIComponent(date);
-      if (price) params.price = encodeURIComponent(price);
-      setSearchParams(params, { replace: true });
-   };
-
-   /*
     * This useEffect allows you to change type values from external components.
     * The re-rendering process starts when the typeParam is changed.
     * Other query parameters are not affected.
     */
    useEffect(() => {
-      setTypeParams(type || searchParams.get('type') || '');
-      setDateParam(date || decodeURIComponent(searchParams.get('date') || ''));
-      setPriceParam(
-         price || decodeURIComponent(searchParams.get('price') || '')
-      );
+      setTypeParams(getInitParam(type, 'type'));
+      setDateParam(getInitParam(date, 'date'));
+      setPriceParam(getInitParam(price, 'price'));
    }, [type, date, price]);
 
    /*
     * Basic handler for the CatalogSection component.
     */
    useEffect(() => {
-      const title = getValueByAnother(typeParam, cardSectionList);
+      const title = getTitle(typeParam, cardSectionList);
       setTitle(title);
 
-      updateSearchParams(typeParam, dateParam, priceParam);
-      if (typeParam || dateParam || priceParam) {
-         dispatch(
-            getCardsList({
-               type: typeParam,
-               page: 1,
-               date: dateParam,
-               price: priceParam,
-            })
-         );
-      } else {
-         /*
-          * Processing for typeParam = '' && dateParam = '' && priceParam = '' case.
-          */
-         dispatch(getCardsList({ type, page: 1, date, price }));
-      }
+      const queryParams = updateSearchParams(typeParam, dateParam, priceParam);
+      setSearchParams(queryParams, { replace: true });
+
+      dispatch(
+         getCardsList({
+            type: typeParam,
+            page: 1,
+            date: dateParam,
+            price: priceParam,
+         })
+      );
 
       return () => {
          dispatch(resetCardsState());
@@ -105,7 +89,6 @@ export const Catalog = () => {
 
    return (
       <>
-         <Backdrop />
          <div
             className={clsx(
                styles.buttons,

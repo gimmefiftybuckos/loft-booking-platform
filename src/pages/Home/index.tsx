@@ -1,16 +1,25 @@
 import { cardSectionList } from '../../services/constants';
 
-import { MainSection } from '../../components/Sections/SectionMain';
-import { BannerSection } from '../../components/Sections/SectionBanner';
-import { CardBlockSection } from '../../components/Sections/SectionCardBlocks';
-import { CardSection } from '../../components/Sections/SectionCard';
+import { MainSection } from '../../parts/sections/SectionMain';
+import { BannerSection } from '../../parts/sections/SectionBanner';
+import { CardBlockSection } from '../../parts/sections/SectionCardBlocks';
+import { CardSection } from '../../parts/sections/SectionCard';
+import { useDispatch } from '../../store';
+import { resetFilters } from '../../store/cardCatalogSlice';
+import { useEffect } from 'react';
 
 export const Home = () => {
+   const dispatch = useDispatch();
+
    const { title: mainSectionTitle, type: mainSectionParam } =
       cardSectionList[0];
 
    const blockSectionCards = cardSectionList.slice(1, 11);
    const cardsSection = cardSectionList.slice(11, 100);
+
+   useEffect(() => {
+      dispatch(resetFilters());
+   }, []);
 
    return (
       <>

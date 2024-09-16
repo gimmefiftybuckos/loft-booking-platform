@@ -8,7 +8,7 @@ import styles from './index.module.sass';
 import { TypeParamsType, ICardSection } from '../../../types';
 import { setType } from '../../../store/cardCatalogSlice';
 
-import { Text } from '../../ui/Text';
+import { Text } from '../../../components/ui/Text';
 
 type CardBlockSectionProps = {
    data: ICardSection[];
