@@ -8,7 +8,7 @@ import './fonts/font.sass';
 import store from './store/index.ts';
 
 import App from './App.tsx';
-import { MainSection } from './components/Sections/SectionMain/index.tsx';
+import { MainSection } from './parts/sections/SectionMain/index.tsx';
 import { Catalog } from './pages/Catalog/index.tsx';
 import { Loft } from './pages/Loft/index.tsx';
 

@@ -6,10 +6,12 @@ import { getTitleByFilter } from '../../../services/utils';
 import { selectionFilters } from '../../../services/constants';
 import { useModalControl } from '../../../hooks/useModalControl';
 
-import { Button, ButtonVariant } from '../../Button';
-import { SelectionButton } from '../../Modal/SelectionButton';
+import { Button, ButtonVariant } from '../../../components/Button';
+import {
+   SelectionButton,
+   SelectionVariant,
+} from '../../../components/Modal/SelectionButton';
 import { CoverTitle } from './CoverTitle';
-import { Backdrop } from '../../Modal/Backdrop';
 import { Link } from 'react-router-dom';
 
 export const MainSection = () => {
@@ -17,7 +19,6 @@ export const MainSection = () => {
 
    return (
       <>
-         <Backdrop />
          <section className={clsx(styles.cover)}>
             <CoverTitle />
             <div
@@ -34,6 +35,7 @@ export const MainSection = () => {
                      onClick={toggleModal}
                      isActive={controlIndex === index}
                      currentValue={getTitleByFilter(item) || null}
+                     variant={SelectionVariant.MAIN}
                   />
                ))}
 

@@ -10,7 +10,7 @@ import { setPrice } from '../../../store/cardCatalogSlice';
 import { MAX_PRICE } from '../../../services/constants';
 import { useModalControl } from '../../../hooks/useModalControl';
 
-import { Text } from '../../Text';
+import { Text } from '../../ui/Text';
 import { Button, ButtonVariant } from '../../Button';
 
 interface IPriceState {

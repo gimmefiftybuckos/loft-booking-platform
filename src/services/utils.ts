@@ -7,6 +7,8 @@ import { resetFilters } from '../store/cardCatalogSlice';
 import { useSelector, AppDispatch } from '../store';
 import { cardSectionList } from './constants';
 
+export const todayDate = new Date();
+
 export const createNavPoints = (dispatch: AppDispatch) => [
    {
       name: 'Все лофты',
@@ -49,14 +51,12 @@ export const formatDate = (fullDate: string): string | null => {
    return formattedDate;
 };
 
-export const getValueByAnother = (
+export const getTitle = (
    typeParam: string,
    cardSectionList: ICardSection[]
 ) => {
    return cardSectionList.find((item) => item.type === typeParam)?.title || '';
 };
-
-export const todayDate = new Date();
 
 export const getTitleByFilter = (
    filter: SelectionFiltersType | CatalogFiltersType
@@ -68,7 +68,7 @@ export const getTitleByFilter = (
 
    switch (filter) {
       case 'Event':
-         return type ? getValueByAnother(type, cardSectionList) : null;
+         return type ? getTitle(type, cardSectionList) : null;
       case 'Date':
          return newDate;
       case 'Price':
@@ -79,4 +79,16 @@ export const getTitleByFilter = (
       default:
          return null;
    }
+};
+
+export const updateSearchParams = (
+   type: string,
+   date: string,
+   price: string
+) => {
+   const params: Record<string, string> = {};
+   if (type) params.type = type;
+   if (date) params.date = encodeURIComponent(date);
+   if (price) params.price = encodeURIComponent(price);
+   return params;
 };

@@ -6,8 +6,8 @@ import { CatalogFiltersType, SelectionFiltersType } from '../../../types';
 
 import { Modal } from '../../Modal';
 import { ModalContent } from '../ModalContent';
-import { Text } from '../../Text';
-import { Arrow } from '../../Arrow';
+import { Text } from '../../ui/Text';
+import { Arrow } from '../../ui/Arrow';
 import { ModalContext } from '../../../context';
 
 type SelectionButtonType = {
@@ -16,8 +16,13 @@ type SelectionButtonType = {
    onClick: (key: number) => void;
    isActive: boolean;
    currentValue?: string | null;
-   catalogStyles?: boolean;
+   variant?: string;
 };
+
+export enum SelectionVariant {
+   MAIN = 'main',
+   CATALOG = 'catalog',
+}
 
 export const SelectionButton: React.FC<SelectionButtonType> = ({
    title,
@@ -25,22 +30,22 @@ export const SelectionButton: React.FC<SelectionButtonType> = ({
    onClick,
    isActive,
    currentValue,
-   catalogStyles,
-}) => (
-   <div
-      onClick={() => onClick(index)}
-      className={clsx(
-         styles.button,
-         !catalogStyles && styles.button__main,
-         catalogStyles && styles.button__catalog
-      )}
-   >
-      <Text weight={500}>{currentValue || title}</Text>
-      <Arrow num={isActive ? index : -1} index={index} />
-      <Modal isOpen={isActive}>
-         <ModalContext.Provider value={onClick}>
-            <ModalContent name={title} />
-         </ModalContext.Provider>
-      </Modal>
-   </div>
-);
+   variant,
+}) => {
+   const variantClassName = variant ? styles[`button__${variant}`] : null;
+
+   return (
+      <div
+         onClick={() => onClick(index)}
+         className={clsx(styles.button, variantClassName)}
+      >
+         <Text weight={500}>{currentValue || title}</Text>
+         <Arrow num={isActive ? index : -1} index={index} />
+         <Modal isOpen={isActive}>
+            <ModalContext.Provider value={onClick}>
+               <ModalContent name={title} />
+            </ModalContext.Provider>
+         </Modal>
+      </div>
+   );
+};

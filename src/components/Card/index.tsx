@@ -5,7 +5,7 @@ import styles from './index.module.sass';
 import { ILoftCard } from '../../types';
 import { API_URL } from '../../services/constants';
 
-import { Text } from '../Text';
+import { Text } from '../ui/Text';
 import { Price } from './Price';
 import { Rating } from './Rating';
 import { Room } from './Room';
@@ -18,40 +18,42 @@ type CardProps = {
 };
 
 export const Card: React.FC<CardProps> = ({ cardData, wide }) => {
-   const {
-      id,
-      title,
-      imageUrl,
-      metroStation,
-      walkingDistanceMinutes,
-      reviewsCount,
-      averageRating,
-      pricePerHour,
-      area,
-      maxPersons,
-      seatingPlaces,
-   } = cardData;
    const navigate = useNavigate();
 
    const onClick = () => {
-      navigate(`/catalog/${id}`);
+      navigate(`/catalog/${cardData.id}`);
    };
 
    const size = wide ? '_wide' : '';
 
    const template = wide ? (
       <>
-         <Room wide area={area} persons={maxPersons} seats={seatingPlaces} />
+         <Room
+            wide
+            area={cardData.area}
+            persons={cardData.maxPersons}
+            seats={cardData.seatingPlaces}
+         />
          <div className={clsx(styles.details)}>
-            <Price price={pricePerHour} />
-            <Rating averageRating={averageRating} reviewsCount={reviewsCount} />
+            <Price price={cardData.pricePerHour} />
+            <Rating
+               averageRating={cardData.averageRating}
+               reviewsCount={cardData.reviewsCount}
+            />
          </div>
       </>
    ) : (
       <>
-         <Rating averageRating={averageRating} reviewsCount={reviewsCount} />
-         <Price outline price={pricePerHour} />
-         <Room area={area} persons={maxPersons} seats={seatingPlaces} />
+         <Rating
+            averageRating={cardData.averageRating}
+            reviewsCount={cardData.reviewsCount}
+         />
+         <Price outline price={cardData.pricePerHour} />
+         <Room
+            area={cardData.area}
+            persons={cardData.maxPersons}
+            seats={cardData.seatingPlaces}
+         />
       </>
    );
 
@@ -68,7 +70,7 @@ export const Card: React.FC<CardProps> = ({ cardData, wide }) => {
          >
             <img
                className={clsx(styles.card__image)}
-               src={`${API_URL}/uploads/${imageUrl[0]}`}
+               src={`${API_URL}/uploads/${cardData.imageUrl[0]}`}
                loading='lazy'
                alt=''
             />
@@ -84,9 +86,12 @@ export const Card: React.FC<CardProps> = ({ cardData, wide }) => {
                weight={600}
                as={'h3'}
             >
-               {title}
+               {cardData.title}
             </Text>
-            <Distance metro={metroStation} time={walkingDistanceMinutes} />
+            <Distance
+               metro={cardData.metroStation}
+               time={cardData.walkingDistanceMinutes}
+            />
             {template}
          </div>
       </article>
