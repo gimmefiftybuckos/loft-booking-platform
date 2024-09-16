@@ -7,7 +7,10 @@ import { selectionFilters } from '../../../services/constants';
 import { useModalControl } from '../../../hooks/useModalControl';
 
 import { Button, ButtonVariant } from '../../../components/Button';
-import { SelectionButton } from '../../../components/Modal/SelectionButton';
+import {
+   SelectionButton,
+   SelectionVariant,
+} from '../../../components/Modal/SelectionButton';
 import { CoverTitle } from './CoverTitle';
 import { Link } from 'react-router-dom';
 
@@ -32,6 +35,7 @@ export const MainSection = () => {
                      onClick={toggleModal}
                      isActive={controlIndex === index}
                      currentValue={getTitleByFilter(item) || null}
+                     variant={SelectionVariant.MAIN}
                   />
                ))}
 
