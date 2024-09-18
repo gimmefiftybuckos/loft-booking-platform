@@ -1,7 +1,7 @@
 # loft-radar-project
 
 ![image](https://github.com/user-attachments/assets/9b495315-7782-4011-83ea-8cee9a5ac05c)
-![image](https://github.com/user-attachments/assets/a563901d-4868-41a3-a2fd-efd7ed8c4a17)
+![image](https://github.com/user-attachments/assets/386e21c0-64f5-4b74-a703-97a3d3606957)
 
 ## ToDo:
 1. Auth Forms
