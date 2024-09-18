@@ -70,7 +70,7 @@ export const getTitleByFilter = (
       case 'Event':
          return type ? getTitle(type, cardSectionList) : null;
       case 'Date':
-         return newDate;
+         return newDate || null;
       case 'Price':
          if (price) {
             return `${newPrice[0]} - ${newPrice[1]} руб.`;

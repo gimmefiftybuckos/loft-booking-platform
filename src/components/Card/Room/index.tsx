@@ -4,18 +4,28 @@ import styles from './index.module.sass';
 
 import { Text } from '../../ui/Text';
 
+export enum RoomInfoVariant {
+   CATALOG = 'catalog',
+   PAGE = 'page',
+}
+
 type RoomProps = {
    area: number;
    persons: number;
    seats: number;
-   wide?: boolean;
+   variant?: RoomInfoVariant | '';
 };
 
-export const Room: React.FC<RoomProps> = ({ area, persons, seats, wide }) => {
-   const room = wide ? styles.room_wide : null;
+export const Room: React.FC<RoomProps> = ({
+   area,
+   persons,
+   seats,
+   variant,
+}) => {
+   const variantClassName = variant ? styles[`room_${variant}`] : null;
 
    return (
-      <div className={clsx(styles.room, room)}>
+      <div className={clsx(styles.room, variantClassName)}>
          <div className={clsx(styles.room__people, styles.room__element)}>
             <Text size='14' as={'p'}>
                {persons} чел
@@ -31,13 +41,13 @@ export const Room: React.FC<RoomProps> = ({ area, persons, seats, wide }) => {
                {area} m²
             </Text>
          </div>
-         {wide ? (
+         {variant && (
             <div className={clsx(styles.room__bell, styles.room__element)}>
                <Text size='14' as={'p'}>
                   Еда с собой
                </Text>
             </div>
-         ) : null}
+         )}
       </div>
    );
 };
