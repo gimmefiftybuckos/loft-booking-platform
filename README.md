@@ -5,8 +5,9 @@
 
 ## ToDo:
 1. Auth Forms
-2. Customer profile
-3. Manager profile
+2. Add Protected Routes
+3. Customer profile
+4. Manager profile
 
 Для запуска проекта необходимо:
 
