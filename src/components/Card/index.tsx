@@ -8,7 +8,7 @@ import { API_URL } from '../../services/constants';
 import { Text } from '../ui/Text';
 import { Price } from './Price';
 import { Rating } from './Rating';
-import { Room } from './Room';
+import { Room, RoomInfoVariant } from './Room';
 import { Distance } from './Distance';
 import { useNavigate } from 'react-router-dom';
 
@@ -29,7 +29,7 @@ export const Card: React.FC<CardProps> = ({ cardData, wide }) => {
    const template = wide ? (
       <>
          <Room
-            wide
+            variant={size && RoomInfoVariant.CATALOG}
             area={cardData.area}
             persons={cardData.maxPersons}
             seats={cardData.seatingPlaces}
