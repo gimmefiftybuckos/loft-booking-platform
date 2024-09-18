@@ -44,3 +44,8 @@ export type TCatalogParams = {
    date?: string;
    price?: string;
 };
+
+export type TUser = {
+   email: string;
+   login: string;
+};

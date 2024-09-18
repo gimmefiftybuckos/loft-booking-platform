@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { TypeParamsType, ILoftCard, TCatalogParams } from '../types';
 import { MAX_PRICE } from '../services/constants';
@@ -36,13 +36,13 @@ const cardSlice = createSlice({
    name: 'cards',
    initialState,
    reducers: {
-      setType(state, action: PayloadAction<TypeParamsType>) {
+      setType(state, action) {
          state.type = action.payload;
       },
-      setDate(state, action: PayloadAction<string>) {
+      setDate(state, action) {
          state.date = action.payload;
       },
-      setPrice(state, action: PayloadAction<string>) {
+      setPrice(state, action) {
          if (action.payload !== `0:${MAX_PRICE}`) {
             state.price = action.payload;
          } else {
