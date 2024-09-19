@@ -1,10 +1,12 @@
 import { useReducer } from 'react';
-import { Button, ButtonVariant } from '../../../components/Button';
-import { Input } from '../../../components/Input';
+
 import { TLoginData } from '../../../services/api';
 import { loginUser } from '../../../store/userAuthSlice';
 import { useDispatch } from '../../../store';
 import { authReducer, AuthsValues } from '../authsUtils';
+
+import { Input } from '../../../components/Input';
+import { Button, ButtonVariant } from '../../../components/Button';
 
 export const LoginForm = () => {
    const dispatchRedux = useDispatch();
