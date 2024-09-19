@@ -12,6 +12,25 @@ export const MAX_PRICE = 20000;
 
 export const API_URL = import.meta.env.VITE_API_URL;
 
+export const todayDate = new Date();
+
+export const months = [
+   'января',
+   'февраля',
+   'марта',
+   'апреля',
+   'мая',
+   'июня',
+   'июля',
+   'августа',
+   'сентября',
+   'октября',
+   'ноября',
+   'декабря',
+];
+
+export const daysOfWeek = ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'];
+
 export const selectionFilters: SelectionFiltersType[] = [
    'Event',
    'Date',

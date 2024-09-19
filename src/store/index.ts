@@ -8,11 +8,13 @@ import {
 
 import cardReducer from './cardCatalogSlice';
 import modalControlReducer from './modalControlSlice';
+import userAuthReducer from './userAuthSlice';
 
 const store = configureStore({
    reducer: {
       cards: cardReducer,
       modalControl: modalControlReducer,
+      user: userAuthReducer,
    },
 });
 

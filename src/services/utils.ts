@@ -5,9 +5,7 @@ import {
 } from '../types';
 import { resetFilters } from '../store/cardCatalogSlice';
 import { useSelector, AppDispatch } from '../store';
-import { cardSectionList } from './constants';
-
-export const todayDate = new Date();
+import { cardSectionList, daysOfWeek, months } from './constants';
 
 export const createNavPoints = (dispatch: AppDispatch) => [
    {
@@ -20,23 +18,6 @@ export const createNavPoints = (dispatch: AppDispatch) => [
 ];
 
 export const formatDate = (fullDate: string): string | null => {
-   const months = [
-      'января',
-      'февраля',
-      'марта',
-      'апреля',
-      'мая',
-      'июня',
-      'июля',
-      'августа',
-      'сентября',
-      'октября',
-      'ноября',
-      'декабря',
-   ];
-
-   const daysOfWeek = ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'];
-
    const [day, month, year] = fullDate.split(':').map(Number);
 
    if (!day || !month || !year) {
@@ -46,9 +27,7 @@ export const formatDate = (fullDate: string): string | null => {
    const jsDate = new Date(year, month - 1, day);
    const dayOfWeek = daysOfWeek[jsDate.getDay()];
 
-   const formattedDate = `${day} ${months[month - 1]}, ${dayOfWeek}`;
-
-   return formattedDate;
+   return `${day} ${months[month - 1]}, ${dayOfWeek}`;
 };
 
 export const getTitle = (
@@ -87,8 +66,32 @@ export const updateSearchParams = (
    price: string
 ) => {
    const params: Record<string, string> = {};
+
    if (type) params.type = type;
    if (date) params.date = encodeURIComponent(date);
    if (price) params.price = encodeURIComponent(price);
+
    return params;
 };
+
+export function setCookie(name: string, value: string) {
+   value = encodeURIComponent(value);
+   let updatedCookie = name + '=' + value;
+   document.cookie = updatedCookie;
+}
+
+export function getCookie(name: string): string | undefined {
+   const matches = document.cookie.match(
+      new RegExp(
+         '(?:^|; )' +
+            name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') +
+            '=([^;]*)'
+      )
+   );
+
+   return matches ? decodeURIComponent(matches[1]) : undefined;
+}
+
+export function deleteCookie(name: string) {
+   setCookie(name, '');
+}
