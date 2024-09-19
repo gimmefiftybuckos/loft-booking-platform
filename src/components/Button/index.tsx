@@ -13,6 +13,7 @@ export enum ButtonVariant {
 export interface ButtonProps {
    as?: ElementType;
    pathTo?: string;
+   type?: string;
    children: string;
 
    className?: string;
@@ -23,6 +24,7 @@ export interface ButtonProps {
 export const Button: React.FC<ButtonProps> = ({
    as: Tag = 'button',
    pathTo,
+   type = 'submit',
    children,
 
    className,
@@ -31,9 +33,21 @@ export const Button: React.FC<ButtonProps> = ({
 }) => {
    const variantClassName = variant ? styles[`button_${variant}`] : null;
 
+   if (Tag === Link && !pathTo) {
+      console.error("'pathTo' prop is required!");
+      return null;
+   }
+
+   if (Tag === 'button' && !type) {
+      console.error("'type' prop is required!");
+      return null;
+   }
+
+   const props = Tag === Link ? { to: pathTo } : { type };
+
    return (
       <Tag
-         {...(Tag === Link && { to: pathTo })}
+         {...props}
          onClick={onClick}
          className={clsx(styles.button, variantClassName, className)}
       >
