@@ -6,7 +6,7 @@ import clsx from 'clsx';
 
 import styles from './index.module.sass';
 
-import { setDate } from '../../../store/cardCatalogSlice';
+import { setDate } from '../../../store/slices/cardCatalog';
 import { ModalContext } from '../../../context';
 
 import { Button, ButtonVariant } from '../../Button';

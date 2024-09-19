@@ -6,9 +6,9 @@ import {
    useSelector as selectorHook,
 } from 'react-redux';
 
-import cardReducer from './cardCatalogSlice';
-import modalControlReducer from './modalControlSlice';
-import userAuthReducer from './userAuthSlice';
+import cardReducer from './slices/cardCatalog';
+import modalControlReducer from './slices/modalControl';
+import userAuthReducer from './slices/userAuth';
 
 const store = configureStore({
    reducer: {

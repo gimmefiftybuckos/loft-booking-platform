@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-import { TypeParamsType, ILoftCard, TCatalogParams } from '../types';
-import { MAX_PRICE } from '../services/constants';
-import { getCardsApi } from '../services/api';
+import { TypeParamsType, ILoftCard, TCatalogParams } from '../../types';
+import { MAX_PRICE } from '../../services/constants';
+import { getCardsApi } from '../../services/api';
 
 export const getCardsList = createAsyncThunk(
    'cards/getCards',
@@ -32,7 +32,7 @@ const initialState: CardSliceType = {
    hasMore: true,
 };
 
-const cardSlice = createSlice({
+const cardCatalog = createSlice({
    name: 'cards',
    initialState,
    reducers: {
@@ -71,7 +71,7 @@ const cardSlice = createSlice({
             state.cards = [...state.cards, ...action.payload];
 
             state.hasMore = action.payload.length >= state.limit;
-            state.page += 1;
+            state.page++;
          })
          .addCase(getCardsList.rejected, (state) => {
             state.status = 'failed';
@@ -80,6 +80,6 @@ const cardSlice = createSlice({
 });
 
 export const { setType, setDate, setPrice, resetFilters, resetCardsState } =
-   cardSlice.actions;
+   cardCatalog.actions;
 
-export default cardSlice.reducer;
+export default cardCatalog.reducer;

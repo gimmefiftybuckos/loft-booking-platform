@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-const modalControlSlice = createSlice({
+const modalControl = createSlice({
    name: 'modalControl',
    initialState: {
       controlIndex: -1,
@@ -16,6 +16,6 @@ const modalControlSlice = createSlice({
    },
 });
 
-export const { setIndexModal, setModalClose } = modalControlSlice.actions;
+export const { setIndexModal, setModalClose } = modalControl.actions;
 
-export default modalControlSlice.reducer;
+export default modalControl.reducer;

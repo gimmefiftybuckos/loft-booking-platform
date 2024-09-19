@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from '../store';
-import { setIndexModal, setModalClose } from '../store/modalControlSlice';
+import { setIndexModal, setModalClose } from '../store/slices/modalControl';
 import { useBodyScrollLock } from './useBodyScrollLock';
 
 export const useModalControl = () => {

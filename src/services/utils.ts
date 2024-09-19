@@ -3,7 +3,7 @@ import {
    ICardSection,
    SelectionFiltersType,
 } from '../types';
-import { resetFilters } from '../store/cardCatalogSlice';
+import { resetFilters } from '../store/slices/cardCatalog';
 import { useSelector, AppDispatch } from '../store';
 import { cardSectionList, daysOfWeek, months } from './constants';
 

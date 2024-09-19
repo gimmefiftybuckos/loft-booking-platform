@@ -7,7 +7,10 @@ import { Card } from '../../../components/Card';
 import { useDispatch, useSelector } from '../../../store';
 import { useEffect, useState } from 'react';
 import { getTitle, updateSearchParams } from '../../../services/utils';
-import { getCardsList, resetCardsState } from '../../../store/cardCatalogSlice';
+import {
+   getCardsList,
+   resetCardsState,
+} from '../../../store/slices/cardCatalog';
 import { cardSectionList } from '../../../services/constants';
 
 type TQuerryParams = Record<string, string>;

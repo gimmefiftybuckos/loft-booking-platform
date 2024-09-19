@@ -2,7 +2,7 @@ import { useReducer } from 'react';
 
 import { TRegisterData } from '../../../services/api';
 import { useDispatch } from '../../../store';
-import { registerUser } from '../../../store/userAuthSlice';
+import { registerUser } from '../../../store/slices/userAuth';
 import { authReducer, AuthsValues } from '../authsUtils';
 
 import { Input } from '../../../components/Input';
