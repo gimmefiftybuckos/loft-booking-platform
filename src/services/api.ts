@@ -71,7 +71,7 @@ export type TRegisterData = {
 
 export const registerUserApi = async (data: TRegisterData) => {
    try {
-      const response = await api.post(`/registration`, data, {
+      const response = await api.post(`/auth/registration`, data, {
          headers: { 'Content-Type': 'application/json;charset=utf-8' },
       });
 
@@ -94,7 +94,7 @@ export type TLoginData = {
 
 export const loginUserApi = async (data: TLoginData) => {
    try {
-      const response = await api.post(`/login`, data, {
+      const response = await api.post(`/auth/login`, data, {
          headers: { 'Content-Type': 'application/json;charset=utf-8' },
       });
 
