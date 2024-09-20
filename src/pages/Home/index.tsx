@@ -5,7 +5,7 @@ import { BannerSection } from '../../parts/sections/SectionBanner';
 import { CardBlockSection } from '../../parts/sections/SectionCardBlocks';
 import { CardSection } from '../../parts/sections/SectionCard';
 import { useDispatch } from '../../store';
-import { resetFilters } from '../../store/cardCatalogSlice';
+import { resetFilters } from '../../store/slices/cardCatalog';
 import { useEffect } from 'react';
 
 export const Home = () => {

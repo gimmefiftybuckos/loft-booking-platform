@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import styles from './index.module.sass';
 
 import { TypeParamsType, ILoftCard } from '../../../types';
-import { setType } from '../../../store/cardCatalogSlice';
+import { setType } from '../../../store/slices/cardCatalog';
 
 import { Text } from '../../../components/ui/Text';
 import { Button } from '../../../components/Button';

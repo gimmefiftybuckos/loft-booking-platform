@@ -6,8 +6,8 @@ import {
    startSession,
    TLoginData,
    TRegisterData,
-} from '../services/api';
-import { TUser } from '../types';
+} from '../../services/api';
+import { TUser } from '../../types';
 
 export const registerUser = createAsyncThunk(
    'user/register',
@@ -42,7 +42,7 @@ const initialState: TUserAuth = {
    error: null,
 };
 
-const userAuthSlice = createSlice({
+const userAuth = createSlice({
    name: 'user',
    initialState,
    reducers: {},
@@ -50,12 +50,10 @@ const userAuthSlice = createSlice({
       builder
          .addCase(registerUser.rejected, (state, action) => {
             state.error = action.error.message;
-            console.log(action.payload, 'проеб');
          })
          .addCase(registerUser.fulfilled, (state, action) => {
             state.isAuth = true;
             state.userData = action.payload.user;
-            console.log(state.userData);
          })
          .addCase(loginUser.rejected, (state, action) => {
             state.error = action.error.message;
@@ -67,6 +65,6 @@ const userAuthSlice = createSlice({
    },
 });
 
-export const {} = userAuthSlice.actions;
+export const {} = userAuth.actions;
 
-export default userAuthSlice.reducer;
+export default userAuth.reducer;

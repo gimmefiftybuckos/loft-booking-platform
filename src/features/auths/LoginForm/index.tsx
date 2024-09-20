@@ -1,7 +1,7 @@
 import { useReducer } from 'react';
 
 import { TLoginData } from '../../../services/api';
-import { loginUser } from '../../../store/userAuthSlice';
+import { loginUser } from '../../../store/slices/userAuth';
 import { useDispatch } from '../../../store';
 import { authReducer, AuthsValues } from '../authsUtils';
 

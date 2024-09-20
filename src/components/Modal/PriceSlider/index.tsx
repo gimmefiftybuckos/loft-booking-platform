@@ -6,7 +6,7 @@ import 'rc-slider/assets/index.css';
 import styles from './index.module.sass';
 
 import { useDispatch } from '../../../store';
-import { setPrice } from '../../../store/cardCatalogSlice';
+import { setPrice } from '../../../store/slices/cardCatalog';
 import { MAX_PRICE } from '../../../services/constants';
 import { useModalControl } from '../../../hooks/useModalControl';
 
