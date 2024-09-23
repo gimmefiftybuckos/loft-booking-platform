@@ -4,11 +4,12 @@
 ![image](https://github.com/user-attachments/assets/386e21c0-64f5-4b74-a703-97a3d3606957)
 
 ## ToDo:
-1. Auth Forms logic ✓
-2. Forms styles
-3. Add Protected Routes
-4. Customer profile
-5. Manager profile
+1. Auth Forms Logic ✓
+2. Auth Forms Validation
+3. Forms Styles
+4. Add Protected Routes
+5. Customer Profile
+6. Manager Profile
 
 ### Для запуска проекта необходимо:
 
