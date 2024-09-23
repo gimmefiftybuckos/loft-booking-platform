@@ -43,7 +43,7 @@ export const SectionCatalogLofts = ({
                date: dateParam,
                price: priceParam,
             })
-         );
+         ).catch((error) => console.error(error));
       }
    };
 

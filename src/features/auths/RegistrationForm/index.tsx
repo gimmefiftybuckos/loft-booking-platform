@@ -22,7 +22,9 @@ export const RegistrationForm = () => {
 
    const onSubmit = () => {
       event?.preventDefault();
-      dispatchRedux(registerUser(registrState));
+      dispatchRedux(registerUser(registrState)).catch((error) =>
+         console.error(error)
+      );
    };
 
    return (
