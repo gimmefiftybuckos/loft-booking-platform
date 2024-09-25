@@ -8,6 +8,7 @@ import { Catalog } from '../../pages/Catalog';
 import { Loft } from '../../pages/Loft';
 import { Registration } from '../../pages/Registration';
 import { Login } from '../../pages/Login';
+import { ProtectedRoute } from '../../components/ProtectedRoute';
 
 export const Main = () => {
    return (
@@ -16,8 +17,22 @@ export const Main = () => {
             <Route path='/' element={<Home />} />
             <Route path='/catalog' element={<Catalog />} />
             <Route path='/catalog/:id' element={<Loft />} />
-            <Route path='/login' element={<Login />} />
-            <Route path='/registration' element={<Registration />} />
+            <Route
+               path='/login'
+               element={
+                  <ProtectedRoute isAuthRequired={false}>
+                     <Login />
+                  </ProtectedRoute>
+               }
+            />
+            <Route
+               path='/registration'
+               element={
+                  <ProtectedRoute isAuthRequired={false}>
+                     <Registration />
+                  </ProtectedRoute>
+               }
+            />
             {/* <Route path="*" element={<NotFound />} /> */}
          </Routes>
       </main>

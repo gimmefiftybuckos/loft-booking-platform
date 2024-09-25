@@ -10,8 +10,10 @@ import { setType } from '../../../store/slices/cardCatalog';
 import { Text } from '../../../components/ui/Text';
 import { Button } from '../../../components/Button';
 import { Card } from '../../../components/Card';
-import { getCardsApi } from '../../../services/api';
+import { catchError, getCardsApi } from '../../../services/api';
 import { Link } from 'react-router-dom';
+import { Preloader } from '../../../components/ui/Preloader';
+import { AxiosError } from 'axios';
 
 type CardSectionProps = {
    title?: string;
@@ -23,12 +25,19 @@ export const CardSection: React.FC<CardSectionProps> = ({
    type = '',
 }) => {
    const [dataState, setDataState] = useState<ILoftCard[]>();
+   const [errorState, setErrorState] = useState<AxiosError>();
 
    const dispatch = useDispatch();
 
    const initalHomeCards = async () => {
-      const data = await getCardsApi({ type });
-      setDataState(data);
+      try {
+         const data = await getCardsApi({ type });
+         setDataState(data);
+      } catch (error) {
+         setErrorState(error as AxiosError);
+         catchError(error);
+         throw error;
+      }
    };
 
    useEffect(() => {
@@ -54,6 +63,13 @@ export const CardSection: React.FC<CardSectionProps> = ({
             </div>
          </div>
          <div className={clsx(styles['card-container'])}>
+            {/* {dataState?.length &&
+               titleCards?.map((item) => {
+                  return <Card cardData={item} key={item.id} />;
+               }) &&
+               !errorState} */}
+            {!errorState && !dataState?.length && <Preloader />}
+            {errorState && <Text>Server Error</Text>}
             {titleCards?.map((item) => {
                return <Card cardData={item} key={item.id} />;
             })}

@@ -18,7 +18,9 @@ export const LoginForm = () => {
 
    const onSubmit = () => {
       event?.preventDefault();
-      dispatchRedux(loginUser(loginState));
+      dispatchRedux(loginUser(loginState)).catch((error) =>
+         console.error(error)
+      );
    };
 
    return (

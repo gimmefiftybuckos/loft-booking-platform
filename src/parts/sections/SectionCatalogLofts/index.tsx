@@ -12,6 +12,7 @@ import {
    resetCardsState,
 } from '../../../store/slices/cardCatalog';
 import { cardSectionList } from '../../../services/constants';
+import { Preloader } from '../../../components/ui/Preloader';
 
 type TQuerryParams = Record<string, string>;
 
@@ -43,7 +44,7 @@ export const SectionCatalogLofts = ({
                date: dateParam,
                price: priceParam,
             })
-         );
+         ).catch((error) => console.error(error));
       }
    };
 
@@ -77,7 +78,11 @@ export const SectionCatalogLofts = ({
                className={clsx(styles.container)}
                next={fetchMore}
                hasMore={hasMore}
-               loader={<p>Загрузка...</p>}
+               loader={
+                  <>
+                     <Preloader /> <Preloader />
+                  </>
+               }
                dataLength={cards.length}
             >
                {cards.map((item) => (
