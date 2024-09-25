@@ -5,7 +5,7 @@ import { deleteCookie, getCookie, setCookie } from './utils';
 
 const api = axios.create({
    baseURL: API_URL,
-   timeout: 5000,
+   timeout: 15000,
 });
 
 api.interceptors.request.use(
@@ -94,29 +94,6 @@ export const fetchAuth = async <T>(options: AxiosRequestConfig): Promise<T> => {
    }
 };
 
-export const getCardsApi = async ({
-   type,
-   page,
-   date,
-   price,
-}: TCatalogParams): Promise<ILoftCard[]> => {
-   try {
-      const response = await fetchAuth<ILoftCard[]>({
-         url: '/catalog',
-         method: 'GET',
-         headers: {
-            Authorization: `Bearer ${getCookie('accessToken')}`,
-         },
-         params: { type, page, date, price },
-      });
-
-      return response;
-   } catch (error) {
-      catchError(error);
-      throw error;
-   }
-};
-
 // export const getCardsApi = async ({
 //    type,
 //    page,
@@ -124,18 +101,38 @@ export const getCardsApi = async ({
 //    price,
 // }: TCatalogParams): Promise<ILoftCard[]> => {
 //    try {
-//       const response = await api.get<ILoftCard[]>('/catalog', {
+//       const response = await fetchAuth<ILoftCard[]>({
+//          url: '/catalog',
+//          method: 'GET',
 //          headers: {
 //             Authorization: `Bearer ${getCookie('accessToken')}`,
 //          },
 //          params: { type, page, date, price },
 //       });
-//       return checkResponse<ILoftCard[]>(response);
+
+//       return response;
 //    } catch (error) {
 //       catchError(error);
 //       throw error;
 //    }
 // };
+
+export const getCardsApi = async ({
+   type,
+   page,
+   date,
+   price,
+}: TCatalogParams): Promise<ILoftCard[]> => {
+   try {
+      const response = await api.get<ILoftCard[]>('/catalog', {
+         params: { type, page, date, price },
+      });
+      return checkResponse<ILoftCard[]>(response);
+   } catch (error) {
+      catchError(error);
+      throw error;
+   }
+};
 
 export const getLoftApi = async (id: string) => {
    try {
@@ -208,7 +205,6 @@ export const authUserApi = async () => {
             Authorization: `Bearer ${getCookie('accessToken')}`,
          },
       });
-      console.log(response);
 
       return response;
    } catch (error) {
