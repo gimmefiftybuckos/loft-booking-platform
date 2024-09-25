@@ -1,9 +1,12 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import {
+   authUserApi,
    loginUserApi,
+   logoutApi,
    registerUserApi,
    startSession,
+   stopSession,
    TLoginData,
    TRegisterData,
 } from '../../services/api';
@@ -25,6 +28,11 @@ export const loginUser = createAsyncThunk(
          startSession(res);
          return res;
       })
+);
+
+export const authUser = createAsyncThunk('user/auth', authUserApi);
+export const logoutUser = createAsyncThunk('user/logout', async () =>
+   logoutApi().then(() => stopSession())
 );
 
 export type TUserAuth = {
@@ -52,6 +60,8 @@ const userAuth = createSlice({
             state.error = action.error.message;
          })
          .addCase(registerUser.fulfilled, (state, action) => {
+            console.log('Debug: User registred');
+
             state.isAuth = true;
             state.userData = action.payload.user;
          })
@@ -59,8 +69,29 @@ const userAuth = createSlice({
             state.error = action.error.message;
          })
          .addCase(loginUser.fulfilled, (state, action) => {
+            console.log('Debug: User logined');
+
             state.isAuth = true;
             state.userData = action.payload.user;
+         })
+         .addCase(authUser.rejected, (state, action) => {
+            state.error = action.error.message;
+            state.userData = { email: '', login: '' };
+         })
+         .addCase(authUser.fulfilled, (state, action) => {
+            console.log('Debug: User authed');
+
+            state.userData = action.payload.user;
+            state.isAuth = true;
+         })
+         .addCase(logoutUser.fulfilled, (state) => {
+            console.log('Debug: User logout');
+
+            state.isAuth = false;
+            state.userData = {
+               email: '',
+               login: '',
+            };
          });
    },
 });

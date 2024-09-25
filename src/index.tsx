@@ -8,9 +8,9 @@ import './fonts/font.sass';
 import store from './store/index.ts';
 
 import App from './App.tsx';
-import { MainSection } from './parts/sections/SectionMain/index.tsx';
 import { Catalog } from './pages/Catalog/index.tsx';
 import { Loft } from './pages/Loft/index.tsx';
+import { Home } from './pages/Home/index.tsx';
 
 const router = createBrowserRouter([
    {
@@ -18,7 +18,7 @@ const router = createBrowserRouter([
       element: <App />,
       children: [
          {
-            element: <MainSection />,
+            element: <Home />,
          },
          {
             path: 'catalog',

@@ -10,7 +10,7 @@ import { setType } from '../../../store/slices/cardCatalog';
 import { Text } from '../../../components/ui/Text';
 import { Button } from '../../../components/Button';
 import { Card } from '../../../components/Card';
-import { getCardsApi } from '../../../services/api';
+import { catchError, getCardsApi } from '../../../services/api';
 import { Link } from 'react-router-dom';
 
 type CardSectionProps = {
@@ -27,8 +27,13 @@ export const CardSection: React.FC<CardSectionProps> = ({
    const dispatch = useDispatch();
 
    const initalHomeCards = async () => {
-      const data = await getCardsApi({ type });
-      setDataState(data);
+      try {
+         const data = await getCardsApi({ type });
+         setDataState(data);
+      } catch (error) {
+         catchError(error);
+         throw error;
+      }
    };
 
    useEffect(() => {

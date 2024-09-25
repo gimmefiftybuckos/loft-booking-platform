@@ -24,13 +24,17 @@ const checkResponse = <T>(res: AxiosResponse): Promise<T> => {
       : Promise.reject(res.data);
 };
 
-const catchError = (error: unknown) => {
+export const catchError = (error: unknown) => {
+   const axiosError = error as AxiosError<ApiError>;
    if (axios.isAxiosError(error)) {
-      console.error('Axios error:', error.response?.data || error.message);
-      throw new Error(error.response?.data?.message || 'Ошибка запроса');
+      console.error(
+         'Axios error:',
+         axiosError.response?.data || axiosError.message
+      );
+      throw new Error(axiosError.response?.data.error);
    } else {
       console.error('Unexpected error:', error);
-      throw new Error('Неизвестная ошибка');
+      throw error;
    }
 };
 
@@ -67,8 +71,10 @@ export const fetchAuth = async <T>(options: AxiosRequestConfig): Promise<T> => {
       const axiosError = error as AxiosError<ApiError>;
 
       if (
-         axiosError.response?.data.error.includes('Invalid or expired token')
+         axiosError.response?.data.error.includes('Token verification failed')
       ) {
+         console.log('BEBRA');
+
          const refreshData = await refreshTokens();
          startSession(refreshData);
 
@@ -88,7 +94,7 @@ export const fetchAuth = async <T>(options: AxiosRequestConfig): Promise<T> => {
    }
 };
 
-export const getCardsApiTest = async ({
+export const getCardsApi = async ({
    type,
    page,
    date,
@@ -111,25 +117,25 @@ export const getCardsApiTest = async ({
    }
 };
 
-export const getCardsApi = async ({
-   type,
-   page,
-   date,
-   price,
-}: TCatalogParams): Promise<ILoftCard[]> => {
-   try {
-      const response = await api.get<ILoftCard[]>('/catalog', {
-         headers: {
-            Authorization: `Bearer ${getCookie('accessToken')}`,
-         },
-         params: { type, page, date, price },
-      });
-      return checkResponse<ILoftCard[]>(response);
-   } catch (error) {
-      catchError(error);
-      throw error;
-   }
-};
+// export const getCardsApi = async ({
+//    type,
+//    page,
+//    date,
+//    price,
+// }: TCatalogParams): Promise<ILoftCard[]> => {
+//    try {
+//       const response = await api.get<ILoftCard[]>('/catalog', {
+//          headers: {
+//             Authorization: `Bearer ${getCookie('accessToken')}`,
+//          },
+//          params: { type, page, date, price },
+//       });
+//       return checkResponse<ILoftCard[]>(response);
+//    } catch (error) {
+//       catchError(error);
+//       throw error;
+//    }
+// };
 
 export const getLoftApi = async (id: string) => {
    try {
@@ -160,9 +166,13 @@ export type TRegisterData = {
 
 export const registerUserApi = async (data: TRegisterData) => {
    try {
-      const response = await api.post(`/auth/registration`, data, {
-         headers: { 'Content-Type': 'application/json;charset=utf-8' },
-      });
+      const response = await api.post<TAuthResponse>(
+         `/auth/registration`,
+         data,
+         {
+            headers: { 'Content-Type': 'application/json;charset=utf-8' },
+         }
+      );
 
       return checkResponse<TAuthResponse>(response);
    } catch (error) {
@@ -183,6 +193,41 @@ export const loginUserApi = async (data: TLoginData) => {
       });
 
       return checkResponse<TAuthResponse>(response);
+   } catch (error) {
+      catchError(error);
+      throw error;
+   }
+};
+
+export const authUserApi = async () => {
+   try {
+      const response = await fetchAuth<TAuthResponse>({
+         url: '/user/auth',
+         method: 'GET',
+         headers: {
+            Authorization: `Bearer ${getCookie('accessToken')}`,
+         },
+      });
+      console.log(response);
+
+      return response;
+   } catch (error) {
+      catchError(error);
+      throw error;
+   }
+};
+
+export const logoutApi = async () => {
+   try {
+      const response = await api.post<TServerResponse<{}>>(
+         '/user/logout',
+         { token: localStorage.getItem('refreshToken') },
+         {
+            headers: { 'Content-Type': 'application/json;charset=utf-8' },
+         }
+      );
+
+      return checkResponse<TServerResponse<{}>>(response);
    } catch (error) {
       catchError(error);
       throw error;
