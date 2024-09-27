@@ -3,46 +3,65 @@ import { ILoftCard, TCatalogParams, TUser } from '../types';
 import { API_URL } from './constants';
 import { deleteCookie, getCookie, setCookie } from './utils';
 
+// Настройка базового инстанса axios
 const api = axios.create({
    baseURL: API_URL,
    timeout: 15000,
 });
 
+// Интерсептор для запросов: добавляем заголовок с языком
 api.interceptors.request.use(
    (config) => {
       config.headers['accept-language'] = 'ru-RU, ru;q=0.9, en';
       return config;
    },
-   (error) => {
-      return Promise.reject(error);
-   }
+   (error) => Promise.reject(error)
 );
 
-const checkResponse = <T>(res: AxiosResponse): Promise<T> => {
+// Типизация ошибок API
+interface ApiError {
+   error: string;
+   statusCode?: number;
+   message?: string;
+}
+
+// Проверка успешности ответа
+const checkResponse = <T>(res: AxiosResponse<T>): Promise<T> => {
    return res.status >= 200 && res.status < 300
       ? Promise.resolve(res.data)
       : Promise.reject(res.data);
 };
 
+// Обработка ошибок Axios
 export const catchError = (error: unknown) => {
-   const axiosError = error as AxiosError<ApiError>;
    if (axios.isAxiosError(error)) {
+      const axiosError = error as AxiosError<ApiError>;
       console.error(
          'Axios error:',
          axiosError.response?.data || axiosError.message
       );
-      throw new Error(axiosError.response?.data.error);
+      throw new Error(
+         axiosError.response?.data?.error || 'Unknown Axios error'
+      );
    } else {
       console.error('Unexpected error:', error);
       throw error;
    }
 };
 
-const refreshTokens = async () => {
+// Обновление токенов
+const refreshTokens = async (): Promise<TAuthResponse | null> => {
+   const refreshToken = localStorage.getItem('refreshToken');
+
+   if (!refreshToken) {
+      console.warn('No refresh token found');
+      return null;
+   }
+
    try {
       const response = await api.post<TAuthResponse>(
          '/user/refresh',
-         { token: localStorage.getItem('refreshToken') },
+         { token: refreshToken },
          {
             headers: {
                'Content-Type': 'application/json;charset=utf-8',
@@ -53,70 +72,57 @@ const refreshTokens = async () => {
       return checkResponse<TAuthResponse>(response);
    } catch (error) {
       catchError(error);
-      throw error;
+      return null;
    }
 };
 
-interface ApiError {
-   error: string;
-   statusCode?: number;
-   message?: string;
-}
-
-export const fetchAuth = async <T>(options: AxiosRequestConfig): Promise<T> => {
+// Общий метод для запросов с авторизацией
+export const fetchAuth = async <T>(
+   options: AxiosRequestConfig
+): Promise<T | null> => {
    try {
       const response = await api.request<T>(options);
       return checkResponse<T>(response);
    } catch (error) {
       const axiosError = error as AxiosError<ApiError>;
 
+      // Проверка на ошибку верификации токена
       if (
-         axiosError.response?.data.error.includes('Token verification failed')
+         axiosError.response?.data?.error.includes('Token verification failed')
       ) {
-         console.log('BEBRA');
-
          const refreshData = await refreshTokens();
+
+         if (!refreshData) {
+            console.warn('User not authenticated');
+            return null;
+         }
+
          startSession(refreshData);
 
-         const updatedOptions = {
-            ...options,
-            headers: {
-               Authorization: `Bearer ${refreshData.accessToken}`,
-            },
-         } as AxiosRequestConfig;
+         // Повторяем запрос с обновленным токеном
+         try {
+            const updatedOptions: AxiosRequestConfig = {
+               ...options,
+               headers: {
+                  ...options.headers,
+                  Authorization: `Bearer ${refreshData.accessToken}`,
+               },
+            };
 
-         const response = await api.request<T>(updatedOptions);
-         return checkResponse<T>(response);
+            const retryResponse = await api.request<T>(updatedOptions);
+            return checkResponse<T>(retryResponse);
+         } catch (retryError) {
+            catchError(retryError);
+            return null;
+         }
       } else {
          catchError(axiosError);
-         throw axiosError;
+         return null;
       }
    }
 };
 
-// export const getCardsApi = async ({
-//    type,
-//    page,
-//    date,
-//    price,
-// }: TCatalogParams): Promise<ILoftCard[]> => {
-//    try {
-//       const response = await fetchAuth<ILoftCard[]>({
-//          url: '/catalog',
-//          method: 'GET',
-//          headers: {
-//             Authorization: `Bearer ${getCookie('accessToken')}`,
-//          },
-//          params: { type, page, date, price },
-//       });
-
-//       return response;
-//    } catch (error) {
-//       catchError(error);
-//       throw error;
-//    }
-// };
-
+// API для получения карточек
 export const getCardsApi = async ({
    type,
    page,
@@ -127,6 +133,7 @@ export const getCardsApi = async ({
       const response = await api.get<ILoftCard[]>('/catalog', {
          params: { type, page, date, price },
       });
+
       return checkResponse<ILoftCard[]>(response);
    } catch (error) {
       catchError(error);
@@ -134,7 +141,8 @@ export const getCardsApi = async ({
    }
 };
 
-export const getLoftApi = async (id: string) => {
+// API для получения конкретного лофта
+export const getLoftApi = async (id: string): Promise<ILoftCard | null> => {
    try {
       const response = await api.get<ILoftCard>(`/catalog/${id}`);
 
@@ -161,10 +169,13 @@ export type TRegisterData = {
    password: string;
 };
 
-export const registerUserApi = async (data: TRegisterData) => {
+// API для регистрации
+export const registerUserApi = async (
+   data: TRegisterData
+): Promise<TAuthResponse> => {
    try {
       const response = await api.post<TAuthResponse>(
-         `/auth/registration`,
+         '/auth/registration',
          data,
          {
             headers: { 'Content-Type': 'application/json;charset=utf-8' },
@@ -183,9 +194,12 @@ export type TLoginData = {
    password: string;
 };
 
-export const loginUserApi = async (data: TLoginData) => {
+// API для логина
+export const loginUserApi = async (
+   data: TLoginData
+): Promise<TAuthResponse> => {
    try {
-      const response = await api.post(`/auth/login`, data, {
+      const response = await api.post<TAuthResponse>('/auth/login', data, {
          headers: { 'Content-Type': 'application/json;charset=utf-8' },
       });
 
@@ -196,7 +210,8 @@ export const loginUserApi = async (data: TLoginData) => {
    }
 };
 
-export const authUserApi = async () => {
+// API для авторизации пользователя
+export const authUserApi = async (): Promise<TAuthResponse | null> => {
    try {
       const response = await fetchAuth<TAuthResponse>({
          url: '/user/auth',
@@ -213,15 +228,12 @@ export const authUserApi = async () => {
    }
 };
 
-export const logoutApi = async () => {
+// API для выхода из системы
+export const logoutApi = async (): Promise<TServerResponse<{}>> => {
    try {
-      const response = await api.post<TServerResponse<{}>>(
-         '/user/logout',
-         { token: localStorage.getItem('refreshToken') },
-         {
-            headers: { 'Content-Type': 'application/json;charset=utf-8' },
-         }
-      );
+      const response = await api.post<TServerResponse<{}>>('/user/logout', {
+         token: localStorage.getItem('refreshToken'),
+      });
 
       return checkResponse<TServerResponse<{}>>(response);
    } catch (error) {
@@ -230,13 +242,57 @@ export const logoutApi = async () => {
    }
 };
 
+export type TFavoritesData = string;
+
+// API для управления избранным
+export const setFavoriteApi = async (
+   loftId: string
+): Promise<TFavoritesData[]> => {
+   try {
+      const response = await fetchAuth<TFavoritesData[]>({
+         url: '/user/favorite',
+         method: 'POST',
+         headers: {
+            'Content-Type': 'application/json;charset=utf-8',
+            Authorization: `Bearer ${getCookie('accessToken')}`,
+         },
+         data: { loftId },
+      });
+
+      return response || [];
+   } catch (error) {
+      catchError(error);
+      throw error;
+   }
+};
+
+export const getFavoritesApi = async (): Promise<TFavoritesData[]> => {
+   try {
+      const response = await fetchAuth<TFavoritesData[]>({
+         url: '/user/favorite',
+         method: 'GET',
+         headers: {
+            'Content-Type': 'application/json;charset=utf-8',
+            Authorization: `Bearer ${getCookie('accessToken')}`,
+         },
+      });
+
+      return response || [];
+   } catch (error) {
+      catchError(error);
+      throw error;
+   }
+};
+
+// Функции для начала и завершения сессии
 export const startSession = (auth: TAuthResponse) => {
    setCookie('accessToken', auth.accessToken);
    localStorage.setItem('refreshToken', auth.refreshToken);
-   console.log(document.cookie);
+   console.log('Session started:', localStorage.getItem('refreshToken'));
 };
 
 export const stopSession = () => {
    deleteCookie('accessToken');
    localStorage.removeItem('refreshToken');
+   console.log('Session stopped');
 };

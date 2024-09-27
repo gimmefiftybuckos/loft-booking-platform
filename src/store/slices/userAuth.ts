@@ -32,7 +32,7 @@ export const loginUser = createAsyncThunk(
 
 export const authUser = createAsyncThunk('user/auth', authUserApi);
 export const logoutUser = createAsyncThunk('user/logout', async () =>
-   logoutApi().then(() => stopSession())
+   logoutApi().finally(() => stopSession())
 );
 
 export type TUserAuth = {
@@ -79,12 +79,13 @@ const userAuth = createSlice({
             state.userData = { email: '', login: '' };
          })
          .addCase(authUser.fulfilled, (state, action) => {
-            console.log('Debug: User authed');
-
-            state.userData = action.payload.user;
-            state.isAuth = true;
+            if (action.payload) {
+               console.log('Debug: User authed');
+               state.userData = action.payload.user;
+               state.isAuth = true;
+            }
          })
-         .addCase(logoutUser.fulfilled, (state) => {
+         .addCase(logoutUser.pending, (state) => {
             console.log('Debug: User logout');
 
             state.isAuth = false;
@@ -92,6 +93,10 @@ const userAuth = createSlice({
                email: '',
                login: '',
             };
+         })
+         .addCase(logoutUser.fulfilled, (state) => {
+            console.log('Debug: token was deleted by logout');
+            state.isAuth = false;
          });
    },
 });

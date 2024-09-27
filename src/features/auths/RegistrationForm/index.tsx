@@ -32,6 +32,7 @@ export const RegistrationForm = () => {
          <Input
             type='text'
             placeholder='email'
+            autoFocus
             value={registrState.email}
             onChange={(event) =>
                dispatchReducer({

@@ -10,7 +10,7 @@ export const getCardsList = createAsyncThunk(
       getCardsApi({ type, page, date, price })
 );
 
-export type CardSliceType = {
+type TCardSlice = {
    cards: ILoftCard[];
    status: 'idle' | 'loading' | 'succeeded' | 'failed';
    type: TypeParamsType;
@@ -21,7 +21,7 @@ export type CardSliceType = {
    hasMore: boolean;
 };
 
-const initialState: CardSliceType = {
+const initialState: TCardSlice = {
    cards: [],
    status: 'idle',
    type: '',

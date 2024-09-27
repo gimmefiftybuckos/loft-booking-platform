@@ -79,9 +79,14 @@ export const SectionCatalogLofts = ({
                next={fetchMore}
                hasMore={hasMore}
                loader={
-                  <>
-                     <Preloader /> <Preloader />
-                  </>
+                  status !== 'failed' ? (
+                     <>
+                        <Preloader />
+                        <Preloader />
+                     </>
+                  ) : (
+                     <Text>Server Error</Text>
+                  )
                }
                dataLength={cards.length}
             >
