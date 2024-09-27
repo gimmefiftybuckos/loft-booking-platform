@@ -1,5 +1,5 @@
 import { Navigate, useLocation } from 'react-router-dom';
-import { useSelector } from '../../store';
+import { useSelector } from '../../../store';
 
 type ProtectedRouteProps = {
    children: React.ReactElement;

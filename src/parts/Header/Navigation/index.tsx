@@ -37,7 +37,9 @@ export const Navigation = () => {
             </div>
             <div>
                {isAuth ? (
-                  <Button onClick={onClick}>{userData.login}</Button>
+                  <Button as={Link} pathTo='/' onClick={onClick}>
+                     {userData.login}
+                  </Button>
                ) : (
                   <Button
                      as={Link}

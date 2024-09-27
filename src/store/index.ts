@@ -9,12 +9,14 @@ import {
 import cardReducer from './slices/cardCatalog';
 import modalControlReducer from './slices/modalControl';
 import userAuthReducer from './slices/userAuth';
+import favoritesReducer from './slices/favorites';
 
 const store = configureStore({
    reducer: {
       cards: cardReducer,
       modalControl: modalControlReducer,
       user: userAuthReducer,
+      favorites: favoritesReducer,
    },
 });
 

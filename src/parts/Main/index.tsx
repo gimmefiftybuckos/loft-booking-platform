@@ -8,7 +8,7 @@ import { Catalog } from '../../pages/Catalog';
 import { Loft } from '../../pages/Loft';
 import { Registration } from '../../pages/Registration';
 import { Login } from '../../pages/Login';
-import { ProtectedRoute } from '../../components/ProtectedRoute';
+import { ProtectedRoute } from '../../features/auths/ProtectedRoute';
 
 export const Main = () => {
    return (

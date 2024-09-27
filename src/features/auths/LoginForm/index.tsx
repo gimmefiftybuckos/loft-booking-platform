@@ -28,6 +28,7 @@ export const LoginForm = () => {
          <Input
             type='text'
             placeholder='login'
+            autoFocus
             value={loginState.login}
             onChange={(event) =>
                dispatchReducer({
