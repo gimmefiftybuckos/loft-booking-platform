@@ -38,6 +38,7 @@ export const logoutUser = createAsyncThunk('user/logout', async () =>
 export type TUserAuth = {
    userData: TUser;
    isAuth: boolean;
+   status: 'idle' | 'loading' | 'succeeded' | 'failed';
    error: string | null | undefined;
 };
 
@@ -47,6 +48,7 @@ const initialState: TUserAuth = {
       login: '',
    },
    isAuth: false,
+   status: 'idle',
    error: null,
 };
 
@@ -77,13 +79,19 @@ const userAuth = createSlice({
          .addCase(authUser.rejected, (state, action) => {
             state.error = action.error.message;
             state.userData = { email: '', login: '' };
+
+            state.status = 'failed';
          })
          .addCase(authUser.fulfilled, (state, action) => {
             if (action.payload) {
                console.log('Debug: User authed');
-               state.userData = action.payload.user;
+               state.userData = action.payload?.user;
                state.isAuth = true;
             }
+            state.status = 'succeeded';
+         })
+         .addCase(authUser.pending, (state) => {
+            state.status = 'loading';
          })
          .addCase(logoutUser.pending, (state) => {
             console.log('Debug: User logout');

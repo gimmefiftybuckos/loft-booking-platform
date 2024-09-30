@@ -54,7 +54,7 @@ const refreshTokens = async (): Promise<TAuthResponse | null> => {
    const refreshToken = localStorage.getItem('refreshToken');
 
    if (!refreshToken) {
-      console.warn('No refresh token found');
+      console.warn('Refresh token not found');
       return null;
    }
 

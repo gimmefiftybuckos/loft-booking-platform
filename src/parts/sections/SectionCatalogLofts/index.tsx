@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import styles from './index.module.sass';
 import { Card } from '../../../components/Card';
 import { useDispatch, useSelector } from '../../../store';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { getTitle, updateSearchParams } from '../../../services/utils';
 import {
    getCardsList,
@@ -13,6 +13,7 @@ import {
 } from '../../../store/slices/cardCatalog';
 import { cardSectionList } from '../../../services/constants';
 import { Preloader } from '../../../components/ui/Preloader';
+import { ILoftCard } from '../../../types';
 
 type TQuerryParams = Record<string, string>;
 
@@ -32,11 +33,15 @@ export const SectionCatalogLofts = ({
    const { cards, page, hasMore, status } = useSelector((state) => state.cards);
 
    const [titleState, setTitle] = useState('');
+   const [cardsState, setCardsState] = useState<ILoftCard[]>(cards);
+
+   const isDelayed = useRef(false);
 
    const { typeParam, dateParam, priceParam } = params;
 
    const fetchMore = () => {
       if (status !== 'loading' && hasMore) {
+         isDelayed.current = true;
          dispatch(
             getCardsList({
                type: typeParam,
@@ -68,6 +73,18 @@ export const SectionCatalogLofts = ({
       };
    }, [dispatch, typeParam, dateParam, priceParam]);
 
+   useEffect(() => {
+      if (!isDelayed.current) {
+         const timer = setTimeout(() => {
+            setCardsState(cards);
+         }, 200);
+         return () => clearTimeout(timer);
+      } else {
+         setCardsState(cards);
+         isDelayed.current = false;
+      }
+   }, [cards]);
+
    return (
       <section>
          <div className={clsx(styles.content)}>
@@ -88,9 +105,9 @@ export const SectionCatalogLofts = ({
                      <Text>Server Error</Text>
                   )
                }
-               dataLength={cards.length}
+               dataLength={cardsState.length}
             >
-               {cards.map((item) => (
+               {cardsState.map((item) => (
                   <Card key={item.id} wide cardData={item} />
                ))}
             </InfiniteScroll>
