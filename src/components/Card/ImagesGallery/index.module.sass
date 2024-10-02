@@ -1,0 +1,145 @@
+.gallery
+    position: relative
+    block-size: 250px
+    inline-size: 100%
+    margin: 0
+    padding: 0
+    overflow: hidden
+    border-radius: 10px
+    border: 0
+    user-select: none
+
+    &_wide
+        block-size: 320px
+
+    &::before
+        content: ''
+        position: absolute
+        z-index: 1
+        inset-block-end: 0
+        left: 0
+        width: 100%
+        height: 50%
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0))
+
+.container
+    display: flex
+    inline-size: 300%
+    block-size: 100%
+    transform: translateX(-33.33%)
+
+    &_next
+        transform: translate(-66.66%)
+        transition: .2s
+    &_prev
+        transform: translate(0)
+        transition: .2s
+
+.image
+    position: relative
+    border-radius: 10px
+    block-size: 100%
+    inline-size: 100%
+    object-fit: cover
+    transition: transform 0.5s ease
+
+.slider
+    position: absolute
+    z-index: 1
+    inset-block-end: 5%
+    inset-inline-start: 0
+    display: flex
+    justify-content: space-between
+    block-size: 1rem
+    inline-size: 100%
+    padding-inline: 1.5rem
+
+    &__item
+        inline-size: 100%
+        block-size: 100%
+        background: none
+        cursor: pointer
+        transition: inline-size .3s
+
+        &::before
+            content: ''
+            position: relative
+            display: block
+            inset: 0
+            block-size: 35%
+            inline-size: 100%
+            min-inline-size: 10%
+            background-color: #fff
+            opacity: 0.3
+            border-radius: 10px
+            transition: opacity .3s
+
+        &:hover
+            inline-size: 150%
+            &::before
+                opacity: 0.7
+
+        &_selected
+            &::before
+                opacity: 1
+            &:hover
+                inline-size: 150%
+                &::before
+                    opacity: 1
+
+.button
+    position: absolute
+    z-index: 1
+    inset-block-start: 48%
+    block-size: 40px
+    inline-size: 45px
+    background-repeat: no-repeat
+    background-position: center center
+    background-color: transparent
+    cursor: pointer
+    transition: transform .3s
+
+    &:hover
+        transform: scale(1.2)
+
+    &_left
+        inset-inline-start: 0
+        background-image: url('/assets/arrow_left.svg')
+        background-position-x: center
+    &_right
+        inset-inline-end: 0
+        background-image: url('/assets/arrow_right.svg')
+        background-position-x: center
+
+    &_hidden
+        opacity: 0.5
+        &:hover
+            transform: none
+
+.like
+    position: absolute
+    z-index: 1
+    inset-block-start: 10px
+    inset-inline-end: 10px
+    display: flex
+    justify-content: center
+    align-items: center
+    block-size: 36px
+    inline-size: 36px
+    border-radius: 8px
+    background: #fff
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25)
+    transition: box-shadow .5s
+
+    &:hover
+        box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.4)
+
+    &__icon
+        block-size: 26px
+        inline-size: 26px
+        background: url('../../../assets/empty-heart.svg')
+        background-repeat: no-repeat
+        background-position: center
+
+        &_selected
+            background-image: url('../../../assets/heart.svg')

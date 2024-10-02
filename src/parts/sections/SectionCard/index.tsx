@@ -32,7 +32,6 @@ export const CardSection: React.FC<CardSectionProps> = ({
    const initalHomeCards = async () => {
       try {
          const data = await getCardsApi({ type });
-         console.log(data);
 
          setDataState(data);
       } catch (error) {
@@ -51,7 +50,6 @@ export const CardSection: React.FC<CardSectionProps> = ({
    };
 
    const titleCards = dataState?.slice(0, 3);
-   console.log(titleCards);
 
    return (
       <section className={clsx(styles.section)}>

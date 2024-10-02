@@ -69,7 +69,6 @@ const cardCatalog = createSlice({
             state.status = 'succeeded';
 
             state.cards = [...state.cards, ...action.payload];
-            console.log(state.cards);
 
             state.hasMore = action.payload.length >= state.limit;
             state.page++;
