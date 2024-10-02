@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 
 import styles from './index.module.sass';
-import { ILoftCard } from '../../types';
+import { ILoft } from '../../types';
 import { API_URL } from '../../services/constants';
 
 import { Text } from '../ui/Text';
@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from '../../store';
 import { setFavorite } from '../../store/slices/favorites';
 
 type CardProps = {
-   cardData: ILoftCard;
+   cardData: ILoft;
    wide?: boolean;
 };
 

@@ -4,7 +4,7 @@ import clsx from 'clsx';
 
 import styles from './index.module.sass';
 
-import { TypeParamsType, ILoftCard } from '../../../types';
+import { TypeParamsType, ILoft } from '../../../types';
 import { setType } from '../../../store/slices/cardCatalog';
 
 import { Text } from '../../../components/ui/Text';
@@ -24,7 +24,7 @@ export const CardSection: React.FC<CardSectionProps> = ({
    title = 'Мы рекомендуем',
    type = '',
 }) => {
-   const [dataState, setDataState] = useState<ILoftCard[]>();
+   const [dataState, setDataState] = useState<ILoft[]>();
    const [errorState, setErrorState] = useState<AxiosError>();
 
    const dispatch = useDispatch();
@@ -32,6 +32,8 @@ export const CardSection: React.FC<CardSectionProps> = ({
    const initalHomeCards = async () => {
       try {
          const data = await getCardsApi({ type });
+         console.log(data);
+
          setDataState(data);
       } catch (error) {
          setErrorState(error as AxiosError);
@@ -42,13 +44,14 @@ export const CardSection: React.FC<CardSectionProps> = ({
 
    useEffect(() => {
       initalHomeCards();
-   }, [type]);
+   }, []);
 
    const clickHandle = () => {
       dispatch(setType(type));
    };
 
    const titleCards = dataState?.slice(0, 3);
+   console.log(titleCards);
 
    return (
       <section className={clsx(styles.section)}>

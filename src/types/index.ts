@@ -1,16 +1,17 @@
-export interface ILoftCard {
+export interface ILoft {
    id: string;
    title: string;
    metroStation: string;
    walkingDistanceMinutes: number;
    reviewsCount: number;
-   averageRating: number;
+   averageRating: string;
    pricePerHour: number;
    maxPersons: number;
    seatingPlaces: number;
    area: number;
    imageUrl: string[];
    type: string[];
+   date?: Date;
 }
 
 export interface ICardSection {

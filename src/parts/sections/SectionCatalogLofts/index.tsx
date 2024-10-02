@@ -13,7 +13,7 @@ import {
 } from '../../../store/slices/cardCatalog';
 import { cardSectionList } from '../../../services/constants';
 import { Preloader } from '../../../components/ui/Preloader';
-import { ILoftCard } from '../../../types';
+import { ILoft } from '../../../types';
 
 type TQuerryParams = Record<string, string>;
 
@@ -33,7 +33,7 @@ export const SectionCatalogLofts = ({
    const { cards, page, hasMore, status } = useSelector((state) => state.cards);
 
    const [titleState, setTitle] = useState('');
-   const [cardsState, setCardsState] = useState<ILoftCard[]>(cards);
+   const [cardsState, setCardsState] = useState<ILoft[]>(cards);
 
    const isDelayed = useRef(false);
 

@@ -1,15 +1,13 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
-import { ILoftCard, TCatalogParams, TUser } from '../types';
+import { ILoft, TCatalogParams, TUser } from '../types';
 import { API_URL } from './constants';
 import { deleteCookie, getCookie, setCookie } from './utils';
 
-// Настройка базового инстанса axios
 const api = axios.create({
    baseURL: API_URL,
    timeout: 15000,
 });
 
-// Интерсептор для запросов: добавляем заголовок с языком
 api.interceptors.request.use(
    (config) => {
       config.headers['accept-language'] = 'ru-RU, ru;q=0.9, en';
@@ -18,21 +16,18 @@ api.interceptors.request.use(
    (error) => Promise.reject(error)
 );
 
-// Типизация ошибок API
 interface ApiError {
    error: string;
    statusCode?: number;
    message?: string;
 }
 
-// Проверка успешности ответа
 const checkResponse = <T>(res: AxiosResponse<T>): Promise<T> => {
    return res.status >= 200 && res.status < 300
       ? Promise.resolve(res.data)
       : Promise.reject(res.data);
 };
 
-// Обработка ошибок Axios
 export const catchError = (error: unknown) => {
    if (axios.isAxiosError(error)) {
       const axiosError = error as AxiosError<ApiError>;
@@ -128,13 +123,13 @@ export const getCardsApi = async ({
    page,
    date,
    price,
-}: TCatalogParams): Promise<ILoftCard[]> => {
+}: TCatalogParams): Promise<ILoft[]> => {
    try {
-      const response = await api.get<ILoftCard[]>('/catalog', {
+      const response = await api.get<ILoft[]>('/catalog', {
          params: { type, page, date, price },
       });
 
-      return checkResponse<ILoftCard[]>(response);
+      return checkResponse<ILoft[]>(response);
    } catch (error) {
       catchError(error);
       throw error;
@@ -142,11 +137,11 @@ export const getCardsApi = async ({
 };
 
 // API для получения конкретного лофта
-export const getLoftApi = async (id: string): Promise<ILoftCard | null> => {
+export const getLoftApi = async (id: string): Promise<ILoft> => {
    try {
-      const response = await api.get<ILoftCard>(`/catalog/${id}`);
+      const response = await api.get<ILoft>(`/catalog/${id}`);
 
-      return checkResponse<ILoftCard>(response);
+      return checkResponse<ILoft>(response);
    } catch (error) {
       catchError(error);
       throw error;

@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-import { TypeParamsType, ILoftCard, TCatalogParams } from '../../types';
+import { TypeParamsType, ILoft, TCatalogParams } from '../../types';
 import { MAX_PRICE } from '../../services/constants';
 import { getCardsApi } from '../../services/api';
 
@@ -11,7 +11,7 @@ export const getCardsList = createAsyncThunk(
 );
 
 type TCardSlice = {
-   cards: ILoftCard[];
+   cards: ILoft[];
    status: 'idle' | 'loading' | 'succeeded' | 'failed';
    type: TypeParamsType;
    date: string;
@@ -69,6 +69,7 @@ const cardCatalog = createSlice({
             state.status = 'succeeded';
 
             state.cards = [...state.cards, ...action.payload];
+            console.log(state.cards);
 
             state.hasMore = action.payload.length >= state.limit;
             state.page++;
