@@ -15,13 +15,13 @@ type TGalleryProps = {
 };
 
 export const ImagesGallery: React.FC<TGalleryProps> = ({ cardData, wide }) => {
-   const { favorites } = useSelector((state) => state.favorites);
+   const { favoritesId } = useSelector((state) => state.favorites);
    const { isAuth } = useSelector((state) => state.user);
    const dispatch = useDispatch();
    const navigate = useNavigate();
    const [action, setAction] = useState<'next' | 'prev' | 'idle'>('idle');
 
-   const isFavorite = favorites?.find((item) => item === cardData.id);
+   const isFavorite = favoritesId?.find((item) => item === cardData.id);
 
    const onClick = (event: React.MouseEvent) => {
       event.stopPropagation();
@@ -100,19 +100,19 @@ export const ImagesGallery: React.FC<TGalleryProps> = ({ cardData, wide }) => {
          <div className={clsx(styles.container, styles[`container_${action}`])}>
             <img
                className={clsx(styles.image, styles.image_prev)}
-               src={`${API_URL}/uploads/${imagesArr[imageState - 1] || imagesArr[imageState]}`}
+               src={`${API_URL}/catalog/uploads/${imagesArr[imageState - 1] || imagesArr[imageState]}`}
                loading='lazy'
                alt=''
             />
             <img
                className={clsx(styles.image)}
-               src={`${API_URL}/uploads/${imagesArr[imageState]}`}
+               src={`${API_URL}/catalog/uploads/${imagesArr[imageState]}`}
                loading='lazy'
                alt=''
             />
             <img
                className={clsx(styles.image, styles.image_next)}
-               src={`${API_URL}/uploads/${imagesArr[imageState + 1] || imagesArr[imageState]}`}
+               src={`${API_URL}/catalog/uploads/${imagesArr[imageState + 1] || imagesArr[imageState]}`}
                loading='lazy'
                alt=''
             />

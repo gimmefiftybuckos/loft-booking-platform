@@ -9,6 +9,7 @@ import { Loft } from '../../pages/Loft';
 import { Registration } from '../../pages/Registration';
 import { Login } from '../../pages/Login';
 import { ProtectedRoute } from '../../features/auths/ProtectedRoute';
+import { Favorites } from '../../pages/Favorites';
 
 export const Main = () => {
    return (
@@ -33,6 +34,7 @@ export const Main = () => {
                   </ProtectedRoute>
                }
             />
+            <Route path='/favorites' element={<Favorites />} />
             {/* <Route path="*" element={<NotFound />} /> */}
          </Routes>
       </main>

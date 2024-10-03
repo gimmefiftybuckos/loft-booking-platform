@@ -7,7 +7,7 @@ import clsx from 'clsx';
 import styles from './index.module.sass';
 
 import { TypeParamsType, ILoft } from '../../../types';
-import { catchError, getCardsApi } from '../../../services/api';
+import { catchError, getAllLoftsApi } from '../../../services/api';
 import { setType } from '../../../store/slices/cardCatalog';
 
 import { Text } from '../../../components/ui/Text';
@@ -31,7 +31,7 @@ export const CardSection: React.FC<CardSectionProps> = ({
 
    const initalHomeCards = async () => {
       try {
-         const data = await getCardsApi({ type });
+         const data = await getAllLoftsApi({ type });
 
          setDataState(data);
       } catch (error) {
@@ -64,11 +64,6 @@ export const CardSection: React.FC<CardSectionProps> = ({
             </div>
          </div>
          <div className={clsx(styles['card-container'])}>
-            {/* {dataState?.length &&
-               titleCards?.map((item) => {
-                  return <Card cardData={item} key={item.id} />;
-               }) &&
-               !errorState} */}
             {!errorState && !dataState?.length && <Preloader />}
             {errorState && <Text>Server Error</Text>}
             {titleCards?.map((item) => {

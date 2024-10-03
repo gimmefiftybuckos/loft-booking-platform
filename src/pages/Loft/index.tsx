@@ -7,6 +7,7 @@ import styles from './index.module.sass';
 import { ILoft } from '../../types';
 import { getLoftApi } from '../../services/api';
 import { API_URL, selectionFilters } from '../../services/constants';
+import { useModalControl } from '../../hooks/useModalControl';
 
 import { Text } from '../../components/ui/Text';
 import { Rating } from '../../components/Card/Rating';
@@ -18,7 +19,6 @@ import {
 } from '../../components/Modal/SelectionButton';
 import { Button } from '../../components/Button';
 import { ButtonVariant } from '../../components/Button';
-import { useModalControl } from '../../hooks/useModalControl';
 
 export const Loft = () => {
    const { pathname } = useLocation();
@@ -50,7 +50,7 @@ export const Loft = () => {
                      <img
                         key={index}
                         className={clsx(styles.image)}
-                        src={`${API_URL}/uploads/${item}`}
+                        src={`${API_URL}/catalog/uploads/${item}`}
                         loading='lazy'
                         alt=''
                      />
