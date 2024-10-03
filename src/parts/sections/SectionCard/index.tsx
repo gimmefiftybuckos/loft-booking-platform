@@ -1,19 +1,19 @@
-import { useDispatch } from '../../../store';
+import { AxiosError } from 'axios';
+import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { useDispatch } from '../../../store';
 import clsx from 'clsx';
 
 import styles from './index.module.sass';
 
-import { TypeParamsType, ILoftCard } from '../../../types';
+import { TypeParamsType, ILoft } from '../../../types';
+import { catchError, getCardsApi } from '../../../services/api';
 import { setType } from '../../../store/slices/cardCatalog';
 
 import { Text } from '../../../components/ui/Text';
 import { Button } from '../../../components/Button';
 import { Card } from '../../../components/Card';
-import { catchError, getCardsApi } from '../../../services/api';
-import { Link } from 'react-router-dom';
 import { Preloader } from '../../../components/ui/Preloader';
-import { AxiosError } from 'axios';
 
 type CardSectionProps = {
    title?: string;
@@ -24,7 +24,7 @@ export const CardSection: React.FC<CardSectionProps> = ({
    title = 'Мы рекомендуем',
    type = '',
 }) => {
-   const [dataState, setDataState] = useState<ILoftCard[]>();
+   const [dataState, setDataState] = useState<ILoft[]>();
    const [errorState, setErrorState] = useState<AxiosError>();
 
    const dispatch = useDispatch();
@@ -32,6 +32,7 @@ export const CardSection: React.FC<CardSectionProps> = ({
    const initalHomeCards = async () => {
       try {
          const data = await getCardsApi({ type });
+
          setDataState(data);
       } catch (error) {
          setErrorState(error as AxiosError);
@@ -42,7 +43,7 @@ export const CardSection: React.FC<CardSectionProps> = ({
 
    useEffect(() => {
       initalHomeCards();
-   }, [type]);
+   }, []);
 
    const clickHandle = () => {
       dispatch(setType(type));

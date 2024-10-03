@@ -6,7 +6,7 @@ import { Text } from '../../ui/Text';
 
 type RatingProps = {
    reviewsCount: number;
-   averageRating: number;
+   averageRating: string;
 };
 
 export const Rating: React.FC<RatingProps> = ({
@@ -15,7 +15,7 @@ export const Rating: React.FC<RatingProps> = ({
 }) => {
    const test = [1, 2, 3, 4, 5];
 
-   const flooredRating = Math.floor(averageRating * 2) / 2;
+   const flooredRating = Math.floor(+averageRating * 2) / 2;
 
    return (
       <div className={clsx(styles.rating)}>
@@ -59,7 +59,7 @@ export const Rating: React.FC<RatingProps> = ({
             })}
          </div>
          <div className={clsx(styles.rating__review)}>
-            <Text size='14'>{averageRating.toFixed(1)}</Text>
+            <Text size='14'>{averageRating}</Text>
             <Text size='14' color='gray'>
                {reviewsCount} отзывов
             </Text>

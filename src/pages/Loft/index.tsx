@@ -4,7 +4,7 @@ import clsx from 'clsx';
 
 import styles from './index.module.sass';
 
-import { ILoftCard } from '../../types';
+import { ILoft } from '../../types';
 import { getLoftApi } from '../../services/api';
 import { API_URL, selectionFilters } from '../../services/constants';
 
@@ -22,7 +22,7 @@ import { useModalControl } from '../../hooks/useModalControl';
 
 export const Loft = () => {
    const { pathname } = useLocation();
-   const [loftState, setLoftState] = useState<ILoftCard>();
+   const [loftState, setLoftState] = useState<ILoft>();
    const { closeModal, toggleModal, controlIndex } = useModalControl();
    const id = pathname.split('/')[2];
 
