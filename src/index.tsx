@@ -11,6 +11,9 @@ import App from './App.tsx';
 import { Catalog } from './pages/Catalog/index.tsx';
 import { Loft } from './pages/Loft/index.tsx';
 import { Home } from './pages/Home/index.tsx';
+import { Favorites } from './pages/Favorites/index.tsx';
+import { Registration } from './pages/Registration/index.tsx';
+import { Login } from './pages/Login/index.tsx';
 
 const router = createBrowserRouter([
    {
@@ -21,12 +24,21 @@ const router = createBrowserRouter([
             element: <Home />,
          },
          {
+            path: 'registration',
+            element: <Registration />,
+         },
+         { path: 'login', element: <Login /> },
+         {
             path: 'catalog',
             element: <Catalog />,
          },
          {
             path: 'catalog/:id',
             element: <Loft />,
+         },
+         {
+            path: 'favorites',
+            element: <Favorites />,
          },
       ],
    },

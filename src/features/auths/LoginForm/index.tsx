@@ -1,4 +1,4 @@
-import { useReducer } from 'react';
+import { useEffect, useReducer } from 'react';
 
 import { TLoginData } from '../../../services/api';
 import { loginUser } from '../../../store/slices/userAuth';
@@ -7,9 +7,11 @@ import { authReducer, AuthsValues } from '../authsUtils';
 
 import { Input } from '../../../components/Input';
 import { Button, ButtonVariant } from '../../../components/Button';
+import { useBackNavigation } from '../../../hooks/useBackNavigation';
 
 export const LoginForm = () => {
    const dispatchRedux = useDispatch();
+   const { goToLastPage, clearPage } = useBackNavigation();
 
    const [loginState, dispatchReducer] = useReducer(authReducer<TLoginData>, {
       login: '',
@@ -21,7 +23,14 @@ export const LoginForm = () => {
       dispatchRedux(loginUser(loginState)).catch((error) =>
          console.error(error)
       );
+      goToLastPage();
    };
+
+   useEffect(() => {
+      return () => {
+         clearPage();
+      };
+   }, []);
 
    return (
       <form onSubmit={onSubmit} action='submit'>

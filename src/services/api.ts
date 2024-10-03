@@ -4,6 +4,12 @@ import { ILoft, TCatalogParams, TUser } from '../types';
 import { API_URL } from './constants';
 import { deleteCookie, getCookie, setCookie } from './utils';
 
+enum EndPoints {
+   CATALOG = '/catalog',
+   USER = '/user',
+   AUTH = '/auth',
+}
+
 const api = axios.create({
    baseURL: API_URL,
    timeout: 15000,
@@ -56,7 +62,7 @@ const refreshTokens = async (): Promise<TAuthResponse | null> => {
 
    try {
       const response = await api.post<TAuthResponse>(
-         '/user/refresh',
+         `${EndPoints.USER}/refresh`,
          { token: refreshToken },
          {
             headers: {
@@ -119,14 +125,14 @@ export const fetchAuth = async <T>(
 };
 
 // API для получения карточек
-export const getCardsApi = async ({
+export const getAllLoftsApi = async ({
    type,
    page,
    date,
    price,
 }: TCatalogParams): Promise<ILoft[]> => {
    try {
-      const response = await api.get<ILoft[]>('/catalog', {
+      const response = await api.get<ILoft[]>(EndPoints.CATALOG, {
          params: { type, page, date, price },
       });
 
@@ -140,7 +146,7 @@ export const getCardsApi = async ({
 // API для получения конкретного лофта
 export const getLoftApi = async (id: string): Promise<ILoft> => {
    try {
-      const response = await api.get<ILoft>(`/catalog/${id}`);
+      const response = await api.get<ILoft>(`${EndPoints.CATALOG}/page/${id}`);
 
       return checkResponse<ILoft>(response);
    } catch (error) {
@@ -171,7 +177,7 @@ export const registerUserApi = async (
 ): Promise<TAuthResponse> => {
    try {
       const response = await api.post<TAuthResponse>(
-         '/auth/registration',
+         `${EndPoints.AUTH}/registration`,
          data,
          {
             headers: { 'Content-Type': 'application/json;charset=utf-8' },
@@ -195,9 +201,13 @@ export const loginUserApi = async (
    data: TLoginData
 ): Promise<TAuthResponse> => {
    try {
-      const response = await api.post<TAuthResponse>('/auth/login', data, {
-         headers: { 'Content-Type': 'application/json;charset=utf-8' },
-      });
+      const response = await api.post<TAuthResponse>(
+         `${EndPoints.AUTH}/login`,
+         data,
+         {
+            headers: { 'Content-Type': 'application/json;charset=utf-8' },
+         }
+      );
 
       return checkResponse<TAuthResponse>(response);
    } catch (error) {
@@ -210,7 +220,7 @@ export const loginUserApi = async (
 export const authUserApi = async (): Promise<TAuthResponse | null> => {
    try {
       const response = await fetchAuth<TAuthResponse>({
-         url: '/user/auth',
+         url: `${EndPoints.USER}/auth`,
          method: 'GET',
          headers: {
             Authorization: `Bearer ${getCookie('accessToken')}`,
@@ -227,9 +237,12 @@ export const authUserApi = async (): Promise<TAuthResponse | null> => {
 // API для выхода из системы
 export const logoutApi = async (): Promise<TServerResponse<{}>> => {
    try {
-      const response = await api.post<TServerResponse<{}>>('/user/logout', {
-         token: localStorage.getItem('refreshToken'),
-      });
+      const response = await api.post<TServerResponse<{}>>(
+         `${EndPoints.USER}/logout`,
+         {
+            token: localStorage.getItem('refreshToken'),
+         }
+      );
 
       return checkResponse<TServerResponse<{}>>(response);
    } catch (error) {
@@ -246,7 +259,7 @@ export const setFavoriteApi = async (
 ): Promise<TFavoritesData[]> => {
    try {
       const response = await fetchAuth<TFavoritesData[]>({
-         url: '/user/favorite',
+         url: `${EndPoints.USER}/favorite`,
          method: 'POST',
          headers: {
             'Content-Type': 'application/json;charset=utf-8',
@@ -262,10 +275,28 @@ export const setFavoriteApi = async (
    }
 };
 
-export const getFavoritesApi = async (): Promise<TFavoritesData[]> => {
+export const getFavoritesIdApi = async (): Promise<TFavoritesData[]> => {
    try {
       const response = await fetchAuth<TFavoritesData[]>({
-         url: '/user/favorite',
+         url: `${EndPoints.USER}/favorite`,
+         method: 'GET',
+         headers: {
+            'Content-Type': 'application/json;charset=utf-8',
+            Authorization: `Bearer ${getCookie('accessToken')}`,
+         },
+      });
+
+      return response || [];
+   } catch (error) {
+      catchError(error);
+      throw error;
+   }
+};
+
+export const getFavoritesLoftsApi = async (): Promise<ILoft[]> => {
+   try {
+      const response = await fetchAuth<ILoft[]>({
+         url: `${EndPoints.CATALOG}/favorites`,
          method: 'GET',
          headers: {
             'Content-Type': 'application/json;charset=utf-8',

@@ -14,7 +14,7 @@ export const createNavPoints = (dispatch: AppDispatch) => [
       onClick: () => dispatch(resetFilters()),
    },
    { name: 'Идеи', path: '/ideas' },
-   { name: 'Избранное', path: '/favorite' },
+   { name: 'Избранное', path: '/favorites' },
 ];
 
 export const formatDate = (fullDate: string): string | null => {

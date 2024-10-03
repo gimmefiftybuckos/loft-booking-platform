@@ -1,9 +1,11 @@
+import { useEffect, useState } from 'react';
+
+import { useDispatch, useSelector } from './store';
+import { getFavoritesId } from './store/slices/favorites';
+import { authUser } from './store/slices/userAuth';
+
 import { Main } from './parts/Main';
 import { Layout } from './parts/Layout';
-import { useDispatch, useSelector } from './store';
-import { authUser } from './store/slices/userAuth';
-import { useEffect, useState } from 'react';
-import { getFavorites } from './store/slices/favorites';
 
 function App() {
    const dispatch = useDispatch();
@@ -12,7 +14,7 @@ function App() {
 
    useEffect(() => {
       if (isAuth) {
-         dispatch(getFavorites());
+         dispatch(getFavoritesId());
       }
    }, [isAuth]);
 
