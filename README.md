@@ -5,11 +5,12 @@
 
 ## ToDo:
 1. Auth Forms Logic ✓
-2. Auth Forms Validation
-3. Forms Styles
-4. Add Protected Routes
-5. Customer Profile
-6. Manager Profile
+2. Auto Token Refresh ✓
+3. Auth Forms Validation
+4. Forms Styles
+5. Add Protected Routes ✓
+6. Customer Profile
+7. Manager Profile
 
 ### Для запуска проекта необходимо:
 
