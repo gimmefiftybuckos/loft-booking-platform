@@ -5,6 +5,10 @@ const LAST_PAGE_KEY = 'lastVisitedPage';
 export const useBackNavigation = () => {
    const navigate = useNavigate();
 
+   const clearPage = () => {
+      localStorage.removeItem(LAST_PAGE_KEY);
+   };
+
    const saveCurrentPage = () => {
       console.log(window.location.pathname);
       localStorage.setItem(LAST_PAGE_KEY, window.location.pathname);
@@ -18,5 +22,5 @@ export const useBackNavigation = () => {
       }
    };
 
-   return { goToLastPage, saveCurrentPage };
+   return { goToLastPage, saveCurrentPage, clearPage };
 };
