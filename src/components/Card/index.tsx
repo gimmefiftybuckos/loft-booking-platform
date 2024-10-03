@@ -1,18 +1,15 @@
+import { useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
 
 import styles from './index.module.sass';
+
 import { ILoft } from '../../types';
-import { API_URL } from '../../services/constants';
 
 import { Text } from '../ui/Text';
 import { Price } from './Price';
 import { Rating } from './Rating';
 import { Room, RoomInfoVariant } from './Room';
 import { Distance } from './Distance';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from '../../store';
-import { setFavorite } from '../../store/slices/favorites';
-import { useState } from 'react';
 import { ImagesGallery } from './ImagesGallery';
 
 type CardProps = {
@@ -22,8 +19,6 @@ type CardProps = {
 
 export const Card: React.FC<CardProps> = ({ cardData, wide }) => {
    const navigate = useNavigate();
-   const dispatch = useDispatch();
-   const { isAuth } = useSelector((state) => state.user);
 
    const size = wide ? '_wide' : '';
 

@@ -1,19 +1,19 @@
-import { useDispatch } from '../../../store';
+import { AxiosError } from 'axios';
+import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { useDispatch } from '../../../store';
 import clsx from 'clsx';
 
 import styles from './index.module.sass';
 
 import { TypeParamsType, ILoft } from '../../../types';
+import { catchError, getCardsApi } from '../../../services/api';
 import { setType } from '../../../store/slices/cardCatalog';
 
 import { Text } from '../../../components/ui/Text';
 import { Button } from '../../../components/Button';
 import { Card } from '../../../components/Card';
-import { catchError, getCardsApi } from '../../../services/api';
-import { Link } from 'react-router-dom';
 import { Preloader } from '../../../components/ui/Preloader';
-import { AxiosError } from 'axios';
 
 type CardSectionProps = {
    title?: string;

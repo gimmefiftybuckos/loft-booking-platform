@@ -1,4 +1,5 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
+
 import { ILoft, TCatalogParams, TUser } from '../types';
 import { API_URL } from './constants';
 import { deleteCookie, getCookie, setCookie } from './utils';

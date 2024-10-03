@@ -1,12 +1,13 @@
-import clsx from 'clsx';
-import { useDispatch, useSelector } from '../../../store';
-import { ILoft } from '../../../types';
 import { useNavigate } from 'react-router-dom';
-import { setFavorite } from '../../../store/slices/favorites';
 import { useState } from 'react';
-import { API_URL } from '../../../services/constants';
+import clsx from 'clsx';
 
 import styles from './index.module.sass';
+
+import { ILoft } from '../../../types';
+import { useDispatch, useSelector } from '../../../store';
+import { setFavorite } from '../../../store/slices/favorites';
+import { API_URL } from '../../../services/constants';
 
 type TGalleryProps = {
    cardData: ILoft;
@@ -49,7 +50,7 @@ export const ImagesGallery: React.FC<TGalleryProps> = ({ cardData, wide }) => {
          setTimeout(() => {
             setImageState(imageState + 1);
             setAction('idle');
-         }, 200);
+         }, 350);
       }
    };
 
@@ -61,7 +62,7 @@ export const ImagesGallery: React.FC<TGalleryProps> = ({ cardData, wide }) => {
          setTimeout(() => {
             setImageState(imageState - 1);
             setAction('idle');
-         }, 200);
+         }, 350);
       }
    };
 
