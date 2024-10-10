@@ -3,7 +3,7 @@ import { clsx } from 'clsx';
 
 import styles from './index.module.sass';
 
-import { FontFamiliesClasses } from '../../services/constants';
+import { FontFamiliesClasses } from '../../../services/constants';
 
 type TextProps = {
    children: ReactNode;

@@ -1,19 +1,25 @@
 import React from 'react';
 
-import { CatalogFiltersType, SelectionFiltersType } from '../../../types';
+import {
+   CatalogFiltersType,
+   ImagesCarouselType,
+   SelectionFiltersType,
+} from '../../../types';
 
 import { Calendar } from '../Calendar';
 import { SearchList } from '../SearchList';
 import { PriceSlider } from '../PriceSlider';
+import { Images } from '../Images';
 
 type ModalContentProps = {
-   name: SelectionFiltersType | CatalogFiltersType;
+   name: SelectionFiltersType | CatalogFiltersType | ImagesCarouselType;
 };
 
 const contentMap: { [key: string]: React.ReactNode } = {
    Event: <SearchList />,
    Date: <Calendar />,
    Price: <PriceSlider />,
+   Images: <Images />,
 };
 
 export const ModalContent: React.FC<ModalContentProps> = ({ name }) => {

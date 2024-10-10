@@ -1,47 +1,18 @@
-.container
-    display: grid
-    grid-template-columns: repeat(5, minmax(150px, 1fr))
-    grid-template-rows: repeat(2, 240px)
-    gap: 0.5rem
+.carousel
+    z-index: 100
+    inset-block-start: 50vh
+    inset-inline-start: 50vw
+    transform: translate(-50%, -50%)
+    max-block-size: none
+    padding: 0
+    max-block-size: 70vw
+    block-size: 90%
+    inline-size: 80%
+    outline: none
+    border: none
     overflow: hidden
-    border-radius: 10px
-
-    @media (max-width: 820px)
-        grid-template-columns: repeat(3, minmax(150px, 1fr))
-        // grid-template-rows: repeat(2, 180px)
-
-.image
-    block-size: 100%
-    inline-size: 100%
-    object-fit: cover
-    transition: transform 0.5s ease
-    aspect-ratio: 1
-    grid-column: span 1
-    grid-row: span 1
-
-    &:first-of-type
-        grid-column-start: 1
-        grid-column-end: span 3
-        grid-row-start: 1
-        grid-row-end: 3
-
-        @media (max-width: 820px)
-            grid-column-end: span 2
-            grid-row-end: 2
-
-.images
-    margin-block-start: 1.5rem
-
-.text
-    display: flex
-    flex-direction: column
-    gap: 1rem
-    max-inline-size: 770px
+    background: #fff
 
 .article
     max-inline-size: 370px
     inline-size: 100%
-
-.content
-    display: flex
-    gap: 1.5rem
