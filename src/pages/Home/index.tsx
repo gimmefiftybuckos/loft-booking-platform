@@ -1,9 +1,9 @@
 import { cardSectionList } from '../../services/constants';
 
-import { MainSection } from '../../parts/sections/SectionMain';
-import { BannerSection } from '../../parts/sections/SectionBanner';
-import { CardBlockSection } from '../../parts/sections/SectionCardBlocks';
-import { CardSection } from '../../parts/sections/SectionCard';
+import { HomeCover } from '../../sections/HomeCover';
+import { HomeBanner } from '../../sections/HomeBanner';
+import { HomeCardBlock } from '../../sections/HomeCardBlocks';
+import { HomeCards } from '../../sections/HomeCards';
 import { useDispatch } from '../../store';
 import { resetFilters } from '../../store/slices/cardCatalog';
 import { useEffect } from 'react';
@@ -23,13 +23,13 @@ export const Home = () => {
 
    return (
       <>
-         <MainSection />
-         <BannerSection />
-         <CardSection title={mainSectionTitle} type={mainSectionParam} />
-         <CardBlockSection data={blockSectionCards} />
+         <HomeCover />
+         <HomeBanner />
+         <HomeCards title={mainSectionTitle} type={mainSectionParam} />
+         <HomeCardBlock data={blockSectionCards} />
          {cardsSection.map((item, index) => {
             return (
-               <CardSection key={index} title={item.title} type={item.type} />
+               <HomeCards key={index} title={item.title} type={item.type} />
             );
          })}
       </>

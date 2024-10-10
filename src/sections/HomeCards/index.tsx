@@ -1,26 +1,26 @@
 import { AxiosError } from 'axios';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { useDispatch } from '../../../store';
+import { useDispatch } from '../../store';
 import clsx from 'clsx';
 
 import styles from './index.module.sass';
 
-import { TypeParamsType, ILoft } from '../../../types';
-import { catchError, getAllLoftsApi } from '../../../services/api';
-import { setType } from '../../../store/slices/cardCatalog';
+import { TypeParamsType, ILoft } from '../../types';
+import { catchError, getAllLoftsApi } from '../../services/api';
+import { setType } from '../../store/slices/cardCatalog';
 
-import { Text } from '../../../components/ui/Text';
-import { Button } from '../../../components/Button';
-import { Card } from '../../../components/Card';
-import { Preloader } from '../../../components/ui/Preloader';
+import { Text } from '../../components/ui/Text';
+import { Button } from '../../components/Button';
+import { Card } from '../../components/Card';
+import { Preloader } from '../../components/ui/Preloader';
 
 type CardSectionProps = {
    title?: string;
    type?: TypeParamsType;
 };
 
-export const CardSection: React.FC<CardSectionProps> = ({
+export const HomeCards: React.FC<CardSectionProps> = ({
    title = 'Мы рекомендуем',
    type = '',
 }) => {

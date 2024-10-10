@@ -1,15 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 
-import { ILoft } from '../../../types';
-import { getTitle, updateSearchParams } from '../../../services/utils';
-import { useDispatch, useSelector } from '../../../store';
-import { cardSectionList } from '../../../services/constants';
+import { ILoft } from '../../types';
+import { getTitle, updateSearchParams } from '../../services/utils';
+import { useDispatch, useSelector } from '../../store';
+import { cardSectionList } from '../../services/constants';
 
-import {
-   getCardsList,
-   resetCardsState,
-} from '../../../store/slices/cardCatalog';
-import { CardsList } from '../../../components/CardsList';
+import { getCardsList, resetCardsState } from '../../store/slices/cardCatalog';
+import { CardsList } from '../../components/CardsList';
 
 type TQuerryParams = Record<string, string>;
 
@@ -21,10 +18,7 @@ type TCatalogLofts = {
    ) => void;
 };
 
-export const SectionCatalogLofts = ({
-   params,
-   setSearchParams,
-}: TCatalogLofts) => {
+export const CatalogLofts = ({ params, setSearchParams }: TCatalogLofts) => {
    const dispatch = useDispatch();
    const { cards, page, hasMore, status } = useSelector((state) => state.cards);
 

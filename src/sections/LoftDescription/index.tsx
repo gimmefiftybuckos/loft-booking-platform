@@ -2,14 +2,14 @@ import clsx from 'clsx';
 
 import styles from './index.module.sass';
 
-import { Distance } from '../../../components/Card/Distance';
-import { Rating } from '../../../components/Card/Rating';
-import { Room, RoomInfoVariant } from '../../../components/Card/Room';
-import { Preloader } from '../../../components/ui/Preloader';
-import { useSelector } from '../../../store';
-import { Text } from '../../../components/ui/Text';
+import { Distance } from '../../components/Card/Distance';
+import { Rating } from '../../components/Card/Rating';
+import { Room, RoomInfoVariant } from '../../components/Card/Room';
+import { Preloader } from '../../components/ui/Preloader';
+import { useSelector } from '../../store';
+import { Text } from '../../components/ui/Text';
 
-export const SectionLoftDescription = () => {
+export const LoftDescription = () => {
    const { card } = useSelector((state) => state.cards);
 
    if (!card) {

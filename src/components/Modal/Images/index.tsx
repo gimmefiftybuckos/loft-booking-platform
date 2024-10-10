@@ -36,15 +36,15 @@ export const Images = () => {
    };
 
    //    useEffect(() => {
-   //    const handleKeyDown = (event: KeyboardEvent) => {
-   //       if (event.key === 'ArrowRight') {
-   //          clickNext();
-   //       } else if (event.key === 'ArrowLeft') {
-   //          clickPrev();
-   //       }
-   //    };
+   //       const handleKeyDown = (event: KeyboardEvent) => {
+   //          if (event.key === 'ArrowRight') {
+   //             clickNext();
+   //          } else if (event.key === 'ArrowLeft') {
+   //             clickPrev();
+   //          }
+   //       };
 
-   //    document.addEventListener('keydown', handleKeyDown);
+   //       document.addEventListener('keydown', handleKeyDown);
 
    //       return () => {
    //          document.removeEventListener('keydown', handleKeyDown);

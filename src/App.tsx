@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from './store';
 import { getFavoritesId } from './store/slices/favorites';
 import { authUser } from './store/slices/userAuth';
 
-import { Main } from './parts/Main';
-import { Layout } from './parts/Layout';
+import { Main } from './sections/Main';
+import { Layout } from './sections/Layout';
 
 function App() {
    const dispatch = useDispatch();

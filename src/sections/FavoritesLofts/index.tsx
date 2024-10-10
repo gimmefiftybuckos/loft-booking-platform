@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
-import { CardsList } from '../../../components/CardsList';
-import { useDispatch, useSelector } from '../../../store';
-import { getFavoritesLofts } from '../../../store/slices/favorites';
+import { CardsList } from '../../components/CardsList';
+import { useDispatch, useSelector } from '../../store';
+import { getFavoritesLofts } from '../../store/slices/favorites';
 import { useNavigate } from 'react-router-dom';
-import { useBackNavigation } from '../../../hooks/useBackNavigation';
+import { useBackNavigation } from '../../hooks/useBackNavigation';
 
-export const SectionFavoritesLofts = () => {
+export const FavoritesLofts = () => {
    const dispatch = useDispatch();
    const { favoritesLofts, status } = useSelector((state) => state.favorites);
    const { isAuth } = useSelector((state) => state.user);
