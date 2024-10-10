@@ -8,9 +8,10 @@ import { useModalControl } from '../../hooks/useModalControl';
 type ModalProps = {
    children: React.ReactNode;
    isOpen: boolean;
+   className?: string;
 };
 
-export const Modal = ({ isOpen, children }: ModalProps) => {
+export const Modal = ({ isOpen, children, className }: ModalProps) => {
    const { closeModal } = useModalControl();
 
    useEffect(() => {
@@ -27,7 +28,11 @@ export const Modal = ({ isOpen, children }: ModalProps) => {
    return (
       <div
          onClick={(event) => event.stopPropagation()}
-         className={clsx(styles.modal, isOpen ? styles.modal_open : null)}
+         className={clsx(
+            styles.modal,
+            isOpen ? styles.modal_open : null,
+            className
+         )}
       >
          {children}
       </div>

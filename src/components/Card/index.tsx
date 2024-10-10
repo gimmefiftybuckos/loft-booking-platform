@@ -11,6 +11,8 @@ import { Rating } from './Rating';
 import { Room, RoomInfoVariant } from './Room';
 import { Distance } from './Distance';
 import { ImagesGallery } from './ImagesGallery';
+import { useDispatch } from '../../store';
+import { getLoft } from '../../store/slices/cardCatalog';
 
 type CardProps = {
    cardData: ILoft;
@@ -19,6 +21,7 @@ type CardProps = {
 
 export const Card: React.FC<CardProps> = ({ cardData, wide }) => {
    const navigate = useNavigate();
+   const dispatch = useDispatch();
 
    const size = wide ? '_wide' : '';
 
@@ -53,9 +56,16 @@ export const Card: React.FC<CardProps> = ({ cardData, wide }) => {
       </>
    );
 
+   const onClick = () => {
+      dispatch(getLoft(cardData.id));
+      setTimeout(() => {
+         navigate(`/catalog/${cardData.id}`);
+      }, 100);
+   };
+
    return (
       <article
-         onClick={() => navigate(`/catalog/${cardData.id}`)}
+         onClick={onClick}
          className={clsx(styles.card, styles[`card${size}`])}
       >
          <ImagesGallery cardData={cardData} wide={size} />

@@ -4,6 +4,7 @@ const modalControl = createSlice({
    name: 'modalControl',
    initialState: {
       controlIndex: -1,
+      imageIndex: -1,
    },
    reducers: {
       setIndexModal(state, action: PayloadAction<number>) {
@@ -13,9 +14,13 @@ const modalControl = createSlice({
       setModalClose(state) {
          state.controlIndex = -1;
       },
+      setImageIndex(state, action) {
+         state.imageIndex = action.payload;
+      },
    },
 });
 
-export const { setIndexModal, setModalClose } = modalControl.actions;
+export const { setIndexModal, setModalClose, setImageIndex } =
+   modalControl.actions;
 
 export default modalControl.reducer;

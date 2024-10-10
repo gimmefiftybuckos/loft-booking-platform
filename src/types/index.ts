@@ -39,6 +39,8 @@ export type SelectionFiltersType = 'Event' | 'Date' | 'Start Time' | 'End Time';
 
 export type CatalogFiltersType = 'Event' | 'Price' | 'Date' | 'Filters';
 
+export type ImagesCarouselType = 'Images';
+
 export type TCatalogParams = {
    type?: string;
    page?: number;

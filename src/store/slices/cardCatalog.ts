@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { TypeParamsType, ILoft, TCatalogParams } from '../../types';
 import { MAX_PRICE } from '../../services/constants';
-import { getAllLoftsApi } from '../../services/api';
+import { getAllLoftsApi, getLoftApi } from '../../services/api';
 
 export const getCardsList = createAsyncThunk(
    'cards/getCards',
@@ -10,8 +10,13 @@ export const getCardsList = createAsyncThunk(
       getAllLoftsApi({ type, page, date, price })
 );
 
+export const getLoft = createAsyncThunk('cards/getCard', async (id: string) =>
+   getLoftApi(id)
+);
+
 type TCardSlice = {
    cards: ILoft[];
+   card: ILoft | null;
    status: 'idle' | 'loading' | 'succeeded' | 'failed';
    type: TypeParamsType;
    date: string;
@@ -23,6 +28,7 @@ type TCardSlice = {
 
 const initialState: TCardSlice = {
    cards: [],
+   card: null,
    status: 'idle',
    type: '',
    date: '',
@@ -59,6 +65,9 @@ const cardCatalog = createSlice({
          state.page = 1;
          state.hasMore = true;
       },
+      resetLoft(state) {
+         state.card = null;
+      },
    },
    extraReducers: (builder) => {
       builder
@@ -75,11 +84,20 @@ const cardCatalog = createSlice({
          })
          .addCase(getCardsList.rejected, (state) => {
             state.status = 'failed';
+         })
+         .addCase(getLoft.fulfilled, (state, action) => {
+            state.card = action.payload;
          });
    },
 });
 
-export const { setType, setDate, setPrice, resetFilters, resetCardsState } =
-   cardCatalog.actions;
+export const {
+   setType,
+   setDate,
+   setPrice,
+   resetFilters,
+   resetCardsState,
+   resetLoft,
+} = cardCatalog.actions;
 
 export default cardCatalog.reducer;

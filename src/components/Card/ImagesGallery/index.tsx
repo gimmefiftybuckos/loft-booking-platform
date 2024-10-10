@@ -68,9 +68,9 @@ export const ImagesGallery: React.FC<TGalleryProps> = ({ cardData, wide }) => {
 
    const handleSelect = (event: React.MouseEvent, index: number) => {
       event.stopPropagation();
-
       setImageState(index);
    };
+
    return (
       <div className={clsx(styles.gallery, styles[`gallery${wide}`])}>
          <div onClick={onClick} className={clsx(styles.like)}>
