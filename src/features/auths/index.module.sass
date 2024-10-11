@@ -1,0 +1,70 @@
+@import '../../styles/variables'
+
+.container
+    margin: 0 auto
+    inline-size: 38%
+    block-size: calc(100vh - 2.5rem - 50px)
+
+.form
+    outline: 2px solid $border-color
+    padding: 4rem 3.5rem 4.5rem 3.5rem
+    border-radius: 0.625rem
+    display: flex
+    gap: 1.4rem
+    flex-direction: column
+    margin-block-start: 13vh
+    transition: outline .5s
+    &_error
+        outline: 2px solid $error-color
+    &_confirm
+        outline: 2px solid $accent-alt-color
+
+.input
+    outline: 2px solid $border-color
+    transition: .5s
+
+    &:focus
+        outline: 2px solid $border-color
+
+    &_error
+        outline: 2px solid $error-color !important
+
+        &:focus
+            outline-color: $error-color
+
+    &_confirm
+        outline-color: $accent-alt-color !important
+        &:focus
+            outline-color: $accent-alt-color
+
+.error
+    color: $error-color
+
+    &__global
+        block-size: 1.25rem
+
+    &__input
+        margin-block-start: 0.5rem
+
+.button
+    display: flex
+    inline-size: 100%
+    justify-content: center
+    font-weight: 400
+
+    &_disabled
+        background: #fff
+        outline: 1px solid $border-color
+        color: #000
+
+        &:hover
+            background: #fff
+
+    &_to
+        outline: 2px solid $border-color
+        margin-block-start: 1.5rem
+        transition: outline .3s
+
+        &:hover
+            outline: 2px solid $accent-alt-color
+            background: inherit

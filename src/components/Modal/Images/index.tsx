@@ -6,7 +6,6 @@ import styles from './index.module.sass';
 import { API_URL } from '../../../services/constants';
 import { useModalControl } from '../../../hooks/useModalControl';
 import { Preloader } from '../../ui/Preloader';
-import { useEffect } from 'react';
 
 export const Images = () => {
    const { card } = useSelector((state) => state.cards);

@@ -1,23 +1,49 @@
-export enum AuthsValues {
-   EMAIL = 'email',
-   LOGIN = 'login',
-   PASSWORD = 'password',
-}
+export const initalLoginInput = { login: '', password: '' };
+export type TLoginInputValues = typeof initalLoginInput;
 
-type TAuthTypeActions =
-   | { type: AuthsValues.EMAIL; payload: string }
-   | { type: AuthsValues.LOGIN; payload: string }
-   | { type: AuthsValues.PASSWORD; payload: string };
+export const initalRegistrInput = { email: '', login: '', password: '' };
+export type TRegistrInputValues = typeof initalRegistrInput;
 
-export const authReducer = <T>(state: T, action: TAuthTypeActions) => {
-   switch (action.type) {
-      case AuthsValues.LOGIN:
-         return { ...state, login: action.payload };
-      case AuthsValues.EMAIL:
-         return { ...state, email: action.payload };
-      case AuthsValues.PASSWORD:
-         return { ...state, password: action.payload };
-      default:
-         return state;
+const validateCommonFields = (
+   values: { login: string; password: string },
+   errors: Partial<{ login: string; password: string }>
+) => {
+   if (!/^[a-zA-Z0-9]+$/.test(values.login)) {
+      errors.login = 'Login must contain only Latin letters and numbers';
    }
+   if (!/^[a-zA-Z0-9]+$/.test(values.password)) {
+      errors.password = 'Password must contain only Latin letters and numbers';
+   }
+
+   if (!values.login.trim()) {
+      errors.login = 'This field is required';
+   }
+   if (!values.password.trim()) {
+      errors.password = 'This field is required';
+   }
+};
+
+export const validateLogin = (values: TLoginInputValues) => {
+   const errors: Partial<TLoginInputValues> = {};
+   validateCommonFields(values, errors);
+   return errors;
+};
+
+export const validateRegistr = (values: TRegistrInputValues) => {
+   const errors: Partial<TRegistrInputValues> = {};
+
+   validateCommonFields(values, errors);
+
+   if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(values.email)) {
+      errors.email = 'Invalid email format';
+   }
+
+   if (values.login.length < 3) {
+      errors.login = 'Login must be at least 3 characters long';
+   }
+   if (values.password.length < 8) {
+      errors.password = 'Password must be at least 8 characters long';
+   }
+
+   return errors;
 };

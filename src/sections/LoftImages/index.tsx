@@ -76,8 +76,6 @@ export const LoftImages = () => {
 
    const moreButtonValue = card?.imageUrl?.length - imagesState?.length;
 
-   console.log(imagesState[0]);
-
    return (
       <section className={clsx(styles.images)}>
          <div className={clsx(styles.container)}>
@@ -90,7 +88,6 @@ export const LoftImages = () => {
                      }}
                      className={clsx(styles.image)}
                      src={`${API_URL}/catalog/uploads/${item}`}
-                     // loading='eager'
                      alt=''
                   />
                );

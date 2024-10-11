@@ -1,6 +1,5 @@
 import { Navigate, useLocation } from 'react-router-dom';
 import { useSelector } from '../../../store';
-import { useBackNavigation } from '../../../hooks/useBackNavigation';
 
 type ProtectedRouteProps = {
    children: React.ReactElement;
@@ -12,11 +11,12 @@ export const ProtectedRoute = ({
    children,
 }: ProtectedRouteProps) => {
    const location = useLocation();
-   const { goToLastPage } = useBackNavigation();
+   // const { goToLastPage } = useBackNavigation();
    const { isAuth } = useSelector((state) => state.user);
    if (isAuth != isAuthRequired) {
       if (isAuth) {
-         goToLastPage();
+         const previousPage = { pathname: '/' };
+         return <Navigate replace to={previousPage} />;
       }
       return <Navigate replace to='/login' state={{ from: location }} />;
    }
