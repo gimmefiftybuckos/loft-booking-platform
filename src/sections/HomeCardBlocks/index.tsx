@@ -1,20 +1,20 @@
 import { useCallback } from 'react';
-import { useDispatch } from '../../../store';
+import { useDispatch } from '../../store';
 import { useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
 
 import styles from './index.module.sass';
 
-import { TypeParamsType, ICardSection } from '../../../types';
-import { setType } from '../../../store/slices/cardCatalog';
+import { TypeParamsType, ICardSection } from '../../types';
+import { setType } from '../../store/slices/cardCatalog';
 
-import { Text } from '../../../components/ui/Text';
+import { Text } from '../../components/ui/Text';
 
 type CardBlockSectionProps = {
    data: ICardSection[];
 };
 
-export const CardBlockSection: React.FC<CardBlockSectionProps> = ({ data }) => {
+export const HomeCardBlock: React.FC<CardBlockSectionProps> = ({ data }) => {
    const navigate = useNavigate();
    const dispatch = useDispatch();
 

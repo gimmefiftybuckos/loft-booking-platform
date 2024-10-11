@@ -2,19 +2,19 @@ import clsx from 'clsx';
 
 import styles from './index.module.sass';
 
-import { getTitleByFilter } from '../../../services/utils';
-import { selectionFilters } from '../../../services/constants';
-import { useModalControl } from '../../../hooks/useModalControl';
+import { getTitleByFilter } from '../../services/utils';
+import { selectionFilters } from '../../services/constants';
+import { useModalControl } from '../../hooks/useModalControl';
 
-import { Button, ButtonVariant } from '../../../components/Button';
+import { Button, ButtonVariant } from '../../components/Button';
 import {
    SelectionButton,
    SelectionVariant,
-} from '../../../components/Modal/SelectionButton';
+} from '../../components/Modal/SelectionButton';
 import { CoverTitle } from './CoverTitle';
 import { Link } from 'react-router-dom';
 
-export const MainSection = () => {
+export const HomeCover = () => {
    const { toggleModal, closeModal, controlIndex } = useModalControl();
 
    return (

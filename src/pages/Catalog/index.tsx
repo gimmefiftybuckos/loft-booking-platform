@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useSelector } from '../../store';
 
-import { SectionFiltersButtons } from '../../parts/sections/SectionFiltersButtons';
-import { SectionCatalogLofts } from '../../parts/sections/SectionCatalogLofts';
+import { CatalogFilterButtons } from '../../sections/CatalogFilterButtons';
+import { CatalogLofts } from '../../sections/CatalogLofts';
 
 export const Catalog = () => {
    const { type, date, price } = useSelector((state) => state.cards);
@@ -28,8 +28,8 @@ export const Catalog = () => {
 
    return (
       <>
-         <SectionFiltersButtons />
-         <SectionCatalogLofts
+         <CatalogFilterButtons />
+         <CatalogLofts
             params={{ typeParam, dateParam, priceParam }}
             setSearchParams={setSearchParams}
          />

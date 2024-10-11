@@ -4,12 +4,12 @@ import clsx from 'clsx';
 
 import styles from './index.module.sass';
 
-import { useSelector } from '../../../store';
-import { API_URL } from '../../../services/constants';
-import { useModalControl } from '../../../hooks/useModalControl';
-import { Button } from '../../../components/Button';
+import { useSelector } from '../../store';
+import { API_URL } from '../../services/constants';
+import { useModalControl } from '../../hooks/useModalControl';
+import { Button } from '../../components/Button';
 
-export const SectionLoftImages = () => {
+export const LoftImages = () => {
    const { toggleModal, setCurImageIndex, curImageIndex, closeModal } =
       useModalControl();
    const { card } = useSelector((state) => state.cards);
@@ -76,6 +76,8 @@ export const SectionLoftImages = () => {
 
    const moreButtonValue = card?.imageUrl?.length - imagesState?.length;
 
+   console.log(imagesState[0]);
+
    return (
       <section className={clsx(styles.images)}>
          <div className={clsx(styles.container)}>
@@ -88,7 +90,7 @@ export const SectionLoftImages = () => {
                      }}
                      className={clsx(styles.image)}
                      src={`${API_URL}/catalog/uploads/${item}`}
-                     loading='lazy'
+                     // loading='eager'
                      alt=''
                   />
                );

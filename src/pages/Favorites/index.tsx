@@ -1,3 +1,3 @@
-import { SectionFavoritesLofts } from '../../parts/sections/SectionFavoritesLofts';
+import { FavoritesLofts } from '../../sections/FavoritesLofts';
 
-export const Favorites = () => <SectionFavoritesLofts />;
+export const Favorites = () => <FavoritesLofts />;

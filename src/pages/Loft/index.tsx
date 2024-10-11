@@ -4,14 +4,14 @@ import clsx from 'clsx';
 
 import styles from './index.module.sass';
 
+import { useDispatch } from '../../store';
 import { useModalControl } from '../../hooks/useModalControl';
+import { getLoft, resetLoft } from '../../store/slices/cardCatalog';
 
 import { Modal } from '../../components/Modal';
-import { SectionLoftImages } from '../../parts/sections/SectionLoftImages';
-import { useDispatch, useSelector } from '../../store';
-import { getLoft, resetLoft } from '../../store/slices/cardCatalog';
+import { LoftImages } from '../../sections/LoftImages';
+import { LoftDescription } from '../../sections/LoftDescription';
 import { ModalContent } from '../../components/Modal/ModalContent';
-import { SectionLoftDescription } from '../../parts/sections/SectionLoftDescription';
 
 export const Loft = () => {
    const { pathname } = useLocation();
@@ -34,8 +34,8 @@ export const Loft = () => {
             <ModalContent name={'Images'} />
          </Modal>
 
-         <SectionLoftImages />
-         <SectionLoftDescription />
+         <LoftImages />
+         <LoftDescription />
       </>
    );
 };

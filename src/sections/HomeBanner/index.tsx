@@ -2,11 +2,11 @@ import clsx from 'clsx';
 
 import styles from './index.module.sass';
 
-import { bannersContent } from '../../../services/constants';
+import { bannersContent } from '../../services/constants';
 
-import { Text } from '../../../components/ui/Text';
+import { Text } from '../../components/ui/Text';
 
-export const BannerSection = () => {
+export const HomeBanner = () => {
    return (
       <section className={clsx(styles.section)}>
          <ul className={clsx(styles['banner-list'])}>

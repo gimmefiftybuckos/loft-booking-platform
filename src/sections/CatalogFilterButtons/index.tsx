@@ -2,16 +2,16 @@ import clsx from 'clsx';
 
 import styles from './index.module.sass';
 
-import { catalogFilters } from '../../../services/constants';
-import { getTitleByFilter } from '../../../services/utils';
-import { useModalControl } from '../../../hooks/useModalControl';
+import { catalogFilters } from '../../services/constants';
+import { getTitleByFilter } from '../../services/utils';
+import { useModalControl } from '../../hooks/useModalControl';
 
 import {
    SelectionButton,
    SelectionVariant,
-} from '../../../components/Modal/SelectionButton';
+} from '../../components/Modal/SelectionButton';
 
-export const SectionFiltersButtons = () => {
+export const CatalogFilterButtons = () => {
    const { toggleModal, controlIndex } = useModalControl();
 
    return (
