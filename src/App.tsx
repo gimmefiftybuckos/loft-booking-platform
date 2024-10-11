@@ -6,11 +6,17 @@ import { authUser } from './store/slices/userAuth';
 
 import { Main } from './sections/Main';
 import { Layout } from './sections/Layout';
+import { useLocation } from 'react-router-dom';
 
 function App() {
    const dispatch = useDispatch();
+   const location = useLocation();
+
    const { isAuth, status } = useSelector((state) => state.user);
    const [isReady, setIsReady] = useState(false);
+   const [hideFooter, setHideFooter] = useState(false);
+
+   const footerHiddenRoutes = ['/login', '/registration'];
 
    useEffect(() => {
       if (isAuth) {
@@ -34,9 +40,13 @@ function App() {
       }
    }, []);
 
+   useEffect(() => {
+      setHideFooter(footerHiddenRoutes.includes(location.pathname));
+   }, [location]);
+
    return isReady ? (
       <>
-         <Layout>
+         <Layout hideFooter={hideFooter}>
             <Main />
          </Layout>
       </>

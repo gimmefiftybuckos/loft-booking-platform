@@ -55,7 +55,11 @@ const initialState: TUserAuth = {
 const userAuth = createSlice({
    name: 'user',
    initialState,
-   reducers: {},
+   reducers: {
+      resetError(state) {
+         state.error = null;
+      },
+   },
    extraReducers: (builder) => {
       builder
          .addCase(registerUser.rejected, (state, action) => {
@@ -109,6 +113,6 @@ const userAuth = createSlice({
    },
 });
 
-export const {} = userAuth.actions;
+export const { resetError } = userAuth.actions;
 
 export default userAuth.reducer;
