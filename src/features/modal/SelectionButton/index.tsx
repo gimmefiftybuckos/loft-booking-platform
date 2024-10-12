@@ -4,10 +4,10 @@ import styles from './index.module.sass';
 
 import { CatalogFiltersType, SelectionFiltersType } from '../../../types';
 
-import { Modal } from '../../Modal';
+import { Modal } from '../Modal';
 import { ModalContent } from '../ModalContent';
-import { Text } from '../../ui/Text';
-import { Arrow } from '../../ui/Arrow';
+import { Text } from '../../../components/ui/Text';
+import { Arrow } from '../../../components/ui/Arrow';
 import { ModalContext } from '../../../context';
 
 type SelectionButtonType = {

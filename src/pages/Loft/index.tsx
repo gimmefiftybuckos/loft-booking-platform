@@ -8,10 +8,10 @@ import { useDispatch } from '../../store';
 import { useModalControl } from '../../hooks/useModalControl';
 import { getLoft, resetLoft } from '../../store/slices/cardCatalog';
 
-import { Modal } from '../../components/Modal';
+import { Modal } from '../../features/modal/Modal';
 import { LoftImages } from '../../sections/LoftImages';
 import { LoftDescription } from '../../sections/LoftDescription';
-import { ModalContent } from '../../components/Modal/ModalContent';
+import { ModalContent } from '../../features/modal/ModalContent';
 
 export const Loft = () => {
    const { pathname } = useLocation();

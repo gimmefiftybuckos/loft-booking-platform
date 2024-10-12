@@ -15,7 +15,7 @@ import { Text } from '../../../components/ui/Text';
 const loginFormValues = ['login', 'password'] as const;
 
 export const LoginForm = () => {
-   const dispatchRedux = useDispatch();
+   const dispatch = useDispatch();
    const { error } = useSelector((state) => state.user);
 
    const { validateForm, handleChange, isChanged, errors, values } =
@@ -31,7 +31,7 @@ export const LoginForm = () => {
          return;
       }
 
-      dispatchRedux(loginUser(values)).catch((error) => console.error(error));
+      dispatch(loginUser(values)).catch((error) => console.error(error));
    };
 
    return (

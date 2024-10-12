@@ -9,7 +9,7 @@ import { cardSectionList } from '../../../services/constants';
 import { setType } from '../../../store/slices/cardCatalog';
 
 import { ModalContext } from '../../../context';
-import { Button } from '../../Button';
+import { Button } from '../../../components/Button';
 
 export const SearchList = () => {
    const dispatch = useDispatch();

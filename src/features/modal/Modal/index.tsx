@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import styles from './index.module.sass';
 
 import { useEffect } from 'react';
-import { useModalControl } from '../../hooks/useModalControl';
+import { useModalControl } from '../../../hooks/useModalControl';
 
 type ModalProps = {
    children: React.ReactNode;

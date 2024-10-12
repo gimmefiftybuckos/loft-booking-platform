@@ -15,7 +15,7 @@ import { Button, ButtonVariant } from '../../../components/Button';
 const registrFormValues = ['email', 'login', 'password'] as const;
 
 export const RegistrationForm = () => {
-   const dispatchRedux = useDispatch();
+   const dispatch = useDispatch();
    const { error } = useSelector((state) => state.user);
 
    const { validateForm, handleChange, isChanged, errors, values } =
@@ -26,14 +26,10 @@ export const RegistrationForm = () => {
 
    const onSubmit = (event: React.FormEvent) => {
       event.preventDefault();
-
       if (!validateForm()) {
          return;
       }
-
-      dispatchRedux(registerUser(values)).catch((error) =>
-         console.error(error)
-      );
+      dispatch(registerUser(values)).catch((error) => console.error(error));
    };
 
    return (
