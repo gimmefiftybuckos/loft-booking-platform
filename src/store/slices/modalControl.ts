@@ -1,13 +1,20 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+type TInitalState = {
+   controlIndex: number | string;
+   imageIndex: number;
+};
+
+const initialState: TInitalState = {
+   controlIndex: -1,
+   imageIndex: -1,
+};
+
 const modalControl = createSlice({
    name: 'modalControl',
-   initialState: {
-      controlIndex: -1,
-      imageIndex: -1,
-   },
+   initialState,
    reducers: {
-      setIndexModal(state, action: PayloadAction<number>) {
+      setIndexModal(state, action: PayloadAction<number | string>) {
          state.controlIndex =
             state.controlIndex === action.payload ? -1 : action.payload;
       },

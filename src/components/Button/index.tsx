@@ -14,7 +14,7 @@ export interface ButtonProps {
    as?: ElementType;
    pathTo?: string;
    type?: string;
-   children: string;
+   children: string | React.ReactNode;
 
    className?: string;
    variant?: ButtonVariant;

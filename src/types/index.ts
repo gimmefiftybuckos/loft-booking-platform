@@ -41,6 +41,8 @@ export type CatalogFiltersType = 'Event' | 'Price' | 'Date' | 'Filters';
 
 export type ImagesCarouselType = 'Images';
 
+export type MenuType = 'Menu';
+
 export type TCatalogParams = {
    type?: string;
    page?: number;

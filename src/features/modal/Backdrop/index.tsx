@@ -10,7 +10,13 @@ export const Backdrop = () => {
    return (
       <>
          {controlIndex !== -1 && (
-            <div onClick={closeModal} className={clsx(styles.backdrop)} />
+            <div
+               onClick={closeModal}
+               className={clsx(
+                  styles.backdrop,
+                  typeof controlIndex === 'string' && styles.backdrop_invisible
+               )}
+            />
          )}
       </>
    );

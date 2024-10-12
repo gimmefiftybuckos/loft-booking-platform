@@ -1,0 +1,44 @@
+@import '../../../styles/variables'
+
+.content
+    &::after
+        content: ""
+        box-sizing: border-box
+        display: block
+        margin-block: 1.25rem 1rem
+        margin-inline: auto
+        block-size: 1px
+        inline-size: 93%
+        background: rgba(120, 123, 126, 0.2)
+
+.button
+    display: flex
+    gap: 1.25rem
+    inline-size: 270px
+    padding: 0.5rem 1.15rem 0.5rem 1rem
+    font-weight: 400
+    color: #494b59
+    transition: .3s
+    cursor: pointer
+
+    &_accent
+        gap: 1.35rem
+        color: $bg-color
+        &:hover
+            background: $accent-alt-color !important
+            color: $bg-color !important
+
+    &_background
+        background: #f2f3fa
+        display: flex
+        justify-content: center
+        margin-block-start: 0.75rem
+
+    &:hover
+        outline: none
+        background: rgba(62, 170, 210, 0.1)
+        color: #3eaad2
+
+.image
+    inline-size: 24px
+    block-size: 24px

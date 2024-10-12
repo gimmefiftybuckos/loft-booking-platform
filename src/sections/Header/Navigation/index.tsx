@@ -8,16 +8,15 @@ import { useDispatch, useSelector } from '../../../store';
 import { Button, ButtonVariant } from '../../../components/Button';
 import { HomeButton } from '../HomeButton';
 import { Link } from 'react-router-dom';
-import { logoutUser } from '../../../store/slices/userAuth';
+import { Modal } from '../../../features/modal/Modal';
+import { useModalControl } from '../../../hooks/useModalControl';
+import { ModalContent } from '../../../features/modal/ModalContent';
 
 export const Navigation = () => {
    const dispatch = useDispatch();
    const { isAuth, userData } = useSelector((state) => state.user);
    const navPoints = createNavPoints(dispatch);
-
-   const onClick = () => {
-      dispatch(logoutUser());
-   };
+   const { toggleModal, controlIndex } = useModalControl();
 
    return (
       <nav className={clsx(styles.navigation)}>
@@ -35,9 +34,9 @@ export const Navigation = () => {
                   </Button>
                ))}
             </div>
-            <div>
+            <div className={clsx(styles.container)}>
                {isAuth ? (
-                  <Button as={Link} pathTo='/' onClick={onClick}>
+                  <Button onClick={() => toggleModal('menu')}>
                      {userData.login}
                   </Button>
                ) : (
@@ -49,6 +48,12 @@ export const Navigation = () => {
                      Войти
                   </Button>
                )}
+               <Modal
+                  className={clsx(styles.modal)}
+                  isOpen={controlIndex === 'menu'}
+               >
+                  <ModalContent name={'Menu'} />
+               </Modal>
             </div>
          </div>
       </nav>

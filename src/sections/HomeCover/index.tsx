@@ -24,7 +24,9 @@ export const HomeCover = () => {
             <div
                className={clsx(
                   styles.container,
-                  controlIndex !== -1 && styles.container_focus
+                  controlIndex !== -1 &&
+                     typeof controlIndex !== 'string' &&
+                     styles.container_focus
                )}
             >
                {selectionFilters.map((item, index) => (

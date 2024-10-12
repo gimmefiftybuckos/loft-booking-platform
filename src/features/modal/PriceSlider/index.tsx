@@ -69,7 +69,6 @@ export const PriceSlider = () => {
    const confirmHandler = () => {
       const value = [price.min, price.max];
       setCurrentPrice(value);
-
       closeModal();
    };
 
@@ -106,7 +105,7 @@ export const PriceSlider = () => {
          </div>
          <Slider
             defaultValue={[0, MAX_PRICE]}
-            value={[price.min, price.max] || currentPrice}
+            value={[price.min, price.max]}
             onChange={handleChange}
             min={0}
             max={MAX_PRICE}
