@@ -10,7 +10,7 @@ import { Button, ButtonVariant } from '../../components/Button';
 import {
    SelectionButton,
    SelectionVariant,
-} from '../../components/Modal/SelectionButton';
+} from '../../features/modal/SelectionButton';
 import { CoverTitle } from './CoverTitle';
 import { Link } from 'react-router-dom';
 

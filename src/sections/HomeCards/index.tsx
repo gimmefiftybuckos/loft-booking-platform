@@ -54,7 +54,12 @@ export const HomeCards: React.FC<CardSectionProps> = ({
    return (
       <section className={clsx(styles.section)}>
          <div className={clsx(styles['section__text-container'])}>
-            <Text as={'h2'} weight={700} size='24'>
+            <Text
+               className={clsx(styles.title)}
+               as={'h2'}
+               weight={700}
+               size='24'
+            >
                {title}
             </Text>
             <div className={clsx(styles['section__button-container'])}>

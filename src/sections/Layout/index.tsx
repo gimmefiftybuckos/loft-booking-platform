@@ -1,7 +1,7 @@
 import { ScrollRestoration } from 'react-router-dom';
 import { Footer } from '../Footer';
 import { Header } from '../Header';
-import { Backdrop } from '../../components/Modal/Backdrop';
+import { Backdrop } from '../../features/modal/Backdrop';
 
 export const Layout = ({
    children,

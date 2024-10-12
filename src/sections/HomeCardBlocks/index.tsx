@@ -25,7 +25,7 @@ export const HomeCardBlock: React.FC<CardBlockSectionProps> = ({ data }) => {
 
    return (
       <section>
-         <Text as={'h2'} weight={700} size='24'>
+         <Text className={clsx(styles.title)} as={'h2'} weight={700} size='24'>
             Любой тип площадки
          </Text>
          <div className={clsx(styles.container)}>

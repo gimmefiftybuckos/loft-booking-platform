@@ -11,7 +11,7 @@ import {
    SelectionVariant,
 } from '../../features/modal/SelectionButton';
 
-export const CatalogFilterButtons = () => {
+export const SectionFiltersButtons = () => {
    const { toggleModal, controlIndex } = useModalControl();
 
    return (
