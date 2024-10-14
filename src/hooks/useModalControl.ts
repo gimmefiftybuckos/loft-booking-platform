@@ -5,6 +5,7 @@ import {
    setModalClose,
 } from '../store/slices/modalControl';
 import { useBodyScrollLock } from './useBodyScrollLock';
+import { useEffect } from 'react';
 
 export const useModalControl = () => {
    const dispatch = useDispatch();
@@ -12,7 +13,13 @@ export const useModalControl = () => {
       (state) => state.modalControl
    );
 
-   const toggleModal = (key: number) => {
+   useEffect(() => {
+      return () => {
+         closeModal();
+      };
+   }, []);
+
+   const toggleModal = (key: number | string) => {
       dispatch(setIndexModal(key));
    };
 
@@ -25,7 +32,7 @@ export const useModalControl = () => {
       dispatch(setImageIndex(-1));
    };
 
-   useBodyScrollLock(controlIndex !== -1);
+   useBodyScrollLock(controlIndex !== -1 && typeof controlIndex !== 'string');
 
    return {
       controlIndex,
