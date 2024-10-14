@@ -1,7 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+export enum ModalTypes {
+   'MENU' = 100,
+}
+
 type TInitalState = {
-   controlIndex: number | string;
+   controlIndex: number;
    imageIndex: number;
 };
 
@@ -14,7 +18,7 @@ const modalControl = createSlice({
    name: 'modalControl',
    initialState,
    reducers: {
-      setIndexModal(state, action: PayloadAction<number | string>) {
+      setIndexModal(state, action: PayloadAction<number>) {
          state.controlIndex =
             state.controlIndex === action.payload ? -1 : action.payload;
       },

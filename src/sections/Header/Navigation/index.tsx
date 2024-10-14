@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 import { Modal } from '../../../features/modal/Modal';
 import { useModalControl } from '../../../hooks/useModalControl';
 import { ModalContent } from '../../../features/modal/ModalContent';
+import { ModalTypes } from '../../../store/slices/modalControl';
 
 export const Navigation = () => {
    const dispatch = useDispatch();
@@ -36,7 +37,7 @@ export const Navigation = () => {
             </div>
             <div className={clsx(styles.container)}>
                {isAuth ? (
-                  <Button onClick={() => toggleModal('menu')}>
+                  <Button onClick={() => toggleModal(ModalTypes.MENU)}>
                      {userData.login}
                   </Button>
                ) : (
@@ -50,7 +51,7 @@ export const Navigation = () => {
                )}
                <Modal
                   className={clsx(styles.modal)}
-                  isOpen={controlIndex === 'menu'}
+                  isOpen={controlIndex === ModalTypes.MENU}
                >
                   <ModalContent name={'Menu'} />
                </Modal>

@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import styles from './index.module.sass';
 
 import { useModalControl } from '../../../hooks/useModalControl';
+import { ModalTypes } from '../../../store/slices/modalControl';
 
 export const Backdrop = () => {
    const { controlIndex, closeModal } = useModalControl();
@@ -14,7 +15,7 @@ export const Backdrop = () => {
                onClick={closeModal}
                className={clsx(
                   styles.backdrop,
-                  typeof controlIndex === 'string' && styles.backdrop_invisible
+                  controlIndex === ModalTypes.MENU && styles.backdrop_invisible
                )}
             />
          )}

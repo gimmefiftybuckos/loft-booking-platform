@@ -19,7 +19,7 @@ export const useModalControl = () => {
       };
    }, []);
 
-   const toggleModal = (key: number | string) => {
+   const toggleModal = (key: number) => {
       dispatch(setIndexModal(key));
    };
 
@@ -32,7 +32,7 @@ export const useModalControl = () => {
       dispatch(setImageIndex(-1));
    };
 
-   useBodyScrollLock(controlIndex !== -1 && typeof controlIndex !== 'string');
+   useBodyScrollLock(controlIndex !== -1 && controlIndex < 100);
 
    return {
       controlIndex,
