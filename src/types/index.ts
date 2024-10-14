@@ -1,6 +1,7 @@
 export interface ILoft {
    id: string;
    title: string;
+   description: string;
    metroStation: string;
    walkingDistanceMinutes: number;
    reviewsCount: number;

@@ -25,7 +25,7 @@ export const HomeCover = () => {
                className={clsx(
                   styles.container,
                   controlIndex !== -1 &&
-                     typeof controlIndex !== 'string' &&
+                     controlIndex < 100 &&
                      styles.container_focus
                )}
             >
