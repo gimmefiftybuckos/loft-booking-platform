@@ -8,7 +8,9 @@
     background-color: $bg-color
     border-radius: $border-radius
     text-decoration: none
-    transition: background-color 0.3s ease
+    transition-timing-function: ease
+    transition-property: color, background-color
+    transition-duration: 0.3s
     font-weight: 500
     color: #000
 
@@ -23,9 +25,10 @@
             background-color: $accent-alt-color
 
     &_outlined
-        outline: 1px solid $primary-alt-color
+        outline: 1px solid $border-color
         &:hover
-            background-color: $primary-alt-color
+            background-color: $accent-alt-color
+            color: $bg-color
 
     &_outlined.button_accent
         outline: 1px solid $accent-alt-color

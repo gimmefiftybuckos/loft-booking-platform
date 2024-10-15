@@ -4,7 +4,7 @@ import styles from './index.module.sass';
 
 import { Navigation } from './Navigation';
 import { useModalControl } from '../../hooks/useModalControl';
-import { ModalTypes } from '../../store/slices/modalControl';
+import { ModalTypes } from '../../features/modal/Modal';
 
 type HeaderProps = {
    isSticky?: boolean;

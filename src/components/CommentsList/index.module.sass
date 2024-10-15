@@ -1,0 +1,40 @@
+@import '../../styles/variables'
+
+.list
+    list-style: none
+
+.item
+    line-height: 150%
+    margin-block-end: 2.5rem
+    padding-inline: 1rem
+
+    &__about
+        display: flex
+        justify-content: space-between
+
+    &__container
+        display: flex
+        align-items: center
+        margin-block-end: 0.5rem
+
+    &__name
+        margin-inline-end: 1rem
+
+    &::after
+        content: ''
+        margin-block-start: 2.5rem
+        display: inline-block
+        block-size: 1px
+        inline-size: 100%
+        background: $border-color
+
+    &:last-of-type
+        margin-block-end: 0
+        &::after
+            display: none
+
+.star
+    margin-inline-end: 0.5rem
+    block-size: 14px
+    inline-size: 14px
+    background: url('/assets/rate-full.svg')

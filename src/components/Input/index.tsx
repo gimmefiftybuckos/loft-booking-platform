@@ -19,8 +19,6 @@ export const Input = ({
    className,
    onChange,
 }: TInputProps) => {
-   console.log(className);
-
    return (
       <input
          autoFocus={autoFocus}

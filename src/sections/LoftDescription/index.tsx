@@ -19,8 +19,8 @@ export const LoftDescription = () => {
    const descriptionStrings = card.description.split('\n');
 
    return (
-      <section className={styles.text}>
-         <div className={clsx(styles.text__info)}>
+      <section className={styles.content}>
+         <div className={clsx(styles.content__info)}>
             <Text size='32' weight={700} as='h1'>
                {card?.title}
             </Text>
@@ -40,14 +40,14 @@ export const LoftDescription = () => {
             />
          </div>
          <Text
-            className={clsx(styles.text__title)}
+            className={clsx(styles.content__title)}
             size='24'
             weight={500}
             as='h2'
          >
             О месте
          </Text>
-         <div className={clsx(styles.text__content)}>
+         <div className={clsx(styles.content__description)}>
             <Text as='p'>Debug id: {card.id}</Text>
             {descriptionStrings.map((item, index) => (
                <Text key={index} as='p' weight={400}>

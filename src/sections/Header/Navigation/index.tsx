@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 import { Modal } from '../../../features/modal/Modal';
 import { useModalControl } from '../../../hooks/useModalControl';
 import { ModalContent } from '../../../features/modal/ModalContent';
-import { ModalTypes } from '../../../store/slices/modalControl';
+import { ModalTypes } from '../../../features/modal/Modal';
 
 export const Navigation = () => {
    const dispatch = useDispatch();

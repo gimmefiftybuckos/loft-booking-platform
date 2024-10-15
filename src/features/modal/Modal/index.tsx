@@ -11,6 +11,11 @@ type ModalProps = {
    className?: string;
 };
 
+export enum ModalTypes {
+   'MENU' = 100,
+   'REVIEW' = 51,
+}
+
 export const Modal = ({ isOpen, children, className }: ModalProps) => {
    const { closeModal } = useModalControl();
 

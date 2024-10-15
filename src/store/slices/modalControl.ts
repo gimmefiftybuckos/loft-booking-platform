@@ -1,9 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-export enum ModalTypes {
-   'MENU' = 100,
-}
-
 type TInitalState = {
    controlIndex: number;
    imageIndex: number;

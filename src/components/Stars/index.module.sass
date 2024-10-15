@@ -1,0 +1,20 @@
+.container
+    display: flex
+    gap: 6px
+
+.star
+    block-size: 14px
+    inline-size: 14px
+    background: url('/assets/rate-empty.svg')
+    background-position: center
+
+    &_big
+        block-size: 20px
+        inline-size: 20px
+        background-size: 20px 20px
+
+    &_full
+        background: url('/assets/rate-full.svg')
+
+    &_half
+        background: url('/assets/rate-half.svg')
