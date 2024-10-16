@@ -1,6 +1,12 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 
-import { ILoft, TCatalogParams, TUser } from '../types';
+import {
+   ICommentsGet,
+   ICommentsPost,
+   ILoft,
+   TCatalogParams,
+   TUser,
+} from '../types';
 import { API_URL } from './constants';
 import { deleteCookie, getCookie, setCookie } from './utils';
 
@@ -305,6 +311,40 @@ export const getFavoritesLoftsApi = async (): Promise<ILoft[]> => {
       });
 
       return response || [];
+   } catch (error) {
+      catchError(error);
+      throw error;
+   }
+};
+
+export const setCommentApi = async (
+   data: ICommentsPost
+): Promise<ICommentsGet | null> => {
+   try {
+      const response = await fetchAuth<ICommentsGet>({
+         url: `${EndPoints.CATALOG}/comments`,
+         method: 'POST',
+         headers: {
+            'Content-Type': 'application/json;charset=utf-8',
+            Authorization: `Bearer ${getCookie('accessToken')}`,
+         },
+         data,
+      });
+
+      return response;
+   } catch (error) {
+      catchError(error);
+      throw error;
+   }
+};
+
+export const getCommentsApi = async (id: string): Promise<ICommentsGet[]> => {
+   try {
+      const response = await api.get<ICommentsGet[]>(
+         `${EndPoints.CATALOG}/comments/${id}`
+      );
+
+      return checkResponse<ICommentsGet[]>(response);
    } catch (error) {
       catchError(error);
       throw error;

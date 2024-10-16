@@ -10,10 +10,12 @@ import cardReducer from './slices/cardCatalog';
 import modalControlReducer from './slices/modalControl';
 import userAuthReducer from './slices/userAuth';
 import favoritesReducer from './slices/favorites';
+import commentsReducer from './slices/comments';
 
 const store = configureStore({
    reducer: {
       cards: cardReducer,
+      comments: commentsReducer,
       modalControl: modalControlReducer,
       user: userAuthReducer,
       favorites: favoritesReducer,

@@ -15,6 +15,20 @@ export interface ILoft {
    date?: Date;
 }
 
+export interface ICommentsGet {
+   userId: string;
+   login: string;
+   userReview: string;
+   userRating: number;
+   date: Date;
+}
+
+export interface ICommentsPost {
+   loftId: string;
+   userReview: string;
+   userRating: number;
+}
+
 export interface ICardSection {
    title: string;
    type: TypeParamsType;

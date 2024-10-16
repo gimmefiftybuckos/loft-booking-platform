@@ -14,6 +14,10 @@ export const LoftComments = () => {
    const { card } = useSelector((state) => state.cards);
    const { toggleModal } = useModalControl();
 
+   const averageRating = card?.averageRating
+      ? parseFloat(card.averageRating)
+      : 0;
+
    return (
       <section className={clsx(styles.container)}>
          <Text as='h2' size='24' weight={500}>
@@ -22,7 +26,7 @@ export const LoftComments = () => {
          <div className={clsx(styles.rating)}>
             <div className={clsx(styles.rating__container)}>
                <Text as='p' size='32' weight={600}>
-                  {card?.averageRating}
+                  {averageRating.toFixed(1)}
                </Text>
                <Stars size averageRating={card?.averageRating} />
                <Text color='gray' weight={400}>

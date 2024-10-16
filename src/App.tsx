@@ -7,6 +7,7 @@ import { authUser } from './store/slices/userAuth';
 import { Main } from './sections/Main';
 import { Layout } from './sections/Layout';
 import { useLocation } from 'react-router-dom';
+import { resetCardsState, resetLoft } from './store/slices/cardCatalog';
 
 function App() {
    const dispatch = useDispatch();
@@ -42,6 +43,11 @@ function App() {
 
    useEffect(() => {
       setHideFooter(footerHiddenRoutes.includes(location.pathname));
+
+      if (!location.pathname.match('catalog')) {
+         dispatch(resetCardsState());
+         dispatch(resetLoft());
+      }
    }, [location]);
 
    return isReady ? (

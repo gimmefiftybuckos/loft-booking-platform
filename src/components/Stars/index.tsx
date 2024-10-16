@@ -12,13 +12,12 @@ export const Stars = ({
    if (averageRating === undefined) {
       return null;
    }
-   const stars = [1, 2, 3, 4, 5];
 
    const flooredRating = Math.floor(+averageRating * 2) / 2;
 
    return (
       <div className={clsx(styles.container)}>
-         {stars.map((item, index) => {
+         {new Array(5).fill(0).map((item, index) => {
             if (flooredRating - index === 0.5) {
                return (
                   <div

@@ -18,7 +18,7 @@ export const Rating: React.FC<RatingProps> = ({
       <div className={clsx(styles.rating)}>
          <Stars averageRating={averageRating} />
          <div className={clsx(styles.rating__review)}>
-            <Text size='14'>{averageRating}</Text>
+            <Text size='14'>{parseFloat(averageRating).toFixed(1)}</Text>
             <Text size='14' color='gray'>
                {reviewsCount} отзывов
             </Text>
